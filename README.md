@@ -37,14 +37,22 @@ CreditoATiempo.sln
 
 ### 2.1 CreditInTimeFront.WebApp
 
+<<<<<<< HEAD
 UI Layer built with Blazor WebAssembly (.NET 9) with MudBlazor 9.1.0.
+=======
+UI Layer built with Blazor WebAssembly.
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 
 This project contains:
 
 - Feature-based modules
 - Shared UI components
+<<<<<<< HEAD
 - Shell layout with persistent sidebar
 - CSS variable-based theme system with light/dark mode
+=======
+- Application entry point
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 - Static assets (wwwroot)
 
 
@@ -53,6 +61,7 @@ Structure:
 ```
 CreditInTimeFront.WebApp
 │
+<<<<<<< HEAD
 ├── App.razor
 ├── _Imports.razor
 ├── Program.cs
@@ -125,11 +134,34 @@ CreditInTimeFront.WebApp
     │   └── theme-variables.css        # CSS custom properties (light/dark tokens)
     ├── images/                        # Logo and static assets
     └── index.html                     # Dark mode toggle + themeManager script
+=======
+├── Modulos
+│   ├── Clientes
+│   ├── Creditos
+│   ├── FabricaCredito
+│   ├── CRM
+│   └── Autenticacion
+│
+├── Components
+│   ├── Layout
+│   ├── Inputs
+│   ├── Feedback
+│   ├── Tables
+│   └── Modals
+│
+├── Shared
+│   ├── Constants
+│   ├── Extensions
+│   └── Helpers
+│
+└── wwwroot
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 ```
 
 Feature-based organization ensures that each business domain is encapsulated and cohesive.
 
 
+<<<<<<< HEAD
 Each module follows the four-layer pattern:
 
 ```
@@ -139,6 +171,17 @@ ModuleName/
 ├── Components/  # Module-scoped UI components (data via [Parameter])
 ├── State/       # Orchestrates service calls, holds loading/data/error state
 └── ViewModels/  # Frontend-only models, never reuse backend DTOs
+=======
+Each module contains:
+
+```
+ModuleName
+│
+├── Pages
+├── Components
+├── State
+└── ViewModels
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 ```
 
 
@@ -233,9 +276,14 @@ Core → (no dependency to WebApp)
 
 ## 4. Technology Stack
 
+<<<<<<< HEAD
 - .NET 9
 - Blazor WebAssembly (WASM)
 - MudBlazor 9.1.0 (UI component library)
+=======
+- .NET 8+
+- Blazor WebAssembly (WASM)
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 - C#
 - xUnit / bUnit (for testing)
 - GitLab for version control
@@ -246,7 +294,11 @@ Core → (no dependency to WebApp)
 
 ### Prerequisites
 
+<<<<<<< HEAD
 - .NET SDK 9.0 or later
+=======
+- .NET SDK 8.0 or later
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 
 
 Verify installation:
@@ -271,6 +323,7 @@ dotnet build
 dotnet run --project src/CreditInTimeFront.WebApp
 ```
 
+<<<<<<< HEAD
 ### Run with hot reload
 ```
 dotnet watch --project src/CreditInTimeFront.WebApp
@@ -281,6 +334,8 @@ dotnet watch --project src/CreditInTimeFront.WebApp
 dotnet test
 ```
 
+=======
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 ---
 
 ## 6. Branching Strategy
@@ -304,6 +359,7 @@ All changes must be merged through Merge Requests.
 
 ## 7. Current Status
 
+<<<<<<< HEAD
 - MudBlazor 9.1.0 fully integrated (services, theme provider, CSS/JS).
 - Shell layout with persistent sidebar and light/dark mode toggle implemented.
 - Banco Agrícola theme with custom light and dark palettes configured.
@@ -312,6 +368,12 @@ All changes must be merged through Merge Requests.
 - **JCE** module implemented: identity lookup with search, photo preview and data display.
 - Stub pages in place for: CreditFactory, CRM, CollectionManagement, CreditBureau, Profile, Reports, Settings.
 - Remaining modules ready for UI implementation.
+=======
+- Initial architecture structure created.
+- Frontend Architecture V2 applied.
+- No business logic implemented yet.
+- Ready for module-based development.
+>>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 
 ---
 
