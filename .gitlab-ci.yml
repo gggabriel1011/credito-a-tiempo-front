@@ -1,0 +1,7 @@
+stages:
+  - test
+
+print:
+  stage: test
+  script:
+    - echo "Test Gitlab CI."
