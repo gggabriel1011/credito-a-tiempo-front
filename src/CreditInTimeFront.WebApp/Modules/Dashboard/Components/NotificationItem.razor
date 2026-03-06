@@ -1,0 +1,28 @@
+<div class="notif-item">
+    <div class="notif-icon-wrap notif-icon-wrap--@Type">
+        <MudIcon Icon="@IconMap" Class="notif-icon" />
+    </div>
+    <div class="notif-body">
+        <div class="notif-header-row">
+            <h4 class="notif-title">@Title</h4>
+            <span class="notif-time">@TimeAgo</span>
+        </div>
+        <p class="notif-desc">@Description</p>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+    [Parameter] public string TimeAgo { get; set; } = "";
+    [Parameter] public string Type { get; set; } = "info";
+
+    private string IconMap => Type switch
+    {
+        "danger"  => Icons.Material.Filled.TrendingUp,
+        "warning" => Icons.Material.Filled.PriorityHigh,
+        "success" => Icons.Material.Filled.TaskAlt,
+        _         => Icons.Material.Filled.Info
+    };
+}

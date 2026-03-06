@@ -1,0 +1,85 @@
+.notif-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-card);
+    transition: background 150ms ease;
+    cursor: default;
+}
+
+.notif-item:last-child {
+    border-bottom: none;
+}
+
+.notif-item:hover {
+    background: var(--bg-subtle);
+}
+
+/* =============================================
+   Icon container — semantic colors
+   ============================================= */
+.notif-icon-wrap {
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.notif-icon-wrap--danger  { background: rgba(var(--error-rgb), 0.1); }
+.notif-icon-wrap--danger .notif-icon { color: var(--error-strong); }
+
+.notif-icon-wrap--warning { background: rgba(var(--warning-rgb), 0.1); }
+.notif-icon-wrap--warning .notif-icon { color: var(--warning-strong); }
+
+.notif-icon-wrap--success { background: rgba(var(--info-rgb), 0.1); }
+.notif-icon-wrap--success .notif-icon { color: var(--info-strong); }
+
+.notif-icon-wrap--info    { background: rgba(var(--text-muted-rgb), 0.1); }
+.notif-icon-wrap--info .notif-icon { color: var(--text-muted); }
+
+.notif-icon {
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+/* =============================================
+   Body
+   ============================================= */
+.notif-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.notif-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
+}
+
+.notif-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-body);
+    margin: 0;
+}
+
+.notif-time {
+    font-size: 10px;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+
+.notif-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
