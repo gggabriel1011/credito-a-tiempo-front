@@ -1,15 +1,20 @@
 html, body {
 <<<<<<< HEAD
+<<<<<<< HEAD
     font-family: 'Inter', sans-serif;
 =======
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 >>>>>>> a2430f8 (feat: initial project structure based on Frontend)
+=======
+    font-family: 'Inter', sans-serif;
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 }
 
 h1:focus {
     outline: none;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 a, .btn-link {
@@ -43,6 +48,8 @@ a, .btn-link {
 }
 
 >>>>>>> a2430f8 (feat: initial project structure based on Frontend)
+=======
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 #blazor-error-ui {
     color-scheme: light only;
     background: lightyellow;
@@ -92,10 +99,14 @@ a, .btn-link {
 
         .loading-progress circle:last-child {
 <<<<<<< HEAD
+<<<<<<< HEAD
             stroke: #6CB324;
 =======
             stroke: #1b6ec2;
 >>>>>>> a2430f8 (feat: initial project structure based on Frontend)
+=======
+            stroke: #6CB324;
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
             stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
             transition: stroke-dasharray 0.05s ease-in-out;
         }
@@ -111,6 +122,7 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* =============================================
    Page Header — shared across all module pages
@@ -149,6 +161,8 @@ a, .btn-link {
     margin: 0.25rem 0 0 0;
 }
 
+=======
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 /* =============================================
    MudNavLink - Global Overrides
    Los overrides de componentes de terceros deben
@@ -158,6 +172,7 @@ a, .btn-link {
 /* Item wrapper: spacing between items */
 .mud-nav-item {
     margin-bottom: 0.125rem;
+<<<<<<< HEAD
 }
 
 /* Base link */
@@ -291,14 +306,66 @@ a, .btn-link {
 =======
 code {
     color: #c02d76;
+=======
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
+/* Base link */
+.mud-nav-link {
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+    padding: 0.625rem 0.75rem !important;
+    height: auto !important;
+    min-height: unset !important;
+    transition: background-color 0.15s ease !important;
 }
 
+<<<<<<< HEAD
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
 >>>>>>> a2430f8 (feat: initial project structure based on Frontend)
+=======
+/* Hover */
+.mud-nav-link:hover {
+    background-color: var(--bg-subtle) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Active: fondo verde sólido + texto blanco */
+.mud-nav-link.active {
+    background-color: var(--primary-color) !important;
+    color: var(--text-on-primary) !important;
+}
+
+/* Icon - atenuado en estado normal */
+.mud-nav-item-icon {
+    opacity: 0.7;
+    color: inherit !important;
+    margin-right: 0.75rem;
+}
+
+/* Icon - visible en estado activo */
+.mud-nav-link.active .mud-nav-item-icon {
+    opacity: 1 !important;
+    color: var(--text-on-primary) !important;
+}
+
+/* El texto hereda el color del enlace padre */
+.mud-nav-link-text {
+    color: inherit !important;
+}
+
+/* =============================================
+   Dashboard — ChartDesembolsos overrides
+   (global fallback para scoping de MudBlazor)
+   ============================================= */
+.desembolsos-card .mud-charts-yaxis { display: none !important; }
+.desembolsos-card .mud-chart-legend { display: none !important; }
+
+/* =============================================
+   Dashboard — ChartDistribucion overrides
+   ============================================= */
+.chart-card--pie .mud-chart-legend { display: none !important; }
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)

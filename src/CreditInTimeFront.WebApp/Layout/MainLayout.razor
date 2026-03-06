@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 @inherits LayoutComponentBase
 @using MudBlazor
 @using CreditInTimeFront.WebApp.Shared.Themes
 
 <MudThemeProvider Theme="BancoAgricolaTheme.GetTheme()" @bind-IsDarkMode="_isDarkMode" />
 
+<<<<<<< HEAD
 <MudPopoverProvider />
+=======
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -15,6 +21,7 @@
                Elevation="1"
                Variant="DrawerVariant.Persistent"
                Class="app-shell-drawer">
+<<<<<<< HEAD
         <NavMenu />
     </MudDrawer>
 
@@ -29,17 +36,22 @@
 ﻿@inherits LayoutComponentBase
 <div class="page">
     <div class="sidebar">
+=======
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
         <NavMenu />
-    </div>
+    </MudDrawer>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+    <MudMainContent Style="padding-top: 0;" Class="app-shell-content">
+        <MudContainer MaxWidth="MaxWidth.False" Class="pa-6">
             @Body
+<<<<<<< HEAD
         </article>
     </main>
 </div>
 >>>>>>> a2430f8 (feat: initial project structure based on Frontend)
+=======
+        </MudContainer>
+    </MudMainContent>
+
+</MudLayout>
+>>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
