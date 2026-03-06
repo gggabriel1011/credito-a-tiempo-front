@@ -38,21 +38,30 @@ CreditoATiempo.sln
 ### 2.1 CreditInTimeFront.WebApp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 UI Layer built with Blazor WebAssembly (.NET 9) with MudBlazor 9.1.0.
 =======
 UI Layer built with Blazor WebAssembly.
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+UI Layer built with Blazor WebAssembly (.NET 9) with MudBlazor 9.1.0.
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 
 This project contains:
 
 - Feature-based modules
 - Shared UI components
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Shell layout with persistent sidebar
 - CSS variable-based theme system with light/dark mode
 =======
 - Application entry point
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+- Shell layout with persistent sidebar
+- CSS variable-based theme system with light/dark mode
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 - Static assets (wwwroot)
 
 
@@ -61,6 +70,7 @@ Structure:
 ```
 CreditInTimeFront.WebApp
 │
+<<<<<<< HEAD
 <<<<<<< HEAD
 ├── App.razor
 ├── _Imports.razor
@@ -141,26 +151,91 @@ CreditInTimeFront.WebApp
 │   ├── FabricaCredito
 │   ├── CRM
 │   └── Autenticacion
+=======
+├── App.razor
+├── _Imports.razor
+├── Program.cs
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 │
-├── Components
-│   ├── Layout
-│   ├── Inputs
-│   ├── Feedback
-│   ├── Tables
-│   └── Modals
+├── Layout/
+│   ├── MainLayout.razor (.cs, .css)   # Shell: MudLayout + MudDrawer
+│   └── NavMenu.razor (.cs, .css)      # Sidebar navigation (data-driven)
 │
-├── Shared
-│   ├── Constants
-│   ├── Extensions
-│   └── Helpers
+├── Modules/
+│   ├── Authentication/
+│   │   ├── Pages/       LoginPage.razor
+│   │   ├── Components/  LoginForm.razor
+│   │   ├── State/       AuthState.cs
+│   │   └── ViewModels/  AuthViewModel.cs
+│   │
+│   ├── Dashboard/                     # Implemented
+│   │   ├── Pages/       Dashboard.razor (.cs, .css)
+│   │   ├── Components/  StatCard, ChartDesembolsos, ChartDistribucion, NotificationItem
+│   │   ├── State/       DashboardState.cs
+│   │   └── ViewModels/  DashboardViewModel.cs
+│   │
+│   ├── JCE/                           # Implemented
+│   │   └── Pages/       JCE.razor (.cs, .css)
+│   │
+│   ├── CreditFactory/                 # Partial
+│   │   ├── Pages/       CreditFactory.razor
+│   │   ├── Components/  FabricaWizard.razor
+│   │   ├── State/       FabricaCreditoState.cs
+│   │   └── ViewModels/  FabricaCreditoViewModel.cs
+│   │
+│   ├── CRM/                           # Partial
+│   │   ├── Pages/       CRM.razor
+│   │   ├── Components/  ClienteCard.razor
+│   │   ├── State/       CrmState.cs
+│   │   └── ViewModels/  CrmViewModel.cs
+│   │
+│   ├── Credits/                       # Partial
+│   │   ├── Pages/       CreditosPage.razor
+│   │   ├── Components/  CreditoForm.razor
+│   │   ├── State/       CreditosState.cs
+│   │   └── ViewModels/  CreditosViewModel.cs
+│   │
+│   ├── Customers/                     # Partial
+│   │   ├── Pages/       ClientesPage.razor
+│   │   ├── Components/  ClienteForm.razor
+│   │   ├── State/       ClientesState.cs
+│   │   └── ViewModels/  ClientesViewModel.cs
+│   │
+│   ├── CollectionManagement/          # Stub
+│   ├── CreditBureau/                  # Stub
+│   ├── Profile/                       # Stub
+│   ├── Reports/                       # Stub
+│   └── Settings/                      # Stub
 │
+<<<<<<< HEAD
 └── wwwroot
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+├── Components/                        # Domain-agnostic shared components
+│   ├── Feedback/    Notification.razor
+│   ├── Inputs/      BaseInput.razor
+│   ├── Modals/      BaseModal.razor
+│   └── Tables/      BaseTable.razor
+│
+├── Shared/
+│   ├── Constants/   UiConstants.cs
+│   ├── Extensions/  NavigationExtensions.cs
+│   ├── Helpers/     FormatHelper.cs
+│   └── Themes/      BancoAgricolaTheme.cs   # MudTheme light + dark palettes
+│
+└── wwwroot/
+    ├── css/
+    │   ├── app.css                    # Global MudBlazor overrides
+    │   └── theme-variables.css        # CSS custom properties (light/dark tokens)
+    ├── images/                        # Logo and static assets
+    └── index.html                     # Dark mode toggle + themeManager script
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 ```
 
 Feature-based organization ensures that each business domain is encapsulated and cohesive.
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Each module follows the four-layer pattern:
 
@@ -173,15 +248,25 @@ ModuleName/
 └── ViewModels/  # Frontend-only models, never reuse backend DTOs
 =======
 Each module contains:
+=======
+Each module follows the four-layer pattern:
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 
 ```
-ModuleName
+ModuleName/
 │
+<<<<<<< HEAD
 ├── Pages
 ├── Components
 ├── State
 └── ViewModels
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+├── Pages/       # Routed pages (@page directive) — no business logic
+├── Components/  # Module-scoped UI components (data via [Parameter])
+├── State/       # Orchestrates service calls, holds loading/data/error state
+└── ViewModels/  # Frontend-only models, never reuse backend DTOs
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 ```
 
 
@@ -277,6 +362,7 @@ Core → (no dependency to WebApp)
 ## 4. Technology Stack
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - .NET 9
 - Blazor WebAssembly (WASM)
 - MudBlazor 9.1.0 (UI component library)
@@ -284,6 +370,11 @@ Core → (no dependency to WebApp)
 - .NET 8+
 - Blazor WebAssembly (WASM)
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+- .NET 9
+- Blazor WebAssembly (WASM)
+- MudBlazor 9.1.0 (UI component library)
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 - C#
 - xUnit / bUnit (for testing)
 - GitLab for version control
@@ -295,10 +386,14 @@ Core → (no dependency to WebApp)
 ### Prerequisites
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - .NET SDK 9.0 or later
 =======
 - .NET SDK 8.0 or later
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+- .NET SDK 9.0 or later
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 
 
 Verify installation:
@@ -324,6 +419,9 @@ dotnet run --project src/CreditInTimeFront.WebApp
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 ### Run with hot reload
 ```
 dotnet watch --project src/CreditInTimeFront.WebApp
@@ -334,8 +432,11 @@ dotnet watch --project src/CreditInTimeFront.WebApp
 dotnet test
 ```
 
+<<<<<<< HEAD
 =======
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 ---
 
 ## 6. Branching Strategy
@@ -360,6 +461,9 @@ All changes must be merged through Merge Requests.
 ## 7. Current Status
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 - MudBlazor 9.1.0 fully integrated (services, theme provider, CSS/JS).
 - Shell layout with persistent sidebar and light/dark mode toggle implemented.
 - Banco Agrícola theme with custom light and dark palettes configured.
@@ -368,12 +472,15 @@ All changes must be merged through Merge Requests.
 - **JCE** module implemented: identity lookup with search, photo preview and data display.
 - Stub pages in place for: CreditFactory, CRM, CollectionManagement, CreditBureau, Profile, Reports, Settings.
 - Remaining modules ready for UI implementation.
+<<<<<<< HEAD
 =======
 - Initial architecture structure created.
 - Frontend Architecture V2 applied.
 - No business logic implemented yet.
 - Ready for module-based development.
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
+=======
+>>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
 
 ---
 
