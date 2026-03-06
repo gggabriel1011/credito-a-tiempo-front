@@ -1,0 +1,142 @@
+/* Agricultural Bank Theme - CSS Variables */
+/* Estas variables pueden usarse como respaldo o para personalizaciones específicas */
+
+:root {
+    /* Colores Principales - Light Mode */
+    --primary-color: #6CB324;
+    --primary-color-light: #8ACD5F;
+    --secondary-color: #D1D5DB;
+    --text-body: #1E293B;
+    --text-title: #334155;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    --text-subtle: #94A3B8;
+    --text-on-primary: #FFFFFF;
+    --text-muted-rgb: 100, 116, 139;
+
+    /* Backgrounds */
+    --bg-light: #F3F4F6;
+    --bg-subtle: #F8FAFC;
+    --bg-dark: #111827;
+    --surface-color: #FFFFFF;
+
+    /* Estado de Colores */
+    --error-color: #EF4444;
+    --warning-color: #F59E0B;
+    --info-color: #3B82F6;
+    --success-color: #10B981;
+    --primary-rgb: 108, 179, 36;
+    --error-rgb: 239, 68, 68;
+    --warning-rgb: 245, 158, 11;
+    --info-rgb: 59, 130, 246;
+    --success-rgb: 16, 185, 129;
+    --error-strong: #DC2626;
+    --warning-strong: #D97706;
+    --info-strong: #2563EB;
+    --success-strong: #16A34A;
+
+    /* Bordes y líneas */
+    --border-card: #F1F5F9;
+    --border-soft: #E2E8F0;
+    --border-hover: #CBD5E1;
+
+    /* Charts */
+    --chart-neutral: #CBD5E1;
+    
+    /* Tipografía */
+    --font-family: "Inter", sans-serif;
+    --font-size-base: 1rem;
+    
+    /* Espaciado */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+    
+    /* Elevación (Sombras) */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode controlled by global toggle */
+:root.dark,
+:root[data-theme="dark"] {
+    --primary-color: #8ACD5F;
+    --primary-rgb: 138, 205, 95;
+    --secondary-color: #374151;
+    --surface-color: #1F2937;
+    --bg-light: #1F2937;
+    --bg-subtle: #111827;
+    --text-body: #E5E7EB;
+    --text-title: #E5E7EB;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+    --text-subtle: #9CA3AF;
+    --text-on-primary: #111827;
+    --border-card: #374151;
+    --border-soft: #4B5563;
+    --border-hover: #6B7280;
+    --chart-neutral: #6B7280;
+}
+
+/* Explicit light mode (when user selects light) */
+:root[data-theme="light"] {
+    --primary-color: #6CB324;
+    --primary-rgb: 108, 179, 36;
+    --primary-color-light: #8ACD5F;
+    --secondary-color: #D1D5DB;
+    --text-body: #1E293B;
+    --text-title: #334155;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    --text-subtle: #94A3B8;
+    --text-muted-rgb: 100, 116, 139;
+    --bg-light: #F3F4F6;
+    --bg-subtle: #F8FAFC;
+    --bg-dark: #111827;
+    --surface-color: #FFFFFF;
+    --error-color: #EF4444;
+    --warning-color: #F59E0B;
+    --info-color: #3B82F6;
+    --success-color: #10B981;
+    --error-rgb: 239, 68, 68;
+    --warning-rgb: 245, 158, 11;
+    --info-rgb: 59, 130, 246;
+    --success-rgb: 16, 185, 129;
+    --error-strong: #DC2626;
+    --warning-strong: #D97706;
+    --info-strong: #2563EB;
+    --success-strong: #16A34A;
+    --border-card: #F1F5F9;
+    --border-soft: #E2E8F0;
+    --border-hover: #CBD5E1;
+    --chart-neutral: #CBD5E1;
+}
+
+/* Fallback to system preference only when no explicit theme is selected */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --primary-color: #8ACD5F;
+        --primary-rgb: 138, 205, 95;
+        --secondary-color: #374151;
+        --surface-color: #1F2937;
+        --bg-light: #1F2937;
+        --bg-subtle: #111827;
+        --text-body: #E5E7EB;
+        --text-title: #E5E7EB;
+        --text-secondary: #D1D5DB;
+        --text-muted: #9CA3AF;
+        --text-subtle: #9CA3AF;
+        --border-card: #374151;
+        --border-soft: #4B5563;
+        --border-hover: #6B7280;
+        --chart-neutral: #6B7280;
+    }
+}
