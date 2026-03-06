@@ -42,11 +42,14 @@
 
     /* Charts */
     --chart-neutral: #CBD5E1;
+<<<<<<< HEAD
 
     /* Accent colors */
     --purple-color: #8B5CF6;
     --teal-color: #14B8A6;
     --cyan-color: #06B6D4;
+=======
+>>>>>>> 11af880 (feat: add Banco Agrícola theme light/dark palettes configuration and CSS variables, including logo images)
     
     /* Tipografía */
     --font-family: "Inter", sans-serif;
@@ -89,9 +92,12 @@
     --border-soft: #4B5563;
     --border-hover: #6B7280;
     --chart-neutral: #6B7280;
+<<<<<<< HEAD
     --purple-color: #A78BFA;
     --teal-color: #2DD4BF;
     --cyan-color: #22D3EE;
+=======
+>>>>>>> 11af880 (feat: add Banco Agrícola theme light/dark palettes configuration and CSS variables, including logo images)
 }
 
 /* Explicit light mode (when user selects light) */
