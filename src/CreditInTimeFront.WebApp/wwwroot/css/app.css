@@ -164,6 +164,43 @@ a, .btn-link {
 =======
 >>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 /* =============================================
+   Page Header — shared across all module pages
+   Usage:
+     <header class="page-header">
+       <h1 class="page-title">Título <span class="page-title-accent">- Subtítulo</span></h1>
+       <p class="page-subtitle">Descripción breve</p>
+     </header>
+   ============================================= */
+.page-header {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.page-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-body);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.page-title-accent {
+    color: var(--primary-color);
+}
+
+.page-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0.25rem 0 0 0;
+}
+
+/* =============================================
    MudNavLink - Global Overrides
    Los overrides de componentes de terceros deben
    vivir en CSS global, no en CSS aislado por componente.

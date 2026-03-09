@@ -1,5 +1,6 @@
 @page "/credit-factory"
 <<<<<<< HEAD
+<<<<<<< HEAD
 @namespace CreditInTimeFront.WebApp.Modules.CreditFactory.Pages
 @using MudBlazor
 @using CreditInTimeFront.WebApp.Modules.CreditFactory.Components
@@ -49,3 +50,43 @@
     </MudCard>
 </MudContainer>
 >>>>>>> 7e3cc8f (feat: add initial modules for CRM, Collection Management, Credit Bureau, Credit Factory, Profile, Reports, and Settings with placeholder content)
+=======
+@namespace CreditInTimeFront.WebApp.Modules.CreditFactory.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CreditFactory.Components
+
+<!-- Header -->
+<header class="page-header">
+    <h1 class="page-title">Fábrica de Crédito <span class="page-title-accent">- Panel de Aprobaciones</span></h1>
+    <p class="page-subtitle">Gestión y Análisis de Solicitudes de Préstamo</p>
+</header>
+
+<!-- KPI Cards -->
+<MudGrid Spacing="3" Class="mb-4">
+    @foreach (var card in _kpiCards)
+    {
+        <MudItem xs="12" sm="6" lg="3">
+            <MudCard Elevation="1" Class="cf-kpi-card" Style="height: 100%;">
+                <MudCardContent>
+                    <p class="cf-kpi-label">@card.Label</p>
+                    <p class="cf-kpi-value">@card.Value</p>
+                    <div class="cf-kpi-detail @card.DetailColorClass">
+                        <MudIcon Icon="@card.Icon" Class="cf-kpi-icon" />
+                        <span>@card.Detail</span>
+                    </div>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+<!-- Requests table — filtering and pagination handled internally by MudTable -->
+<CreditRequestsTable Requests="@_state.Requests"
+                     OnPrintRequest="HandlePrintRequest" />
+
+<!-- Documents modal -->
+<DocumentsModal IsOpen="@_modalOpen"
+                Request="@_selectedRequest"
+                OnClose="CloseModal"
+                OnOpenReport="OpenReport" />
+>>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)

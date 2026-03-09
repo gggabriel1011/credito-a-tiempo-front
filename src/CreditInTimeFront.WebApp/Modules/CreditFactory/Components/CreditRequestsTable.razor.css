@@ -141,6 +141,7 @@
 }
 
 /* =============================================
+<<<<<<< HEAD
    Horizontal scroll — table scrolls, toolbar stays full-width
    ============================================= */
 .cft-root ::deep .mud-table-container {
@@ -152,6 +153,8 @@
 }
 
 /* =============================================
+=======
+>>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
    MudTable — header
    ============================================= */
 .cft-root ::deep .mud-table-head .mud-table-cell {
