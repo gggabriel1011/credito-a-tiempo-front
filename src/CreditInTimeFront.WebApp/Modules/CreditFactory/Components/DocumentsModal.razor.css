@@ -1,0 +1,283 @@
+/* =============================================
+   Overlay
+   ============================================= */
+.doc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+}
+
+/* =============================================
+   Modal box
+   ============================================= */
+.doc-modal {
+    background: var(--surface-color);
+    border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-card);
+    display: flex;
+    flex-direction: column;
+}
+
+/* =============================================
+   Header
+   ============================================= */
+.doc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    gap: 0.75rem;
+}
+
+.doc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.doc-header-icon-wrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    background: rgba(var(--primary-rgb), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.doc-header-icon {
+    color: var(--primary-color) !important;
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+.doc-header-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-body);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.doc-header-subtitle {
+    font-size: 11px;
+    color: var(--text-subtle);
+    margin: 0.125rem 0 0;
+}
+
+.doc-close-btn {
+    color: var(--text-subtle) !important;
+    flex-shrink: 0;
+}
+
+.doc-close-btn:hover {
+    color: var(--text-body) !important;
+    background: var(--bg-subtle) !important;
+}
+
+/* =============================================
+   Client info strip
+   ============================================= */
+.doc-client-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: var(--bg-subtle);
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 0.875rem 1.5rem;
+}
+
+.doc-client-info {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-width: 0;
+}
+
+.doc-client-icon {
+    color: var(--text-subtle) !important;
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    flex-shrink: 0;
+}
+
+.doc-client-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+}
+
+.doc-client-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-body);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doc-company {
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+}
+
+.doc-client-meta {
+    font-size: 11px;
+    color: var(--text-subtle);
+    white-space: nowrap;
+}
+
+/* Status badge — local, self-contained */
+.doc-status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.doc-status--pendiente  { color: var(--warning-strong);  background: rgba(var(--warning-rgb), 0.12); }
+.doc-status--enanalisis { color: var(--info-strong);     background: rgba(var(--info-rgb),    0.12); }
+.doc-status--aprobado   { color: var(--success-strong);  background: rgba(var(--success-rgb),  0.12); }
+.doc-status--rechazado  { color: var(--error-strong);    background: rgba(var(--error-rgb),    0.12); }
+
+/* =============================================
+   Document list
+   ============================================= */
+.doc-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    gap: 0.125rem;
+    flex: 1;
+}
+
+.doc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.doc-item:hover {
+    background: var(--bg-subtle);
+    border-color: var(--border-soft);
+}
+
+/* Icon wrapper with tinted background */
+.doc-item-icon-wrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.doc-icon-bg--blue   { background: rgba(59,  130, 246, 0.10); }
+.doc-icon-bg--purple { background: rgba(139,  92, 246, 0.10); }
+.doc-icon-bg--green  { background: rgba(16,  185, 129, 0.10); }
+.doc-icon-bg--teal   { background: rgba(20,  184, 166, 0.10); }
+.doc-icon-bg--amber  { background: rgba(245, 158,  11, 0.10); }
+.doc-icon-bg--cyan   { background: rgba(6,   182, 212, 0.10); }
+
+.doc-item-icon {
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+/* Icon color variants */
+.doc-icon--blue   { color: var(--info-color)    !important; }
+.doc-icon--purple { color: var(--purple-color)  !important; }
+.doc-icon--green  { color: var(--success-color) !important; }
+.doc-icon--teal   { color: var(--teal-color)    !important; }
+.doc-icon--amber  { color: var(--warning-color) !important; }
+.doc-icon--cyan   { color: var(--cyan-color)    !important; }
+
+/* Item text block */
+.doc-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.doc-item-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-body);
+    line-height: 1.3;
+}
+
+.doc-item-subtitle {
+    font-size: 11px;
+    color: var(--text-subtle);
+    line-height: 1.3;
+}
+
+/* Trailing arrow — reveals on hover */
+.doc-item-arrow {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.doc-item:hover .doc-item-arrow {
+    opacity: 1;
+}
+
+.doc-item-arrow-icon {
+    color: var(--text-subtle) !important;
+    font-size: 1rem !important;
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
+/* =============================================
+   Footer
+   ============================================= */
+.doc-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.875rem 1.5rem;
+    border-top: 1px solid var(--border-soft);
+}
+
+.doc-footer-btn {
+    text-transform: none !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border-color: var(--border-hover) !important;
+    color: var(--text-muted) !important;
+}
