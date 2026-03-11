@@ -340,6 +340,7 @@ a, .btn-link {
 .crm-kpi-value--long {
     font-size: 1.125rem;
 }
+<<<<<<< HEAD
 =======
 code {
     color: #c02d76;
@@ -406,3 +407,5 @@ code {
    ============================================= */
 .chart-card--pie .mud-chart-legend { display: none !important; }
 >>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
+=======
+>>>>>>> c5860af (feat(CRM): Add client management and detail pages)

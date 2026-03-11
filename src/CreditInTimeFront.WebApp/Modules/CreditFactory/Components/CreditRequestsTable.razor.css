@@ -142,6 +142,9 @@
 
 /* =============================================
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c5860af (feat(CRM): Add client management and detail pages)
    Horizontal scroll — table scrolls, toolbar stays full-width
    ============================================= */
 .cft-root ::deep .mud-table-container {
@@ -153,8 +156,11 @@
 }
 
 /* =============================================
+<<<<<<< HEAD
 =======
 >>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
+=======
+>>>>>>> c5860af (feat(CRM): Add client management and detail pages)
    MudTable — header
    ============================================= */
 .cft-root ::deep .mud-table-head .mud-table-cell {
