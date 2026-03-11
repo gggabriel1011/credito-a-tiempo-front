@@ -1,0 +1,26 @@
+<MudCard Elevation="1" Class="desembolsos-card" Style="height: 100%;">
+    <MudCardContent>
+        <div class="desembolsos-header">
+            <h3 class="desembolsos-title">@Title</h3>
+            <div class="year-select-wrap">
+                <select @onchange="OnYearSelected" class="desembolsos-year-select">
+                    @foreach (var year in AvailableYears)
+                    {
+                        <option value="@year">Año @year</option>
+                    }
+                </select>
+                <svg class="year-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <MudChart T="double"
+                  ChartType="ChartType.StackedBar"
+                  ChartSeries="@BarSeries"
+                  ChartLabels="@Labels"
+                  Width="100%"
+                  Height="280px"
+                  ChartOptions="@_chartOptions"
+                  MatchBoundsToSize="true" />
+    </MudCardContent>
+</MudCard>

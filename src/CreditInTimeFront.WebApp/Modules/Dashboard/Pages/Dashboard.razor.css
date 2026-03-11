@@ -1,0 +1,87 @@
+/* =============================================
+   Header
+   ============================================= */
+.db-header {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.db-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-body);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.db-subtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0.25rem 0 0 0;
+}
+
+/* =============================================
+   Notifications Card
+   ============================================= */
+.db-notif-card {
+    border-radius: 12px !important;
+    background: var(--surface-color) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid var(--border-card) !important;
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+.db-notif-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-card);
+}
+
+.db-notif-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.db-notif-icon {
+    color: var(--primary-color);
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+.db-notif-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-title);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.db-notif-ver-todas {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    padding: 0;
+}
+
+.db-notif-ver-todas:hover {
+    text-decoration: underline;
+}
+
+.db-notif-list {
+    /* divide-y effect: items in NotificationItem have border-bottom via their own CSS */
+}

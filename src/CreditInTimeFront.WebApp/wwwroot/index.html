@@ -1,13 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CreditInTimeFront.WebApp</title>
+    <title>Crédito a Tiempo 2.0</title>
     <base href="/" />
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script>
+        (function () {
+            const storageKey = "cat-theme-mode";
+            const root = document.documentElement;
+            const toggleButtonId = "global-theme-toggle";
+            const toggleIconId = "global-theme-toggle-icon";
+
+            function getStoredMode() {
+                return localStorage.getItem(storageKey);
+            }
+
+            function getSystemMode() {
+                return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+
+            function applyMode(mode) {
+                const effectiveMode = mode === "dark" ? "dark" : "light";
+                root.classList.toggle("dark", effectiveMode === "dark");
+                root.setAttribute("data-theme", effectiveMode);
+                const icon = document.getElementById(toggleIconId);
+                if (icon) {
+                    icon.textContent = effectiveMode === "dark" ? "light_mode" : "dark_mode";
+                }
+            }
+
+            const initialMode = getStoredMode() || getSystemMode();
+            applyMode(initialMode);
+
+            window.themeManager = {
+                getTheme: function () {
+                    return getStoredMode() || getSystemMode();
+                },
+                setTheme: function (mode) {
+                    const effectiveMode = mode === "dark" ? "dark" : "light";
+                    localStorage.setItem(storageKey, effectiveMode);
+                    applyMode(effectiveMode);
+                },
+                toggleTheme: function () {
+                    const current = root.classList.contains("dark") ? "dark" : "light";
+                    const next = current === "dark" ? "light" : "dark";
+                    localStorage.setItem(storageKey, next);
+                    applyMode(next);
+                    return next;
+                }
+            };
+
+            window.addEventListener("DOMContentLoaded", function () {
+                const button = document.getElementById(toggleButtonId);
+                if (!button) {
+                    return;
+                }
+
+                button.addEventListener("click", function () {
+                    window.themeManager.toggleTheme();
+                    window.location.reload();
+                });
+
+                applyMode(window.themeManager.getTheme());
+            });
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/theme-variables.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="CreditInTimeFront.WebApp.styles.css" rel="stylesheet" />
 </head>
@@ -21,12 +87,42 @@
         <div class="loading-progress-text"></div>
     </div>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="." class="reload">Reload</a>
-        <span class="dismiss">🗙</span>
-    </div>
+    <button id="global-theme-toggle" class="global-theme-toggle" aria-label="Cambiar tema">
+        <span id="global-theme-toggle-icon" class="global-theme-toggle-icon material-symbols-outlined">dark_mode</span>
+    </button>
+
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 </body>
+
+<style>
+    .global-theme-toggle {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 9999px;
+        border: 1px solid var(--border-soft, #E2E8F0);
+        background: var(--surface-color, #FFFFFF);
+        color: var(--text-secondary, #475569);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0,0,0,.1));
+        z-index: 2000;
+    }
+
+    .global-theme-toggle:hover {
+        background: var(--bg-subtle, #F8FAFC);
+    }
+
+    .global-theme-toggle-icon {
+        font-size: 1.25rem;
+        line-height: 1;
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+</style>
 
 </html>
