@@ -1,0 +1,281 @@
+/* =============================================
+   Root wrapper — scoped parent for ::deep rules
+   ============================================= */
+.crm-t-root {
+    display: contents;
+}
+
+/* =============================================
+   Card
+   ============================================= */
+.crm-t-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+    overflow: hidden;
+}
+
+/* =============================================
+   MudDataGrid toolbar
+   ============================================= */
+.crm-t-root ::deep .mud-table-toolbar {
+    background: var(--bg-subtle) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: unset !important;
+}
+
+.crm-t-toolbar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 0.875rem 1.5rem;
+    width: 100%;
+}
+
+/* ── Fila 1: título + botón ── */
+.crm-t-toolbar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.crm-t-toolbar-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.crm-t-nuevo-btn {
+    text-transform: none !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    border-radius: 9999px !important;
+    white-space: nowrap;
+    padding: 0 1.25rem !important;
+}
+
+/* ── Fila 2: filtros con labels ── */
+.crm-t-filters {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.crm-t-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.crm-t-filter-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+/* All filter inputs share the same look */
+.crm-t-root ::deep .crm-t-filter-input .mud-input-root {
+    font-size: 0.8125rem !important;
+    color: var(--text-body) !important;
+    background: var(--surface-color) !important;
+    border-radius: 6px !important;
+}
+
+.crm-t-root ::deep .crm-t-filter-input .mud-input-outlined-border {
+    border-color: var(--border-soft) !important;
+}
+
+.crm-t-root ::deep .crm-t-filter-input .mud-input-root input::placeholder {
+    color: var(--text-subtle) !important;
+    font-size: 0.8125rem !important;
+}
+
+/* Hide the floating MudBlazor label — we use our own HTML label above */
+.crm-t-root ::deep .crm-t-filter-input .mud-input-label,
+.crm-t-root ::deep .crm-t-filter-input label {
+    display: none !important;
+}
+
+.crm-t-root ::deep .crm-t-filter-input .mud-select-input {
+    font-size: 0.8125rem !important;
+}
+
+.crm-t-root ::deep .crm-t-filter-input .mud-input-adornment {
+    color: var(--text-subtle) !important;
+}
+
+/* =============================================
+   Horizontal scroll — table scrolls, toolbar stays full-width
+   ============================================= */
+.crm-t-root ::deep .mud-table-container {
+    overflow-x: auto !important;
+}
+
+.crm-t-root ::deep .mud-table-container table {
+    min-width: 1100px;
+}
+
+/* =============================================
+   MudDataGrid — header
+   ============================================= */
+.crm-t-root ::deep .mud-table-head .mud-table-cell {
+    background: var(--bg-subtle) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-muted) !important;
+    padding: 0.75rem 1rem !important;
+    white-space: normal;
+    line-height: 1.3;
+    vertical-align: bottom;
+}
+
+/* =============================================
+   MudDataGrid — body rows
+   ============================================= */
+.crm-t-root ::deep .mud-table-body .mud-table-cell {
+    border-bottom: 1px solid var(--border-card) !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+    color: var(--text-muted) !important;
+}
+
+.crm-t-root ::deep .mud-table-body .mud-table-row:hover .mud-table-cell {
+    background: var(--bg-subtle) !important;
+}
+
+/* =============================================
+   MudDataGrid — pagination
+   ============================================= */
+.crm-t-root ::deep .mud-table-pagination {
+    background: var(--bg-subtle) !important;
+    border-top: 1px solid var(--border-soft) !important;
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    border-radius: 0 0 12px 12px;
+}
+
+.crm-t-root ::deep .mud-table-pagination .mud-select-input,
+.crm-t-root ::deep .mud-table-pagination .mud-input-root {
+    font-size: 11px !important;
+    color: var(--text-body) !important;
+}
+
+/* =============================================
+   Custom cell styles
+   ============================================= */
+.crm-t-client-name {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: var(--text-body) !important;
+    margin: 0 !important;
+}
+
+.crm-t-company {
+    text-transform: uppercase !important;
+    font-size: 0.8rem !important;
+}
+
+/* =============================================
+   Status badge — MudChip con look compacto idéntico al <span> original
+   ============================================= */
+.crm-t-status-badge {
+    display: inline-flex !important;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 9999px !important;
+    white-space: nowrap;
+    height: auto !important;
+}
+
+/* Resetea el padding interno del MudChip para replicar el del <span> */
+.crm-t-status-badge ::deep .mud-chip-content {
+    padding: 0.2rem 0.625rem !important;
+    height: auto !important;
+    min-height: unset !important;
+}
+
+.crm-t-status-badge ::deep .mud-chip-label {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* Color aplicado nativamente via MudChip Color="Color.Success|Info|Warning" + Variant.Filled */
+
+/* =============================================
+   Sub-table (seguimientos)
+   ============================================= */
+.crm-t-sub-wrap {
+    padding: 0.75rem 1.5rem 1rem 3rem;
+    background: var(--bg-subtle);
+    border-top: 1px solid var(--border-soft);
+}
+
+.crm-t-sub-title {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    color: var(--text-subtle) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin: 0 0 0.5rem 0 !important;
+}
+
+.crm-t-sub-table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+}
+
+.crm-t-root ::deep .crm-t-sub-table .mud-table-head .mud-table-cell {
+    background: var(--surface-color) !important;
+    font-size: 10px !important;
+    padding: 0.5rem 0.75rem !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+}
+
+.crm-t-root ::deep .crm-t-sub-table .mud-table-body .mud-table-cell {
+    padding: 0.4rem 0.75rem !important;
+    font-size: 0.8rem !important;
+    border-bottom: 1px solid var(--border-card) !important;
+}
+
+.crm-t-sub-empty {
+    font-size: 0.8rem;
+    color: var(--text-subtle);
+    padding-top: 0.5rem;
+}
+
+/* =============================================
+   Empty state
+   ============================================= */
+.crm-t-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem;
+}
+
+.crm-t-empty-icon {
+    color: var(--text-subtle) !important;
+    font-size: 2rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+.crm-t-empty-text {
+    font-size: 0.875rem;
+    color: var(--text-subtle);
+}

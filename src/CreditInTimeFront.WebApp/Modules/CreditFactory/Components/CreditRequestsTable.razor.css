@@ -141,6 +141,17 @@
 }
 
 /* =============================================
+   Horizontal scroll — table scrolls, toolbar stays full-width
+   ============================================= */
+.cft-root ::deep .mud-table-container {
+    overflow-x: auto !important;
+}
+
+.cft-root ::deep .mud-table-container table {
+    min-width: 800px;
+}
+
+/* =============================================
    MudTable — header
    ============================================= */
 .cft-root ::deep .mud-table-head .mud-table-cell {

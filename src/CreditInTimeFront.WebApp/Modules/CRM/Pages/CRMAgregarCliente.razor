@@ -1,0 +1,207 @@
+@page "/crm/agregar"
+@namespace CreditInTimeFront.WebApp.Modules.CRM.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CRM.ViewModels
+
+<!-- Header -->
+<header class="page-header crm-add-header">
+    <div class="crm-add-header-left">
+        <MudIcon Icon="@Icons.Material.Outlined.PersonAdd" Class="crm-add-header-icon" />
+        <div>
+            <h1 class="page-title">Nuevo Cliente <span class="page-title-accent">- Formulario de Registro</span></h1>
+            <p class="page-subtitle">Complete los datos del cliente para agregarlo al sistema</p>
+        </div>
+    </div>
+    <MudIconButton Icon="@Icons.Material.Outlined.Close"
+                   Size="Size.Medium"
+                   Class="crm-add-close-btn"
+                   OnClick="Cancelar" />
+</header>
+
+<MudForm @ref="_form" ValidationDelay="0">
+    <MudCard Elevation="1" Class="crm-add-card">
+        <MudCardContent>
+
+            <!-- Sección 1: Información Básica -->
+            <div class="crm-add-section">
+                <div class="crm-add-section-header">
+                    <MudIcon Icon="@Icons.Material.Outlined.Person" Color="Color.Primary" Class="crm-add-section-icon" />
+                    <span class="crm-add-section-title">Información Básica</span>
+                </div>
+                <MudGrid Spacing="2">
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string"
+                                      @bind-Value="_nombre"
+                                      Label="Nombre Completo"
+                                      Placeholder="Ej. Juan Carlos Pérez"
+                                      Required="true"
+                                      RequiredError="El nombre es requerido"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="2">
+                        <MudTextField @bind-Value="_identificacion"
+                                 Mask="@(new PatternMask("000-0000000-0"))"
+                                 Label="Número de Identificación"
+                                 Placeholder="000-0000000-0"
+                                 Required="true"
+                                 RequiredError="La identificación es requerida"
+                                 Variant="Variant.Outlined"
+                                 Margin="Margin.Dense"
+                                 FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string"
+                                      @bind-Value="_email"
+                                      Label="Correo Electrónico"
+                                      Placeholder="correo@ejemplo.com"
+                                      InputType="InputType.Email"
+                                      Required="true"
+                                      RequiredError="El correo es requerido"
+                                      Validation="@_emailValidator"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="2">
+                        <MudTextField @bind-Value="_telefono"
+                                 Mask="@(new PatternMask("000-000-0000"))"
+                                 Label="Teléfono"
+                                 Placeholder="Ej. 000-000-0000"
+                                 ShrinkLabel="true"
+                                 Required="true"
+                                 RequiredError="El teléfono es requerido"
+                                 Variant="Variant.Outlined"
+                                 Margin="Margin.Dense"
+                                 FullWidth="true" />
+                    </MudItem>
+                </MudGrid>
+            </div>
+
+            <!-- Sección 2: Información Empresarial -->
+            <div class="crm-add-section">
+                <div class="crm-add-section-header">
+                    <MudIcon Icon="@Icons.Material.Outlined.Business" Color="Color.Primary" Class="crm-add-section-icon" />
+                    <span class="crm-add-section-title">Información Empresarial</span>
+                </div>
+                <MudGrid Spacing="2">
+                    <MudItem xs="12" sm="6">
+                        <MudTextField T="string"
+                                      @bind-Value="_nombreEmpresa"
+                                      Label="Nombre Empresa"
+                                      Placeholder="Ej. Empresa S.R.L."
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="2">
+                        <MudTextField @bind-Value="_rnc"
+                                 Mask="@(new PatternMask("000-00000-0"))"
+                                 Label="RNC"
+                                 Placeholder="000-00000-0"
+                                 ShrinkLabel="true"
+                                 Variant="Variant.Outlined"
+                                 Margin="Margin.Dense"
+                                 FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudSelect T="SegmentoCliente"
+                                   @bind-Value="_segmento"
+                                   Label="Segmento de Cliente"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense"
+                                   FullWidth="true">
+                            @foreach (SegmentoCliente seg in Enum.GetValues<SegmentoCliente>())
+                            {
+                                <MudSelectItem T="SegmentoCliente" Value="@seg">@seg.ToLabel()</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+            </div>
+
+            <!-- Sección 3: Información de Contacto -->
+            <div class="crm-add-section">
+                <div class="crm-add-section-header">
+                    <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Color="Color.Primary" Class="crm-add-section-icon" />
+                    <span class="crm-add-section-title">Información de Contacto</span>
+                </div>
+                <MudGrid Spacing="2">
+                    <MudItem xs="12">
+                        <MudTextField T="string"
+                                      @bind-Value="_direccion"
+                                      Label="Dirección"
+                                      Placeholder="Ej. Calle Principal #123, Zona Este"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="5">
+                        <MudTextField T="string"
+                                      @bind-Value="_provincia"
+                                      Label="Provincia"
+                                      Placeholder="Ej. Distrito Nacional"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="5">
+                        <MudTextField T="string"
+                                      @bind-Value="_municipio"
+                                      Label="Municipio"
+                                      Placeholder="Ej. Santo Domingo Este"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="2">
+                        <MudTextField T="string"
+                                      @bind-Value="_codigoPostal"
+                                      Label="Código Postal"
+                                      Placeholder="10101"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
+                    </MudItem>
+                </MudGrid>
+            </div>
+
+            <!-- Sección 4: Notas Adicionales -->
+            <div class="crm-add-section crm-add-section--last">
+                <div class="crm-add-section-header">
+                    <MudIcon Icon="@Icons.Material.Outlined.Notes" Color="Color.Primary" Class="crm-add-section-icon" />
+                    <span class="crm-add-section-title">Notas Adicionales</span>
+                </div>
+                <MudTextField T="string"
+                              @bind-Value="_observaciones"
+                              Label="Observaciones"
+                              Placeholder="Escriba cualquier observación o nota adicional sobre el cliente..."
+                              Lines="4"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense"
+                              FullWidth="true" />
+            </div>
+
+        </MudCardContent>
+    </MudCard>
+
+    <!-- Footer Actions -->
+    <div class="crm-add-footer">
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Default"
+                   DisableElevation="true"
+                   Class="crm-add-cancel-btn"
+                   OnClick="Cancelar">
+            Cancelar
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   DisableElevation="true"
+                   StartIcon="@Icons.Material.Rounded.CheckCircle"
+                   Class="crm-add-save-btn"
+                   OnClick="Guardar">
+            Guardar Cliente
+        </MudButton>
+    </div>
+</MudForm>

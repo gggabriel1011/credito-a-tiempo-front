@@ -170,3 +170,79 @@ h1:focus {
    Dashboard — ChartDistribucion overrides
    ============================================= */
 .chart-card--pie .mud-chart-legend { display: none !important; }
+
+/* =============================================
+   CRM KPI Card — global styles (mismo patrón que StatCard)
+   Sin CSS isolation para garantizar carga inmediata.
+   ============================================= */
+.crm-kpi-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+    height: 100%;
+}
+
+.crm-kpi-card .mud-card-content {
+    padding: 1.5rem !important;
+}
+
+.crm-kpi-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.crm-kpi-icon {
+    color: var(--text-subtle) !important;
+    font-size: 1.5rem !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+.crm-kpi-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.crm-kpi-badge--primary {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), 0.1);
+}
+
+.crm-kpi-badge--warning {
+    color: var(--warning-strong);
+    background: rgba(var(--warning-rgb), 0.1);
+}
+
+.crm-kpi-badge--info {
+    color: var(--info-strong);
+    background: rgba(var(--info-rgb), 0.1);
+}
+
+.crm-kpi-badge--muted {
+    color: var(--text-muted);
+    background: var(--bg-subtle);
+}
+
+.crm-kpi-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.25rem 0;
+}
+
+.crm-kpi-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-body);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.crm-kpi-value--long {
+    font-size: 1.125rem;
+}
