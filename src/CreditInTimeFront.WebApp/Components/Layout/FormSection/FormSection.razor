@@ -1,0 +1,15 @@
+@namespace CreditInTimeFront.WebApp.Components
+
+<div class="fs-section">
+    <div class="fs-header">
+        <MudIcon Icon="@Icon" Color="Color.Primary" Class="fs-icon" />
+        <span class="fs-title">@Title</span>
+    </div>
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
