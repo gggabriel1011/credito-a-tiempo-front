@@ -2,8 +2,20 @@
 
 <div class="fs-section">
     <div class="fs-header">
-        <MudIcon Icon="@Icon" Color="Color.Primary" Class="fs-icon" />
-        <span class="fs-title">@Title</span>
+        <div class="fs-header-left">
+            <MudIcon Icon="@Icon" Color="Color.Primary" Class="fs-icon" />
+            <div class="fs-header-text">
+                <span class="fs-title">@Title</span>
+                @if (!string.IsNullOrEmpty(Subtitle))
+                {
+                    <span class="fs-subtitle">@Subtitle</span>
+                }
+            </div>
+        </div>
+        @if (HeaderActions is not null)
+        {
+            <div class="fs-header-actions">@HeaderActions</div>
+        }
     </div>
     @ChildContent
 </div>
@@ -11,5 +23,7 @@
 @code {
     [Parameter] public string Icon { get; set; } = "";
     [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string? Subtitle { get; set; }
+    [Parameter] public RenderFragment? HeaderActions { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
 }

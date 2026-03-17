@@ -98,18 +98,63 @@
     <!-- ── FormSection ────────────────────────────────────────────── -->
     <section class="cp-section">
         <h2 class="cp-section-title">FormSection</h2>
+
+        <!-- Base: solo Icon + Title -->
         <div class="cp-preview cp-preview--outlined">
             <FormSection Icon="@Icons.Material.Outlined.Person" Title="Datos Personales">
                 <MudGrid Spacing="2">
                     <MudItem xs="12" sm="6">
-                        <MudTextField T="string" Label="Nombre" Variant="Variant.Outlined" />
+                        <MudTextField T="string" Label="Nombre" Variant="Variant.Outlined" Margin="Margin.Dense" />
                     </MudItem>
                     <MudItem xs="12" sm="6">
-                        <MudTextField T="string" Label="Apellido" Variant="Variant.Outlined" />
+                        <MudTextField T="string" Label="Apellido" Variant="Variant.Outlined" Margin="Margin.Dense" />
                     </MudItem>
                 </MudGrid>
             </FormSection>
         </div>
+
+        <!-- Con Subtitle -->
+        <div class="cp-preview cp-preview--outlined" style="margin-top: 0.75rem;">
+            <FormSection Icon="@Icons.Material.Outlined.Business"
+                         Title="Información Empresarial"
+                         Subtitle="Datos de la empresa u organización del cliente">
+                <MudGrid Spacing="2">
+                    <MudItem xs="12" sm="8">
+                        <MudTextField T="string" Label="Nombre Empresa" Variant="Variant.Outlined" Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string" Label="RNC" Variant="Variant.Outlined" Margin="Margin.Dense" />
+                    </MudItem>
+                </MudGrid>
+            </FormSection>
+        </div>
+
+        <!-- Con HeaderActions -->
+        <div class="cp-preview cp-preview--outlined" style="margin-top: 0.75rem;">
+            <FormSection Icon="@Icons.Material.Outlined.People"
+                         Title="Referencias Personales"
+                         Subtitle="Agregue al menos una referencia personal">
+                <HeaderActions>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               StartIcon="@Icons.Material.Outlined.Add">
+                        Agregar
+                    </MudButton>
+                </HeaderActions>
+                <ChildContent>
+                    <MudGrid Spacing="2">
+                        <MudItem xs="12" sm="6">
+                            <MudTextField T="string" Label="Nombre Referencia" Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField T="string" Label="Teléfono" Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+                    </MudGrid>
+                </ChildContent>
+            </FormSection>
+        </div>
+
     </section>
 
     <!-- ── ChartCard ──────────────────────────────────────────────── -->
