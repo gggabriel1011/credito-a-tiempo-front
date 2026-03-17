@@ -6,7 +6,7 @@ public class CrmState
 {
     // ─── Static config ────────────────────────────────────────────────────────
 
-    public static readonly IReadOnlyList<string> TiposContacto =
+    public static readonly IReadOnlyList<string> ContactTypes =
         ["Llamada", "Visita", "Correo"];
 
     public static readonly IReadOnlyList<string> TiposSolicitud =

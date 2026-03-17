@@ -4,19 +4,16 @@
 @using CreditInTimeFront.WebApp.Modules.CRM.ViewModels
 
 <!-- Header -->
-<header class="page-header crm-add-header">
-    <div class="crm-add-header-left">
-        <MudIcon Icon="@Icons.Material.Outlined.PersonAdd" Class="crm-add-header-icon" />
-        <div>
-            <h1 class="page-title">Nuevo Cliente <span class="page-title-accent">- Formulario de Registro</span></h1>
-            <p class="page-subtitle">Complete los datos del cliente para agregarlo al sistema</p>
-        </div>
-    </div>
-    <MudIconButton Icon="@Icons.Material.Outlined.Close"
-                   Size="Size.Medium"
-                   Class="crm-add-close-btn"
-                   OnClick="Cancelar" />
-</header>
+<PageHeader Title="Nuevo Cliente"
+            TitleAccent="- Formulario de Registro"
+            Subtitle="Complete los datos del cliente para agregarlo al sistema">
+    <Actions>
+        <MudIconButton Icon="@Icons.Material.Outlined.Close"
+                       Size="Size.Medium"
+                       Class="crm-add-close-btn"
+                       OnClick="Cancelar" />
+    </Actions>
+</PageHeader>
 
 <MudForm @ref="_form" ValidationDelay="0">
     <MudCard Elevation="1" Class="crm-add-card">

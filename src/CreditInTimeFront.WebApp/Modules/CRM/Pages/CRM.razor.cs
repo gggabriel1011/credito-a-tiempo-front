@@ -32,10 +32,10 @@ public partial class CRM
     {
         _kpiCards =
         [
-            new("Total Clientes",       _state.TotalClientes.ToString("N0"),      Icons.Material.Outlined.Group,        "crm-detail--primary", "Clientes activos en cartera"),
-            new("Prospectos Nuevos",    _state.ProspectosNuevos.ToString(),        Icons.Material.Outlined.PersonAdd,    "crm-detail--info",    "Nuevos este mes"),
-            new("Tasa de Conversión",   $"{_state.TasaConversion}%",               Icons.Material.Outlined.TrendingUp,   "crm-detail--warning", "Meta mensual"),
-            new("Retención Clientes",   $"{_state.RetencionClientes}%",            Icons.Material.Outlined.Loyalty,      "crm-detail--primary", "Índice de fidelización"),
+            new("Total Clientes",       _state.TotalClientes.ToString("N0"),      Icons.Material.Outlined.Group,        "primary", "Clientes activos en cartera"),
+            new("Prospectos Nuevos",    _state.ProspectosNuevos.ToString(),        Icons.Material.Outlined.PersonAdd,    "info",    "Nuevos este mes"),
+            new("Tasa de Conversión",   $"{_state.TasaConversion}%",               Icons.Material.Outlined.TrendingUp,   "warning", "Meta mensual"),
+            new("Retención Clientes",   $"{_state.RetencionClientes}%",            Icons.Material.Outlined.Loyalty,      "primary", "Índice de fidelización"),
         ];
     }
 
@@ -79,5 +79,5 @@ public partial class CRM
 
     private void HandleNuevoCliente() => NavManager.NavigateTo("/crm/agregar");
 
-    private record KpiCard(string Label, string Value, string Icon, string DetailColorClass, string Detail);
+    private record KpiCard(string Label, string Value, string Icon, string BadgeVariant, string Detail);
 }

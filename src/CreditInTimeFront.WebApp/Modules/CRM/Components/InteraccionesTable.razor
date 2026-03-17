@@ -1,204 +1,111 @@
 @namespace CreditInTimeFront.WebApp.Modules.CRM.Components
 @using MudBlazor
 @using CreditInTimeFront.WebApp.Modules.CRM.ViewModels
-@using CreditInTimeFront.WebApp.Modules.CRM.State
 
-<div class="crm-t-root">
-    <MudCard Elevation="1" Class="crm-t-card">
+<DataTable T="InteraccionViewModel"
+           Title="Interacciones Recientes"
+           TitleIcon="@Icons.Material.Outlined.People"
+           Items="@Interacciones"
+           Filters="@_filters"
+           FilterPredicate="@FilterInteraccion">
 
-        <MudDataGrid T="InteraccionViewModel"
-                     Items="@Interacciones"
-                     QuickFilter="@FilterInteraccion"
-                     Elevation="0"
-                     Dense="true"
-                     Hover="true"
-                     Filterable="false"
-                     SortMode="SortMode.Multiple"
-                     RowsPerPage="8"
-                     Class="crm-t-grid">
+    <HeaderActions>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Outlined.PersonAdd"
+                   Class="crm-t-nuevo-btn"
+                   OnClick="() => OnNuevoCliente.InvokeAsync()">
+            Nuevo Cliente
+        </MudButton>
+    </HeaderActions>
 
-            <ToolBarContent>
-                <div class="crm-t-toolbar-inner">
+    <ColumnDefs>
+        <HierarchyColumn T="InteraccionViewModel" HeaderStyle="width: 40px;" />
+        <PropertyColumn T="InteraccionViewModel" TProperty="string" Property="x => x.Identificacion"
+                        Title="Identificación" HeaderStyle="width: 120px;" />
+        <TemplateColumn T="InteraccionViewModel" Title="Nombre Completo" HeaderStyle="min-width: 140px;">
+            <CellTemplate>
+                <MudText Typo="Typo.body2"
+                         Class="@("crm-t-client-name " + (context.Item.ClienteNombre.Contains(',') || context.Item.ClienteNombre.EndsWith("SA") || context.Item.ClienteNombre.EndsWith("SRL") || context.Item.ClienteNombre.EndsWith("SAS") ? "crm-t-company" : ""))">
+                    @context.Item.ClienteNombre
+                </MudText>
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn T="InteraccionViewModel" TProperty="string" Property="x => x.TipoSolicitud"
+                        Title="Tipo Solicitud" HeaderStyle="width: 100px;" />
+        <TemplateColumn T="InteraccionViewModel" Title="Tipo Contacto" HeaderStyle="width: 80px;">
+            <CellTemplate>@context.Item.TipoContacto.ToLabel()</CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn T="InteraccionViewModel" Title="Fecha Creación" HeaderStyle="width: 72px;">
+            <CellTemplate>@context.Item.FechaCreacion.ToString("dd/MM/yyyy")</CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn T="InteraccionViewModel" Title="Fecha Inicio" HeaderStyle="width: 68px;">
+            <CellTemplate>@(context.Item.FechaInicio?.ToString("dd/MM/yyyy") ?? "—")</CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn T="InteraccionViewModel" Title="Fecha Estimada" HeaderStyle="width: 72px;">
+            <CellTemplate>@(context.Item.FechaEstimada?.ToString("dd/MM/yyyy") ?? "—")</CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn T="InteraccionViewModel" Title="Fecha Realizado" HeaderStyle="width: 72px;">
+            <CellTemplate>@(context.Item.FechaRealizado?.ToString("dd/MM/yyyy") ?? "—")</CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn T="InteraccionViewModel" TProperty="string" Property="x => x.Sucursal"
+                        Title="Sucursal" HeaderStyle="min-width: 90px;" />
+        <PropertyColumn T="InteraccionViewModel" TProperty="string" Property="x => x.Departamento"
+                        Title="Departamento" HeaderStyle="width: 110px;" />
+        <TemplateColumn T="InteraccionViewModel" Title="Estado" HeaderStyle="width: 96px;" HeaderClass="dt-col--center" CellStyle="text-align:center">
+            <CellTemplate>
+                <span class="crm-t-status-badge crm-t-status--@context.Item.Estado.ToString().ToLower()">
+                    @context.Item.Estado.ToLabel()
+                </span>
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn T="InteraccionViewModel" Title="Acciones" HeaderStyle="width: 72px;">
+            <CellTemplate>
+                <MudIconButton Icon="@Icons.Material.Outlined.Visibility"
+                               Size="Size.Small"
+                               Color="Color.Primary"
+                               Href="@($"/crm/detalle/{context.Item.ClienteId}")" />
+            </CellTemplate>
+        </TemplateColumn>
+    </ColumnDefs>
 
-                    <!-- Fila 1: título + botón Nuevo Cliente -->
-                    <div class="crm-t-toolbar-top">
-                        <span class="crm-t-toolbar-label">Interacciones Recientes</span>
-                        <MudButton Variant="Variant.Filled"
-                                   Color="Color.Primary"
-                                   StartIcon="@Icons.Material.Outlined.PersonAdd"
-                                   Class="crm-t-nuevo-btn"
-                                   OnClick="() => OnNuevoCliente.InvokeAsync()">
-                            Nuevo Cliente
-                        </MudButton>
-                    </div>
-
-                    <!-- Fila 2: filtros con labels encima -->
-                    <div class="crm-t-filters">
-
-                        <div class="crm-t-filter-group">
-                            <label class="crm-t-filter-label">Cliente</label>
-                            <MudTextField T="string"
-                                          @bind-Value="_searchCliente"
-                                          Placeholder="Buscar..."
-                                          Clearable="true"
-                                          Immediate="true"
-                                          Variant="Variant.Outlined"
-                                          Margin="Margin.Dense"
-                                          Class="crm-t-filter-input" />
-                        </div>
-
-                        <div class="crm-t-filter-group">
-                            <label class="crm-t-filter-label">Tipo Contacto</label>
-                            <MudSelect T="string"
-                                       @bind-Value="_tipoContactoFilter"
-                                       Placeholder="Todos"
-                                       Clearable="true"
-                                       Variant="Variant.Outlined"
-                                       Margin="Margin.Dense"
-                                       Class="crm-t-filter-input">
-                                @foreach (var tipo in CrmState.TiposContacto)
-                                {
-                                    <MudSelectItem T="string" Value="@tipo">@tipo</MudSelectItem>
-                                }
-                            </MudSelect>
-                        </div>
-
-                        <div class="crm-t-filter-group">
-                            <label class="crm-t-filter-label">Estado</label>
-                            <MudSelect T="InteraccionStatus?"
-                                       @bind-Value="_estadoFilter"
-                                       Placeholder="Cualquiera"
-                                       Clearable="true"
-                                       Variant="Variant.Outlined"
-                                       Margin="Margin.Dense"
-                                       Class="crm-t-filter-input">
-                                @foreach (InteraccionStatus s in Enum.GetValues<InteraccionStatus>())
-                                {
-                                    <MudSelectItem T="InteraccionStatus?" Value="@((InteraccionStatus?)s)">@s.ToLabel()</MudSelectItem>
-                                }
-                            </MudSelect>
-                        </div>
-
-                        <div class="crm-t-filter-group">
-                            <label class="crm-t-filter-label">Ejecutivo</label>
-                            <MudTextField T="string"
-                                          @bind-Value="_searchEjecutivo"
-                                          Placeholder="Nombre..."
-                                          Clearable="true"
-                                          Immediate="true"
-                                          Variant="Variant.Outlined"
-                                          Margin="Margin.Dense"
-                                          Class="crm-t-filter-input" />
-                        </div>
-
-                        <div class="crm-t-filter-group">
-                            <label class="crm-t-filter-label">Fecha</label>
-                            <MudDatePicker @bind-Date="_fechaFilter"
-                                           Placeholder="dd/mm/aaaa"
-                                           DateFormat="dd/MM/yyyy"
-                                           Clearable="true"
-                                           Variant="Variant.Outlined"
-                                           Margin="Margin.Dense"
-                                           Class="crm-t-filter-input" />
-                        </div>
-
-                    </div>
+    <RowDetails Context="rowCtx">
+        <div class="crm-t-detail">
+            @if (rowCtx.Item.Seguimientos.Count > 0)
+            {
+                <div class="crm-t-sub-wrap">
+                    <MudText Typo="Typo.caption" Class="crm-t-sub-title">Seguimientos</MudText>
+                    <MudTable T="SeguimientoViewModel"
+                              Items="@rowCtx.Item.Seguimientos"
+                              Elevation="0"
+                              Dense="true"
+                              Class="crm-t-sub-table">
+                        <HeaderContent>
+                            <MudTh Style="width:130px">Tipo Acción</MudTh>
+                            <MudTh Style="width:140px">Tipo Respuesta</MudTh>
+                            <MudTh Style="width:90px">Estado</MudTh>
+                            <MudTh Style="width:170px">Resultado</MudTh>
+                            <MudTh Style="width:130px">Usuario Atención</MudTh>
+                            <MudTh Style="width:140px">Departamento</MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="seg">
+                            <MudTd DataLabel="Tipo Acción">@seg.TipoAccion</MudTd>
+                            <MudTd DataLabel="Tipo Respuesta">@seg.TipoRespuesta</MudTd>
+                            <MudTd DataLabel="Estado">@seg.Estado</MudTd>
+                            <MudTd DataLabel="Resultado">@seg.Resultado</MudTd>
+                            <MudTd DataLabel="Usuario Atención">@seg.UsuarioAtencion</MudTd>
+                            <MudTd DataLabel="Departamento">@seg.Departamento</MudTd>
+                        </RowTemplate>
+                    </MudTable>
                 </div>
-            </ToolBarContent>
-
-            <Columns>
-                <HierarchyColumn T="InteraccionViewModel" HeaderStyle="width: 40px;" />
-                <PropertyColumn Property="x => x.Identificacion"   Title="Identificación"   HeaderStyle="width: 120px;" />
-                <TemplateColumn Title="Nombre Completo"             HeaderStyle="min-width: 140px;">
-                    <CellTemplate>
-                        <MudText Typo="Typo.body2" Class="@("crm-t-client-name " + (context.Item.ClienteNombre.Contains(',') || context.Item.ClienteNombre.EndsWith("SA") || context.Item.ClienteNombre.EndsWith("SRL") || context.Item.ClienteNombre.EndsWith("SAS") ? "crm-t-company" : ""))">
-                            @context.Item.ClienteNombre
-                        </MudText>
-                    </CellTemplate>
-                </TemplateColumn>
-                <PropertyColumn Property="x => x.TipoSolicitud"    Title="Tipo Solicitud"   HeaderStyle="width: 100px;" />
-                <TemplateColumn Title="Tipo Contacto"               HeaderStyle="width: 80px;">
-                    <CellTemplate>@context.Item.TipoContacto.ToLabel()</CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn Title="Fecha Creación"              HeaderStyle="width: 72px;">
-                    <CellTemplate>@context.Item.FechaCreacion.ToString("dd/MM/yyyy")</CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn Title="Fecha Inicio"                HeaderStyle="width: 68px;">
-                    <CellTemplate>@(context.Item.FechaInicio?.ToString("dd/MM/yyyy") ?? "—")</CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn Title="Fecha Estimada"              HeaderStyle="width: 72px;">
-                    <CellTemplate>@(context.Item.FechaEstimada?.ToString("dd/MM/yyyy") ?? "—")</CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn Title="Fecha Realizado"             HeaderStyle="width: 72px;">
-                    <CellTemplate>@(context.Item.FechaRealizado?.ToString("dd/MM/yyyy") ?? "—")</CellTemplate>
-                </TemplateColumn>
-                <PropertyColumn Property="x => x.Sucursal"         Title="Sucursal"         HeaderStyle="min-width: 90px;" />
-                <PropertyColumn Property="x => x.Departamento"     Title="Departamento"     HeaderStyle="width: 110px;" />
-                <TemplateColumn Title="Estado"                      HeaderStyle="width: 96px;">
-                    <CellTemplate>
-                        <MudChip T="string" Class="crm-t-status-badge" Color="@GetEstadoColor(context.Item.Estado)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Item.Estado.ToLabel()</MudChip>
-                    </CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn Title="Acciones"                    HeaderStyle="width: 72px;">
-                    <CellTemplate>
-                        <MudIconButton Icon="@Icons.Material.Outlined.Visibility"
-                                       Size="Size.Small"
-                                       Color="Color.Primary"
-                                       Href="@($"/crm/detalle/{context.Item.ClienteId}")" />
-                    </CellTemplate>
-                </TemplateColumn>
-            </Columns>
-
-            <ChildRowContent>
-                @if (context.Item.Seguimientos.Count > 0)
-                {
-                    <div class="crm-t-sub-wrap">
-                        <MudText Typo="Typo.caption" Class="crm-t-sub-title">Seguimientos</MudText>
-                        <MudTable T="SeguimientoViewModel"
-                                  Items="@context.Item.Seguimientos"
-                                  Elevation="0"
-                                  Dense="true"
-                                  Class="crm-t-sub-table">
-                            <HeaderContent>
-                                <MudTh>Tipo Acción</MudTh>
-                                <MudTh>Tipo Respuesta</MudTh>
-                                <MudTh>Estado</MudTh>
-                                <MudTh>Resultado</MudTh>
-                                <MudTh>Usuario Atención</MudTh>
-                                <MudTh>Departamento</MudTh>
-                            </HeaderContent>
-                            <RowTemplate Context="seg">
-                                <MudTd DataLabel="Tipo Acción">@seg.TipoAccion</MudTd>
-                                <MudTd DataLabel="Tipo Respuesta">@seg.TipoRespuesta</MudTd>
-                                <MudTd DataLabel="Estado">@seg.Estado</MudTd>
-                                <MudTd DataLabel="Resultado">@seg.Resultado</MudTd>
-                                <MudTd DataLabel="Usuario Atención">@seg.UsuarioAtencion</MudTd>
-                                <MudTd DataLabel="Departamento">@seg.Departamento</MudTd>
-                            </RowTemplate>
-                        </MudTable>
-                    </div>
-                }
-                else
-                {
-                    <div class="crm-t-sub-wrap crm-t-sub-empty">
-                        <span>Sin seguimientos registrados</span>
-                    </div>
-                }
-            </ChildRowContent>
-
-            <NoRecordsContent>
-                <div class="crm-t-empty-state">
-                    <MudIcon Icon="@Icons.Material.Outlined.SearchOff" Class="crm-t-empty-icon" />
-                    <span class="crm-t-empty-text">No se encontraron interacciones con los filtros aplicados</span>
+            }
+            else
+            {
+                <div class="crm-t-sub-wrap crm-t-sub-empty">
+                    <span>Sin seguimientos registrados</span>
                 </div>
-            </NoRecordsContent>
+            }
+        </div>
+    </RowDetails>
 
-            <PagerContent>
-                <MudDataGridPager T="InteraccionViewModel"
-                                  PageSizeOptions="new int[]{8,16,24}"
-                                  RowsPerPageString="Por página:" />
-            </PagerContent>
-
-        </MudDataGrid>
-    </MudCard>
-</div>
+</DataTable>

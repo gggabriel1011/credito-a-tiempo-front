@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Components;
-using MudBlazor;
+using CreditInTimeFront.WebApp.Components;
 using CreditInTimeFront.WebApp.Modules.CRM.ViewModels;
 using CreditInTimeFront.WebApp.Modules.CRM.State;
 
@@ -12,12 +12,40 @@ public partial class InteraccionesTable
     [Parameter] public IReadOnlyList<InteraccionViewModel> Interacciones { get; set; } = [];
     [Parameter] public EventCallback OnNuevoCliente { get; set; }
 
-    private string             _searchCliente      = string.Empty;
-    private string             _tipoContactoFilter = string.Empty;
-    private InteraccionStatus? _estadoFilter       = null;
-    private string             _searchEjecutivo    = string.Empty;
-    private DateTime?          _fechaFilter        = null;
+    // ── Filter definitions ────────────────────────────────────────────────────
+    private static readonly IReadOnlyList<FilterDef> _filters =
+    [
+        new SearchFilter("cliente",      "Cliente",       "Buscar cliente..."),
+        new SelectFilter("tipoContacto", "Tipo Contacto",
+            CrmState.ContactTypes.Select(t => new SelectOption(t, t)).ToList()),
+        new SelectFilter("estado",       "Estado",
+            Enum.GetValues<InteraccionStatus>()
+                .Select(s => new SelectOption(s.ToString(), s.ToLabel()))
+                .ToList()),
+        new SearchFilter("ejecutivo",    "Ejecutivo",     "Nombre..."),
+        new DateFilter  ("fecha",        "Fecha"),
+    ];
 
+    // ── Filter predicate ──────────────────────────────────────────────────────
+    private bool FilterInteraccion(InteraccionViewModel r, IReadOnlyDictionary<string, object?> f)
+    {
+        var cliente      = f.GetString("cliente");
+        var tipoContacto = f.GetString("tipoContacto");
+        var estadoStr    = f.GetString("estado");
+        var ejecutivo    = f.GetString("ejecutivo");
+        var fecha        = f.GetDate("fecha");
+
+        return (string.IsNullOrEmpty(cliente) ||
+                ContainsIgnoreAccents(r.ClienteNombre,  cliente) ||
+                ContainsIgnoreAccents(r.Identificacion, cliente)) &&
+               (string.IsNullOrEmpty(tipoContacto) || r.TipoContacto.ToLabel() == tipoContacto) &&
+               (string.IsNullOrEmpty(estadoStr)    || r.Estado.ToString()      == estadoStr)    &&
+               (string.IsNullOrEmpty(ejecutivo) ||
+                ContainsIgnoreAccents(r.EjecutivoAsignado, ejecutivo)) &&
+               (fecha == null || r.FechaCreacion.Date == fecha.Value.Date);
+    }
+
+    // ── Accent-insensitive search ─────────────────────────────────────────────
     private static string StripAccents(string input)
     {
         var normalized = input.Normalize(NormalizationForm.FormD);
@@ -30,22 +58,4 @@ public partial class InteraccionesTable
 
     private static bool ContainsIgnoreAccents(string source, string term) =>
         StripAccents(source).Contains(StripAccents(term), StringComparison.OrdinalIgnoreCase);
-
-    private static Color GetEstadoColor(InteraccionStatus estado) => estado switch
-    {
-        InteraccionStatus.Completado => Color.Success,
-        InteraccionStatus.EnProceso  => Color.Info,
-        InteraccionStatus.Pendiente  => Color.Warning,
-        _                            => Color.Default
-    };
-
-    private bool FilterInteraccion(InteraccionViewModel r) =>
-        (string.IsNullOrEmpty(_searchCliente) ||
-         ContainsIgnoreAccents(r.ClienteNombre,  _searchCliente) ||
-         ContainsIgnoreAccents(r.Identificacion, _searchCliente)) &&
-        (string.IsNullOrEmpty(_tipoContactoFilter) || r.TipoContacto.ToLabel() == _tipoContactoFilter) &&
-        (_estadoFilter == null || r.Estado == _estadoFilter) &&
-        (string.IsNullOrEmpty(_searchEjecutivo) ||
-         ContainsIgnoreAccents(r.EjecutivoAsignado, _searchEjecutivo)) &&
-        (_fechaFilter == null || r.FechaCreacion.Date == _fechaFilter.Value.Date);
 }

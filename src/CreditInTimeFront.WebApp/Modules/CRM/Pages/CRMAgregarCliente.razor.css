@@ -1,25 +1,6 @@
-/* =============================================
-   Header
-   ============================================= */
-.crm-add-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-}
+/* Header migrated to PageHeader component */
 
-.crm-add-header-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.crm-add-header-icon {
-    color: var(--primary-color) !important;
-    font-size: 2rem !important;
-    width: 2rem !important;
-    height: 2rem !important;
-}
-
+/* Close button — only local style needed */
 .crm-add-close-btn {
     color: var(--text-muted) !important;
 }

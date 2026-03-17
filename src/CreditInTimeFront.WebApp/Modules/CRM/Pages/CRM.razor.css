@@ -1,83 +1,14 @@
-/* =============================================
-   KPI Cards
-   ============================================= */
-.crm-kpi-card {
-    border-radius: 12px !important;
-    border: 1px solid var(--border-card) !important;
-}
-
-.crm-kpi-card ::deep .mud-card-content {
-    padding: 1rem !important;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.crm-kpi-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-subtle);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 0 0 0.25rem 0;
-}
-
-.crm-kpi-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-body);
-    margin: 0 0 0.5rem 0;
-    line-height: 1.2;
-}
-
-.crm-kpi-detail {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-.crm-kpi-icon {
-    font-size: 14px !important;
-    width: 14px !important;
-    height: 14px !important;
-}
-
-/* Detail color variants */
-.crm-detail--primary { color: var(--primary-color); }
-.crm-detail--info    { color: var(--info-color);    }
-.crm-detail--warning { color: var(--warning-color); }
-.crm-detail--muted   { color: var(--text-muted);    }
+/* KPI card styles migrated to Components/Cards/MetricCard */
+/* Chart card styles migrated to Components/Charts/ChartCard */
 
 /* =============================================
-   Chart Cards
-   ============================================= */
-.crm-chart-card {
-    border-radius: 12px !important;
-    border: 1px solid var(--border-card) !important;
-}
-
-.crm-chart-card ::deep .mud-card-content {
-    padding: 1.5rem !important;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.crm-chart-title {
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    color: var(--text-title) !important;
-    margin: 0 0 1rem 0 !important;
-}
-
-/* =============================================
-   Donut legend
+   Donut legend — rendered inside ChartCard's Footer slot,
+   scoped to CRM.razor so classes are isolated here.
    ============================================= */
 .crm-donut-legend {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-top: 1rem;
 }
 
 .crm-legend-row {
@@ -108,3 +39,5 @@
     font-weight: 700;
     color: var(--text-body);
 }
+
+/* Donut legend hide: handled globally in app.css via .chart-card--pie .mud-chart-legend */

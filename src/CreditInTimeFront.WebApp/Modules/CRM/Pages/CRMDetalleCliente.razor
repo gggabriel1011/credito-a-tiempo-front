@@ -39,7 +39,7 @@
         <div class="crm-det-topbar">
             <div class="crm-det-topbar-left">
                 <span class="crm-det-topbar-label">Expediente Digital</span>
-                <MudChip T="string" Class="crm-det-status-badge" Color="Color.Success" Variant="Variant.Filled" Size="Size.Small" Ripple="false">Verificado</MudChip>
+                <StatusBadge Text="Verificado" Color="Color.Success" />
             </div>
             <div class="crm-det-topbar-right">
                 <span class="crm-det-pep-dot"></span>
@@ -237,22 +237,22 @@
                 <!-- KPIs -->
                 <MudGrid Spacing="3" Class="mb-4">
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.CreditCard"
+                        <MetricCard Icon="@Icons.Material.Outlined.CreditCard"
                                     Label="Préstamos Activos"
                                     Value="@_state.PrestamosActivos.ToString()"
                                     BadgeText="vigentes"
                                     BadgeVariant="primary" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.AccountBalance"
+                        <MetricCard Icon="@Icons.Material.Outlined.AccountBalance"
                                     Label="Capital Total"
                                     Value="@_state.MontoTotal"
                                     BadgeText="desembolsado"
                                     BadgeVariant="muted"
-                                    ValueClass="crm-kpi-value--long" />
+                                    ValueClass="mc-value--long" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.Warning"
+                        <MetricCard Icon="@Icons.Material.Outlined.Warning"
                                     Label="En Mora"
                                     Value="1"
                                     BadgeText="atención"
@@ -282,7 +282,7 @@
                             <MudTd DataLabel="Monto" Class="crm-det-td--right"><span class="crm-det-td-amount">@context.Monto</span></MudTd>
                             <MudTd DataLabel="Saldo" Class="crm-det-td--right"><span class="crm-det-td-amount">@context.Saldo</span></MudTd>
                             <MudTd DataLabel="Estado">
-                                <MudChip T="string" Class="crm-det-status-badge" Color="@GetPrestamoEstadoColor(context.Estado)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Estado</MudChip>
+                                <StatusBadge Text="@context.Estado" Color="@GetPrestamoEstadoColor(context.Estado)" />
                             </MudTd>
                             <MudTd DataLabel="Fecha Apertura">@context.FechaApertura</MudTd>
                         </RowTemplate>
@@ -303,27 +303,27 @@
                 <!-- KPIs -->
                 <MudGrid Spacing="3" Class="mb-4">
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.Schedule"
+                        <MetricCard Icon="@Icons.Material.Outlined.Schedule"
                                     Label="Solicitudes Activas"
                                     Value="@_state.SolicitudesActivas.ToString()"
                                     BadgeText="En evaluación"
                                     BadgeVariant="primary" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.AttachMoney"
+                        <MetricCard Icon="@Icons.Material.Outlined.AttachMoney"
                                     Label="Monto en Trámite"
                                     Value="@_state.MontoEnTramite"
                                     BadgeText="Solicitado"
                                     BadgeVariant="muted"
-                                    ValueClass="crm-kpi-value--long" />
+                                    ValueClass="mc-value--long" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.Pending"
+                        <MetricCard Icon="@Icons.Material.Outlined.Pending"
                                     Label="Etapa Actual"
                                     Value="Análisis"
                                     BadgeText="Pendiente"
                                     BadgeVariant="info"
-                                    ValueClass="crm-kpi-value--long" />
+                                    ValueClass="mc-value--long" />
                     </MudItem>
                 </MudGrid>
 
@@ -347,7 +347,7 @@
                             <MudTd DataLabel="Producto"><span class="crm-det-td-product">@context.Producto</span></MudTd>
                             <MudTd DataLabel="Monto" Class="crm-det-td--right"><span class="crm-det-td-amount">@context.Monto</span></MudTd>
                             <MudTd DataLabel="Etapa">
-                                <MudChip T="string" Class="crm-det-status-badge" Color="@GetEtapaColor(context.Etapa)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Etapa</MudChip>
+                                <StatusBadge Text="@context.Etapa" Color="@GetEtapaColor(context.Etapa)" />
                             </MudTd>
                             <MudTd DataLabel="Fecha">@context.Fecha</MudTd>
                         </RowTemplate>
@@ -368,27 +368,27 @@
                 <!-- KPIs -->
                 <MudGrid Spacing="3" Class="mb-4">
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.CalendarToday"
+                        <MetricCard Icon="@Icons.Material.Outlined.CalendarToday"
                                     Label="Total Interacciones"
                                     Value="@_interacciones.Count.ToString()"
                                     BadgeText="este año"
                                     BadgeVariant="primary" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.Event"
+                        <MetricCard Icon="@Icons.Material.Outlined.Event"
                                     Label="Último Contacto"
                                     Value="@UltimoContacto"
                                     BadgeText="más reciente"
                                     BadgeVariant="muted"
-                                    ValueClass="crm-kpi-value--long" />
+                                    ValueClass="mc-value--long" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
-                        <CrmKpiCard Icon="@Icons.Material.Outlined.ContactPhone"
+                        <MetricCard Icon="@Icons.Material.Outlined.ContactPhone"
                                     Label="Canal Preferido"
                                     Value="@CanalPreferido"
                                     BadgeText="más frecuente"
                                     BadgeVariant="info"
-                                    ValueClass="crm-kpi-value--long" />
+                                    ValueClass="mc-value--long" />
                     </MudItem>
                 </MudGrid>
 
@@ -422,7 +422,7 @@
                             <MudTd DataLabel="Tipo Contacto">@context.TipoContacto.ToLabel()</MudTd>
                             <MudTd DataLabel="Ejecutivo"><span class="crm-det-td-name">@context.EjecutivoAsignado</span></MudTd>
                             <MudTd DataLabel="Estado">
-                                <MudChip T="string" Class="crm-det-status-badge" Color="@GetInteraccionEstadoColor(context.Estado)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Estado.ToLabel()</MudChip>
+                                <StatusBadge Text="@context.Estado.ToLabel()" Color="@GetInteraccionEstadoColor(context.Estado)" />
                             </MudTd>
                             <MudTd DataLabel="Fecha Creación">@context.FechaCreacion.ToString("dd/MM/yyyy")</MudTd>
                             <MudTd DataLabel="Tipo Solicitud">@context.TipoSolicitud</MudTd>

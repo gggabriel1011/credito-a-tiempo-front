@@ -303,33 +303,7 @@
 
 /* KPI cards — estilos movidos a CrmKpiCard.razor.css (componente con CSS isolation propio) */
 
-/* =============================================
-   Status badges — MudChip con look compacto idéntico al <span> original
-   ============================================= */
-.crm-det-status-badge {
-    display: inline-flex !important;
-    font-size: 11px;
-    font-weight: 600;
-    border-radius: 9999px !important;
-    white-space: nowrap;
-    height: auto !important;
-}
-
-/* Resetea el padding interno del MudChip para replicar el del <span> */
-.crm-det-status-badge ::deep .mud-chip-content {
-    padding: 0.2rem 0.625rem !important;
-    height: auto !important;
-    min-height: unset !important;
-}
-
-.crm-det-status-badge ::deep .mud-chip-label {
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    padding: 0 !important;
-    line-height: 1.4 !important;
-}
-
-/* Color aplicado nativamente via MudChip Color="Color.Success|Info|Warning|Error|Default" + Variant.Filled */
+/* Status badge styles provided by Components/Feedback/StatusBadge */
 
 /* =============================================
    Tab toolbar — matches crm-t-toolbar / cft-toolbar pattern
