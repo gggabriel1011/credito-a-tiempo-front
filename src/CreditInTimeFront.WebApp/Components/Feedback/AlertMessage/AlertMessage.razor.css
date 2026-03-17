@@ -1,0 +1,12 @@
+/* =============================================
+   AlertMessage — wrapper de MudAlert
+   ============================================= */
+/* .am-alert {
+    border-radius: 8px !important;
+    margin-bottom: 1rem;
+} */
+
+/* Sin margen inferior cuando es el último elemento del contenedor */
+/* .am-alert:last-child {
+    margin-bottom: 0;
+} */

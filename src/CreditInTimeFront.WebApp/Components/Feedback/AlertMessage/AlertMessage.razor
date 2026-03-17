@@ -1,0 +1,27 @@
+@namespace CreditInTimeFront.WebApp.Components
+
+<MudAlert Severity="@Severity"
+          Variant="@Variant"
+          Dense="@Dense"
+          Class="am-alert">
+    @if (!string.IsNullOrEmpty(Text))
+    {
+        @Text
+    }
+    @ChildContent
+</MudAlert>
+
+@code {
+    /// <summary>Info | Success | Warning | Error</summary>
+    [Parameter] public Severity Severity { get; set; } = Severity.Info;
+
+    /// <summary>Outlined (default) | Filled | Text</summary>
+    [Parameter] public Variant Variant { get; set; } = Variant.Filled;
+
+    [Parameter] public bool Dense { get; set; } = false;
+
+    /// <summary>Texto plano. Para contenido rico usar ChildContent.</summary>
+    [Parameter] public string? Text { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
