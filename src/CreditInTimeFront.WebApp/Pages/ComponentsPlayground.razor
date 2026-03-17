@@ -1,0 +1,174 @@
+@page "/components-playground"
+@using MudBlazor
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<PageHeader Title="Página de" TitleAccent=" Componentes"
+            Subtitle="Probar todos los componentes compartidos" />
+
+<div class="cp-page">
+
+    <!-- ── AlertMessage ───────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">AlertMessage</h2>
+        <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="2">
+            <MudButton Variant="Variant.Filled" Color="Color.Info"    OnClick="@(() => ShowAlert(Severity.Info))"   >Info</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="@(() => ShowAlert(Severity.Success))">Success</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => ShowAlert(Severity.Warning))">Warning</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error"   OnClick="@(() => ShowAlert(Severity.Error))"  >Error</MudButton>
+        </MudStack>
+        @if (_alertSeverity.HasValue)
+        {
+            <MudAlert Severity="@_alertSeverity.Value" Variant="Variant.Filled">
+                Esto es una alerta de tipo @_alertSeverity.Value.
+            </MudAlert>
+        }
+    </section>
+
+    <!-- ── StatusBadge ────────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">StatusBadge</h2>
+        <div class="cp-preview cp-wrap">
+            <StatusBadge Text="Activo"      Color="Color.Success" />
+            <StatusBadge Text="Pendiente"   Color="Color.Warning" />
+            <StatusBadge Text="Rechazado"   Color="Color.Error"   />
+            <StatusBadge Text="En revisión" Color="Color.Info"    />
+            <StatusBadge Text="Completado"  Color="Color.Primary" />
+            <StatusBadge Text="Default"     Color="Color.Default" />
+            <StatusBadge Text="Grande"      Color="Color.Success" Size="Size.Medium" />
+        </div>
+    </section>
+
+    <!-- ── MetricCard ─────────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">MetricCard</h2>
+        <MudGrid Spacing="3">
+            <MudItem xs="12" sm="6" md="3">
+                <MetricCard Icon="@Icons.Material.Outlined.AttachMoney"
+                            Label="Total Desembolsado"
+                            Value="RD$4,200,000"
+                            BadgeText="+12%"
+                            BadgeVariant="positive" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MetricCard Icon="@Icons.Material.Outlined.Warning"
+                            Label="Créditos Vencidos"
+                            Value="18"
+                            BadgeText="-3%"
+                            BadgeVariant="negative" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MetricCard Icon="@Icons.Material.Outlined.People"
+                            Label="Clientes Activos"
+                            Value="1,340"
+                            BadgeText="Estable"
+                            BadgeVariant="muted" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MetricCard Icon="@Icons.Material.Outlined.Pending"
+                            Label="Solicitudes Pendientes"
+                            Value="27"
+                            BadgeText="Urgente"
+                            BadgeVariant="warning" />
+            </MudItem>
+        </MudGrid>
+    </section>
+
+    <!-- ── PageHeader ─────────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">PageHeader</h2>
+        <div class="cp-preview cp-preview--outlined">
+            <PageHeader Title="Título de página"
+                        TitleAccent="Módulo"
+                        Subtitle="Descripción breve del módulo o sección">
+                <Actions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               StartIcon="@Icons.Material.Outlined.Add">
+                        Nueva acción
+                    </MudButton>
+                </Actions>
+            </PageHeader>
+        </div>
+        <div class="cp-preview cp-preview--outlined" style="margin-top:0.75rem;">
+            <PageHeader Title="Sin acento ni acciones"
+                        Subtitle="Solo título y subtítulo" />
+        </div>
+    </section>
+
+    <!-- ── FormSection ────────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">FormSection</h2>
+        <div class="cp-preview cp-preview--outlined">
+            <FormSection Icon="@Icons.Material.Outlined.Person" Title="Datos Personales">
+                <MudGrid Spacing="2">
+                    <MudItem xs="12" sm="6">
+                        <MudTextField T="string" Label="Nombre" Variant="Variant.Outlined" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudTextField T="string" Label="Apellido" Variant="Variant.Outlined" />
+                    </MudItem>
+                </MudGrid>
+            </FormSection>
+        </div>
+    </section>
+
+    <!-- ── ChartCard ──────────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">ChartCard</h2>
+        <MudGrid Spacing="3">
+            <MudItem xs="12" md="7">
+                <ChartCard Title="Ejemplo — con HeaderActions y Footer">
+                    <HeaderActions>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Text">
+                            2025
+                        </MudChip>
+                    </HeaderActions>
+                    <ChildContent>
+                        <MudChart T="double"
+                                  ChartType="ChartType.Bar"
+                                  ChartSeries="@_barSeries"
+                                  ChartLabels="@_barLabels"
+                                  Height="200px" />
+                    </ChildContent>
+                    <Footer>
+                        <MudText Typo="Typo.caption" Class="cp-chart-footer">
+                            Datos de ejemplo — Ene–Jun 2025
+                        </MudText>
+                    </Footer>
+                </ChartCard>
+            </MudItem>
+            <MudItem xs="12" md="5">
+                <ChartCard Title="Ejemplo — solo contenido">
+                    <MudChart T="double"
+                              ChartType="ChartType.Donut"
+                              ChartSeries="@_donutSeries"
+                              ChartLabels="@_donutLabels"
+                              Height="200px" />
+                </ChartCard>
+            </MudItem>
+        </MudGrid>
+    </section>
+
+    <!-- ── ConfirmDialog ──────────────────────────────────────────── -->
+    <section class="cp-section">
+        <h2 class="cp-section-title">ConfirmDialog</h2>
+        <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="2">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                       OnClick="OpenConfirmDefault">
+                Confirmar (default)
+            </MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error"
+                       OnClick="OpenConfirmDestructive">
+                Confirmar (destructivo)
+            </MudButton>
+        </MudStack>
+        @if (_dialogResult is not null)
+        {
+            <MudAlert Severity="@(_dialogResult == "Confirmado" ? Severity.Success : Severity.Warning)"
+                      Variant="Variant.Filled">
+                Resultado del diálogo: @_dialogResult
+            </MudAlert>
+        }
+    </section>
+
+</div>
