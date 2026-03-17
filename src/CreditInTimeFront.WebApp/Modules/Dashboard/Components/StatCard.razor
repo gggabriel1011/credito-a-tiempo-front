@@ -1,0 +1,24 @@
+<MudCard Elevation="1" Class="stat-card">
+    <MudCardContent>
+        <div class="stat-card-top">
+            <MudIcon Icon="@Icon" Class="stat-icon" />
+            @if (!string.IsNullOrEmpty(TrendValue))
+            {
+                <span class="stat-trend stat-trend--@(IsPositiveTrend ? "positive" : "negative")">
+                    @TrendValue
+                </span>
+            }
+        </div>
+        <p class="stat-label">@Label</p>
+        <p class="stat-value @(ValueClass ?? "")">@Value</p>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Label { get; set; } = "";
+    [Parameter] public string Value { get; set; } = "";
+    [Parameter] public string TrendValue { get; set; } = "";
+    [Parameter] public bool IsPositiveTrend { get; set; } = true;
+    [Parameter] public string? ValueClass { get; set; }
+}

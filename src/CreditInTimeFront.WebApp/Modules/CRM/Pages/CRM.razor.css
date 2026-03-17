@@ -1,0 +1,110 @@
+/* =============================================
+   KPI Cards
+   ============================================= */
+.crm-kpi-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+}
+
+.crm-kpi-card ::deep .mud-card-content {
+    padding: 1rem !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.crm-kpi-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.25rem 0;
+}
+
+.crm-kpi-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-body);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+}
+
+.crm-kpi-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.crm-kpi-icon {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* Detail color variants */
+.crm-detail--primary { color: var(--primary-color); }
+.crm-detail--info    { color: var(--info-color);    }
+.crm-detail--warning { color: var(--warning-color); }
+.crm-detail--muted   { color: var(--text-muted);    }
+
+/* =============================================
+   Chart Cards
+   ============================================= */
+.crm-chart-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+}
+
+.crm-chart-card ::deep .mud-card-content {
+    padding: 1.5rem !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.crm-chart-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--text-title) !important;
+    margin: 0 0 1rem 0 !important;
+}
+
+/* =============================================
+   Donut legend
+   ============================================= */
+.crm-donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.crm-legend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.crm-legend-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.crm-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.crm-legend-label {
+    color: var(--text-muted);
+}
+
+.crm-legend-pct {
+    font-weight: 700;
+    color: var(--text-body);
+}

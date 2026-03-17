@@ -1,0 +1,95 @@
+/* =============================================
+   Card
+   ============================================= */
+.desembolsos-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+}
+
+.desembolsos-card ::deep .mud-card-content {
+    padding: 1.5rem !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* =============================================
+   Header row
+   ============================================= */
+.desembolsos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.desembolsos-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-title);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+/* =============================================
+   Custom year select
+   ============================================= */
+.year-select-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.desembolsos-year-select {
+    appearance: none;
+    -webkit-appearance: none;
+    font-size: 0.75rem;
+    font-family: inherit;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 4px 28px 4px 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 150ms ease;
+}
+
+.desembolsos-year-select:hover { border-color: var(--border-hover); }
+.desembolsos-year-select:focus { border-color: var(--primary-color); }
+
+.year-chevron {
+    position: absolute;
+    right: 8px;
+    width: 14px;
+    height: 14px;
+    color: var(--text-subtle);
+    pointer-events: none;
+}
+
+/* =============================================
+   MudChart Y-axis — hide values and line
+   ============================================= */
+.desembolsos-card ::deep .mud-charts-yaxis text { display: none !important; }
+.desembolsos-card ::deep .mud-charts-yaxis line { display: none !important; }
+.desembolsos-card ::deep .mud-charts-yaxis { display: none !important; }
+
+/* Hide legend via CSS as fallback (ShowLegend=false in options is primary) */
+.desembolsos-card ::deep .mud-chart-legend { display: none !important; }
+
+/* =============================================
+   MudChart X-axis labels (month abbreviations)
+   ============================================= */
+.desembolsos-card ::deep .mud-charts-xaxis text {
+    font-size: 10px;
+    fill: var(--text-subtle);
+    font-weight: 500;
+}
+
+/* =============================================
+   Soften grid lines
+   ============================================= */
+.desembolsos-card ::deep .mud-charts-grid line {
+    stroke: var(--border-card);
+    stroke-width: 1;
+}

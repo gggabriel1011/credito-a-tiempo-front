@@ -1,0 +1,72 @@
+@page "/"
+@layout MainLayout
+@using CreditInTimeFront.WebApp.Modules.Dashboard.Components
+
+<PageTitle>Dashboard Gerencial</PageTitle>
+
+<header class="db-header">
+    <h1 class="db-title">Dashboard Gerencial de Operaciones</h1>
+    <p class="db-subtitle">Resumen Ejecutivo de Rendimiento y Carteras</p>
+</header>
+
+<MudGrid Class="mb-6">
+    <MudItem xs="12" sm="6" lg="3">
+        <StatCard Icon="@Icons.Material.Outlined.AccountBalance"
+                  Label="Cartera Total"
+                  Value="RD$ 1.2B"
+                  TrendValue="+12%"
+                  IsPositiveTrend="true" />
+    </MudItem>
+    <MudItem xs="12" sm="6" lg="3">
+        <StatCard Icon="@Icons.Material.Outlined.Warning"
+                  Label="Índice de Mora"
+                  Value="3.2%"
+                  TrendValue="-0.4%"
+                  IsPositiveTrend="false" />
+    </MudItem>
+    <MudItem xs="12" sm="6" lg="3">
+        <StatCard Icon="@Icons.Material.Outlined.Description"
+                  Label="Solicitudes del Mes"
+                  Value="450" />
+    </MudItem>
+    <MudItem xs="12" sm="6" lg="3">
+        <StatCard Icon="@Icons.Material.Outlined.Verified"
+                  Label="Tasa de Aprobación"
+                  Value="78%"
+                  ValueClass="text-primary" />
+    </MudItem>
+</MudGrid>
+
+<MudGrid Class="mb-6">
+    <MudItem xs="12" lg="8" Style="display: flex; flex-direction: column;">
+        <ChartDesembolsos Title="Desembolsos Mensuales"
+                          DataPoints="@_desembolsos"
+                          AvailableYears="@_years"
+                          OnYearChanged="@ActualizarGrafico" />
+    </MudItem>
+    <MudItem xs="12" lg="4" Style="display: flex; flex-direction: column;">
+        <ChartDistribucion Title="Distribución por Tipo de Préstamo"
+                           CenterText="RD$ 125M"
+                           DataItems="@_dataDistribucion" />
+    </MudItem>
+</MudGrid>
+
+<MudPaper Elevation="0" Class="db-notif-card">
+    <div class="db-notif-header">
+        <div class="db-notif-title-wrap">
+            <MudIcon Icon="@Icons.Material.Outlined.NotificationsActive" Class="db-notif-icon" />
+            <span class="db-notif-title">Alertas y Notificaciones Recientes</span>
+        </div>
+        <button class="db-notif-ver-todas">Ver todas</button>
+    </div>
+    <div class="db-notif-list">
+        @foreach (var notif in _notificaciones)
+        {
+            <NotificationItem Icon="@notif.Icon"
+                              Title="@notif.Title"
+                              Description="@notif.Description"
+                              TimeAgo="@notif.TimeAgo"
+                              Type="@notif.Type" />
+        }
+    </div>
+</MudPaper>

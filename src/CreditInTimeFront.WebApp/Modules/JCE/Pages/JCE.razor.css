@@ -1,0 +1,297 @@
+/* =============================================
+   Header
+   ============================================= */
+.jce-header {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.jce-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-body);
+    line-height: 1.2;
+    margin: 0 0 0.15rem 0;
+}
+
+.jce-title-accent {
+    color: var(--primary-color);
+}
+
+.jce-subtitle {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin: 0;
+    letter-spacing: 0.01em;
+}
+
+/* =============================================
+   Card
+   ============================================= */
+.jce-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-soft) !important;
+}
+
+/* =============================================
+   Section Label
+   ============================================= */
+.jce-section-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-subtle);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.65rem;
+}
+
+/* =============================================
+   Search Row
+   ============================================= */
+.jce-search-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .jce-search-row {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+/* Combined select + input box */
+.jce-search-box {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface-color);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.jce-search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+}
+
+/* Native select */
+.jce-select-native {
+    background: var(--bg-subtle);
+    border: none;
+    outline: none;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-title);
+    cursor: pointer;
+    min-width: 100px;
+    appearance: auto;
+    -webkit-appearance: auto;
+}
+
+/* Vertical separator */
+.jce-search-separator {
+    width: 1px;
+    background: var(--border-hover);
+    flex-shrink: 0;
+}
+
+/* Native text input */
+.jce-input-native {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-title);
+    background: transparent;
+    width: 100%;
+    min-width: 0;
+}
+
+.jce-input-native::placeholder {
+    color: var(--text-subtle);
+}
+
+/* Search button */
+.jce-search-btn {
+    white-space: nowrap;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    height: 42px;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+}
+
+/* =============================================
+   Section Divider
+   ============================================= */
+.jce-divider-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.jce-divider-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.jce-divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(var(--primary-rgb), 0.25);
+}
+
+/* =============================================
+   Result Content
+   ============================================= */
+.jce-result-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .jce-result-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+}
+
+.jce-photo-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.jce-photo-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 4px solid var(--border-soft);
+}
+
+.jce-photo {
+    max-width: 180px;
+    max-height: 220px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: var(--bg-light);
+    display: block;
+}
+
+.jce-data-col {
+    flex: 1;
+    min-width: 0;
+}
+
+.jce-person-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-body);
+    margin: 0 0 1.25rem 0;
+    line-height: 1.2;
+}
+
+/* =============================================
+   Data Fields
+   ============================================= */
+.jce-field {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.jce-field-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+}
+
+.jce-field-value {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-body);
+    line-height: 1.5;
+}
+
+/* =============================================
+   Action Buttons
+   ============================================= */
+.jce-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.jce-action-btn {
+    border-width: 2px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    text-transform: none !important;
+}
+
+/* =============================================
+   Preview Section
+   ============================================= */
+.jce-preview {
+    padding: 1rem;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: 12px !important;
+    background: var(--bg-subtle) !important;
+}
+
+.jce-preview-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.jce-preview-image-box {
+    height: 260px;
+    background: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+}
+
+.jce-preview-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* =============================================
+   Spinner Animation
+   ============================================= */
+@keyframes jce-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.jce-spin {
+    animation: jce-spin 1s linear infinite;
+}

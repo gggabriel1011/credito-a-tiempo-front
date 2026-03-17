@@ -1,0 +1,76 @@
+@namespace CreditInTimeFront.WebApp.Modules.CreditFactory.Components
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CreditFactory.ViewModels
+
+@if (IsOpen && Request is not null)
+{
+    <div class="doc-overlay" @onclick="() => OnClose.InvokeAsync()">
+        <div class="doc-modal" @onclick:stopPropagation>
+
+            <!-- Header -->
+            <div class="doc-header">
+                <div class="doc-header-left">
+                    <div class="doc-header-icon-wrap">
+                        <MudIcon Icon="@Icons.Material.Outlined.Print" Class="doc-header-icon" />
+                    </div>
+                    <div>
+                        <p class="doc-header-title">Documentación del Expediente</p>
+                        <p class="doc-header-subtitle">Seleccione el documento a imprimir o exportar</p>
+                    </div>
+                </div>
+                <MudIconButton Icon="@Icons.Material.Outlined.Close"
+                               Size="Size.Small"
+                               Class="doc-close-btn"
+                               OnClick="() => OnClose.InvokeAsync()" />
+            </div>
+
+            <!-- Client info strip -->
+            <div class="doc-client-strip">
+                <div class="doc-client-info">
+                    <MudIcon Icon="@(Request.IsCompany ? Icons.Material.Outlined.Apartment : Icons.Material.Outlined.Person)"
+                             Class="doc-client-icon" />
+                    <div class="doc-client-details">
+                        <span class="doc-client-name @(Request.IsCompany ? "doc-company" : "")">@Request.ClientName</span>
+                        <span class="doc-client-meta">
+                            @Request.CaseNumber &nbsp;·&nbsp; @Request.Product &nbsp;·&nbsp; RD$ @Request.Amount.ToString("N0")
+                        </span>
+                    </div>
+                </div>
+                <span class="doc-status-badge doc-status--@Request.Status.ToString().ToLower()">@Request.Status.ToLabel()</span>
+            </div>
+
+            <!-- Document list -->
+            <div class="doc-list">
+                @foreach (var doc in _documents)
+                {
+                    <button class="doc-item" @onclick="() => OnOpenReport.InvokeAsync(doc.Url)">
+                        <div class="@($"doc-item-icon-wrap {doc.BgClass}")">
+                            <MudIcon Icon="@doc.Icon" Class="@($"doc-item-icon {doc.ColorClass}")" />
+                        </div>
+                        <div class="doc-item-text">
+                            <span class="doc-item-title">@doc.Title</span>
+                            @if (!string.IsNullOrEmpty(doc.Subtitle))
+                            {
+                                <span class="doc-item-subtitle">@doc.Subtitle</span>
+                            }
+                        </div>
+                        <span class="doc-item-arrow">
+                            <MudIcon Icon="@Icons.Material.Outlined.OpenInNew" Class="doc-item-arrow-icon" />
+                        </span>
+                    </button>
+                }
+            </div>
+
+            <!-- Footer -->
+            <div class="doc-footer">
+                <MudButton Variant="Variant.Outlined"
+                           Size="Size.Small"
+                           Class="doc-footer-btn"
+                           OnClick="() => OnClose.InvokeAsync()">
+                    Cerrar
+                </MudButton>
+            </div>
+
+        </div>
+    </div>
+}

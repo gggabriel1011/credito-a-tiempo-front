@@ -1,0 +1,117 @@
+@namespace CreditInTimeFront.WebApp.Modules.CreditFactory.Components
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CreditFactory.ViewModels
+@using CreditInTimeFront.WebApp.Modules.CreditFactory.State
+
+<div class="cft-root">
+    <MudCard Elevation="1" Class="cft-card">
+
+        <MudTable T="CreditRequestViewModel"
+                  Items="@Requests"
+                  Filter="@FilterRequest"
+                  Elevation="0"
+                  Dense="true"
+                  Hover="true"
+                  RowsPerPage="8"
+                  Class="cft-table">
+
+            <ToolBarContent>
+                <div class="cft-toolbar-inner">
+                    <div class="cft-toolbar-title">
+                        <MudIcon Icon="@Icons.Material.Outlined.PendingActions" Class="cft-toolbar-icon" />
+                        <span class="cft-toolbar-label">Solicitudes por Aprobar</span>
+                    </div>
+                    <div class="cft-filters">
+                        <MudDateRangePicker @bind-DateRange="_dateRange"
+                                            PlaceholderStart="Desde"
+                                            PlaceholderEnd="Hasta"
+                                            DateFormat="dd/MM/yy"
+                                            Clearable="true"
+                                            Variant="Variant.Outlined"
+                                            Margin="Margin.Dense"
+                                            Class="cft-date-picker" />
+                        <MudSelect T="string"
+                                   @bind-Value="_productFilter"
+                                   Placeholder="Todos los Productos"
+                                   Clearable="true"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense"
+                                   Class="cft-product-select">
+                            @foreach (var product in CreditFactoryState.ProductTypes)
+                            {
+                                <MudSelectItem T="string" Value="@product">@product</MudSelectItem>
+                            }
+                        </MudSelect>
+                        <MudTextField T="string"
+                                      @bind-Value="_searchText"
+                                      Placeholder="Buscar expediente..."
+                                      Clearable="true"
+                                      Immediate="true"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Outlined.Search"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      Class="cft-search-field" />
+                    </div>
+                </div>
+            </ToolBarContent>
+
+            <HeaderContent>
+                <MudTh>Expediente</MudTh>
+                <MudTh>Cliente / ID</MudTh>
+                <MudTh>Producto</MudTh>
+                <MudTh Class="cft-th--right">Monto</MudTh>
+                <MudTh Class="cft-th--center">Progreso</MudTh>
+                <MudTh Class="cft-th--center">Estado</MudTh>
+                <MudTh Class="cft-th--center">Acciones</MudTh>
+            </HeaderContent>
+
+            <RowTemplate>
+                <MudTd DataLabel="Expediente">
+                    <span class="cft-badge">@context.CaseNumber</span>
+                </MudTd>
+                <MudTd DataLabel="Cliente / ID">
+                    <p class="cft-client-name @(context.IsCompany ? "cft-company" : "")">@context.ClientName</p>
+                    <p class="cft-client-id">@context.Identification</p>
+                </MudTd>
+                <MudTd DataLabel="Producto" Class="cft-product">@context.Product</MudTd>
+                <MudTd DataLabel="Monto" Class="cft-amount">RD$ @context.Amount.ToString("N0")</MudTd>
+                <MudTd DataLabel="Progreso" Class="cft-td--center">
+                    <div class="cft-progress-wrap">
+                        <div class="cft-progress-track">
+                            <div class="cft-progress-fill cft-fill--@GetProgressColor(context.Progress)"
+                                 style="width: @(context.Progress)%"></div>
+                        </div>
+                        <span class="cft-progress-pct cft-pct--@GetProgressColor(context.Progress)">@(context.Progress)%</span>
+                    </div>
+                </MudTd>
+                <MudTd DataLabel="Estado" Class="cft-td--center">
+                    <span class="cft-status-badge cft-status--@context.Status.ToString().ToLower()">@context.Status.ToLabel()</span>
+                </MudTd>
+                <MudTd DataLabel="Acciones" Class="cft-td--center">
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               StartIcon="@Icons.Material.Outlined.Print"
+                               Class="cft-print-btn"
+                               OnClick="() => OnPrintRequest.InvokeAsync(context)">
+                        Imprimir
+                    </MudButton>
+                </MudTd>
+            </RowTemplate>
+
+            <NoRecordsContent>
+                <div class="cft-empty-state">
+                    <MudIcon Icon="@Icons.Material.Outlined.SearchOff" Class="cft-empty-icon" />
+                    <span class="cft-empty-text">No se encontraron solicitudes con los filtros aplicados</span>
+                </div>
+            </NoRecordsContent>
+
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{8, 16, 24}"
+                               RowsPerPageString="Por página:" />
+            </PagerContent>
+
+        </MudTable>
+    </MudCard>
+</div>
