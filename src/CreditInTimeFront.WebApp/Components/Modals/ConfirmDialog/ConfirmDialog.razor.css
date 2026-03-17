@@ -1,0 +1,26 @@
+/* =============================================
+   ConfirmDialog — diálogo de confirmación nativo MudBlazor
+   Requiere: <MudDialogProvider /> en MainLayout (ya registrado).
+   ============================================= */
+
+/* ─── Título con ícono ───────────────────────── */
+.cd-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-body);
+}
+
+.cd-title-icon {
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+/* ─── Mensaje ────────────────────────────────── */
+.cd-message {
+    color: var(--text-muted) !important;
+    line-height: 1.6;
+}

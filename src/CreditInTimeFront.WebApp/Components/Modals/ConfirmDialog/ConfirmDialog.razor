@@ -1,0 +1,47 @@
+@namespace CreditInTimeFront.WebApp.Components
+
+<MudDialog>
+    <TitleContent>
+        <div class="cd-title">
+            @if (!string.IsNullOrEmpty(Icon))
+            {
+                <MudIcon Icon="@Icon" Color="@ConfirmColor" Class="cd-title-icon" />
+            }
+            <span>@Title</span>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body2" Class="cd-message">@Message</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel"
+                   Variant="Variant.Text"
+                   Color="Color.Default">
+            @CancelText
+        </MudButton>
+        <MudButton OnClick="Confirm"
+                   Variant="Variant.Filled"
+                   Color="@ConfirmColor"
+                   DisableElevation="true">
+            @ConfirmText
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter] public string Title { get; set; } = "Confirmar acción";
+    [Parameter] public string Message { get; set; } = "";
+    [Parameter] public string ConfirmText { get; set; } = "Confirmar";
+    [Parameter] public string CancelText { get; set; } = "Cancelar";
+
+    /// <summary>Color del botón de confirmación. Usar Color.Error para acciones destructivas.</summary>
+    [Parameter] public Color ConfirmColor { get; set; } = Color.Primary;
+
+    /// <summary>Ícono opcional junto al título (ej: Icons.Material.Outlined.DeleteForever).</summary>
+    [Parameter] public string? Icon { get; set; }
+
+    private void Confirm() => MudDialog.Close(DialogResult.Ok(true));
+    private void Cancel() => MudDialog.Cancel();
+}
