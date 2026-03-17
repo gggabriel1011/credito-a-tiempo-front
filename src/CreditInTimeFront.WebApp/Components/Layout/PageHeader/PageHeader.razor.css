@@ -1,0 +1,52 @@
+/* =============================================
+   Page Header — shared header pattern for all module pages
+   Usage:
+     <PageHeader Title="CRM"
+                 TitleAccent="- Gestión de Clientes"
+                 Subtitle="Descripción breve" />
+   ============================================= */
+.ph-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.ph-title-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.ph-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-body);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.ph-title-accent {
+    color: var(--primary-color);
+}
+
+.ph-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0.25rem 0 0 0;
+}
+
+.ph-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: center;
+}

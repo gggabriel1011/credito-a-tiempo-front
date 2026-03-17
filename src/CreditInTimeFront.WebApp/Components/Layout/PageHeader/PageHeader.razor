@@ -1,0 +1,30 @@
+@namespace CreditInTimeFront.WebApp.Components
+
+<header class="ph-header">
+    <div class="ph-title-row">
+        <h1 class="ph-title">
+            @Title
+            @if (!string.IsNullOrEmpty(TitleAccent))
+            {
+                <span class="ph-title-accent">@TitleAccent</span>
+            }
+        </h1>
+        @if (!string.IsNullOrEmpty(Subtitle))
+        {
+            <p class="ph-subtitle">@Subtitle</p>
+        }
+    </div>
+    @if (Actions is not null)
+    {
+        <div class="ph-actions">
+            @Actions
+        </div>
+    }
+</header>
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string? TitleAccent { get; set; }
+    [Parameter] public string? Subtitle { get; set; }
+    [Parameter] public RenderFragment? Actions { get; set; }
+}
