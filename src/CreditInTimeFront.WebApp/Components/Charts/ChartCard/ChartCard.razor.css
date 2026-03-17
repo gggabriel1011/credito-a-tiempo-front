@@ -1,0 +1,47 @@
+/* =============================================
+   Card wrapper
+   ============================================= */
+.cc-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+}
+
+.cc-card ::deep .mud-card-content {
+    padding: 1.5rem !important;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =============================================
+   Header row (title + optional actions)
+   ============================================= */
+.cc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.cc-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-title);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+}
+
+.cc-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* =============================================
+   Optional footer (legend, etc.)
+   ============================================= */
+.cc-footer {
+    margin-top: 1rem;
+}

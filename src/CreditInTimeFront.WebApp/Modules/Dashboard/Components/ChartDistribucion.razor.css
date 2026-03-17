@@ -1,38 +1,8 @@
 /* =============================================
-   Card
-   ============================================= */
-.chart-card--pie {
-    border-radius: 12px !important;
-    border: 1px solid var(--border-card) !important;
-}
-
-.chart-card--pie ::deep .mud-card-content {
-    padding: 1.5rem !important;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.chart-pie-title {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: var(--text-title);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 0 0 1.5rem 0;
-}
-
-/* =============================================
-   Hide MudBlazor auto-generated legend
-   ============================================= */
-.chart-card--pie ::deep .mud-chart-legend { display: none !important; }
-
-/* =============================================
-   Custom legend
+   Custom legend — stays in ChartDistribucion as it's
+   module-specific content rendered via ChartCard's Footer slot
    ============================================= */
 .chart-legend {
-    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

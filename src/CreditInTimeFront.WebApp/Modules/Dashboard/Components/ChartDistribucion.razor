@@ -1,7 +1,5 @@
-<MudCard Elevation="1" Class="chart-card--pie" Style="height: 100%;">
-    <MudCardContent>
-        <h3 class="chart-pie-title">@Title</h3>
-
+<ChartCard Title="@Title" Height="100%" CardClass="chart-card--pie">
+    <ChildContent>
         <MudChart T="double"
                   ChartType="ChartType.Donut"
                   ChartSeries="@DonutSeries"
@@ -18,7 +16,8 @@
                 </text>
             </CustomGraphics>
         </MudChart>
-
+    </ChildContent>
+    <Footer>
         <div class="chart-legend">
             @for (int i = 0; i < DataItems.Count; i++)
             {
@@ -33,5 +32,5 @@
                 </div>
             }
         </div>
-    </MudCardContent>
-</MudCard>
+    </Footer>
+</ChartCard>

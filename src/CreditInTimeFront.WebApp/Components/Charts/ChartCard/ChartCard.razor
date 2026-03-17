@@ -1,0 +1,29 @@
+@namespace CreditInTimeFront.WebApp.Components
+
+<MudCard Elevation="1" Class="@($"cc-card {CardClass}")" Style="@($"height: {Height};")">
+    <MudCardContent>
+        <div class="cc-header">
+            <h3 class="cc-title">@Title</h3>
+            @if (HeaderActions is not null)
+            {
+                <div class="cc-header-actions">@HeaderActions</div>
+            }
+        </div>
+        @ChildContent
+        @if (Footer is not null)
+        {
+            <div class="cc-footer">
+                @Footer
+            </div>
+        }
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? HeaderActions { get; set; }
+    [Parameter] public RenderFragment? Footer { get; set; }
+    [Parameter] public string Height { get; set; } = "100%";
+    [Parameter] public string CardClass { get; set; } = "";
+}

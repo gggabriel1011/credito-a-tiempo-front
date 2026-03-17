@@ -1,37 +1,4 @@
 /* =============================================
-   Card
-   ============================================= */
-.desembolsos-card {
-    border-radius: 12px !important;
-    border: 1px solid var(--border-card) !important;
-}
-
-.desembolsos-card ::deep .mud-card-content {
-    padding: 1.5rem !important;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-/* =============================================
-   Header row
-   ============================================= */
-.desembolsos-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.desembolsos-title {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: var(--text-title);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 0;
-}
-
-/* =============================================
    Custom year select
    ============================================= */
 .year-select-wrap {
