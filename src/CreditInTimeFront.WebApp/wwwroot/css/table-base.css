@@ -28,7 +28,6 @@
     letter-spacing: 0.05em !important;
     color: var(--text-muted) !important;
     padding: 0.875rem 1.5rem !important;
-    white-space: nowrap;
 }
 
 /* ─── Body cells ──────────────────────────────────── */

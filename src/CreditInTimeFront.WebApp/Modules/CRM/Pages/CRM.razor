@@ -9,7 +9,7 @@
             TitleAccent="- Gestión de Clientes"
             Subtitle="Seguimiento de Interacciones y Cartera de Clientes" />
 
-@* <!-- KPI Cards -->
+<!-- KPI Cards -->
 <MudGrid Spacing="3" Class="mb-4">
     @foreach (var card in _kpiCards)
     {
@@ -82,7 +82,7 @@
         </ChartCard>
     </MudItem>
 
-</MudGrid> *@
+</MudGrid>
 
 <!-- Interactions Table -->
 <InteraccionesTable Interacciones="@_state.Interacciones"
