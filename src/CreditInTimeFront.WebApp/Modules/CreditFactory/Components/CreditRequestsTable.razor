@@ -1,126 +1,88 @@
 @namespace CreditInTimeFront.WebApp.Modules.CreditFactory.Components
 @using MudBlazor
 @using CreditInTimeFront.WebApp.Modules.CreditFactory.ViewModels
-@using CreditInTimeFront.WebApp.Modules.CreditFactory.State
 
-<div class="cft-root">
-    <MudCard Elevation="1" Class="cft-card">
+<DataTable T="CreditRequestViewModel"
+           Title="Solicitudes por Aprobar"
+           TitleIcon="@Icons.Material.Outlined.PendingActions"
+           Items="@Requests"
+           Filters="@_filters"
+           FilterPredicate="@FilterRequest">
 
-        <MudTable T="CreditRequestViewModel"
-                  Items="@Requests"
-                  Filter="@FilterRequest"
-                  Elevation="0"
-                  Dense="true"
-                  Hover="true"
-                  RowsPerPage="8"
-                  Class="cft-table">
+    <ColumnDefs>
 
-            <ToolBarContent>
-                <div class="cft-toolbar-inner">
-                    <div class="cft-toolbar-title">
-                        <MudIcon Icon="@Icons.Material.Outlined.PendingActions" Class="cft-toolbar-icon" />
-                        <span class="cft-toolbar-label">Solicitudes por Aprobar</span>
+        <TemplateColumn T="CreditRequestViewModel" Title="Expediente" HeaderStyle="min-width:120px">
+            <CellTemplate>
+                <span class="cft-badge">@context.Item.CaseNumber</span>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CreditRequestViewModel" Title="Cliente / ID" HeaderStyle="min-width:180px">
+            <CellTemplate>
+                <p class="cft-client-name @(context.Item.IsCompany ? "cft-company" : "")">@context.Item.ClientName</p>
+                <p class="cft-client-id">@context.Item.Identification</p>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CreditRequestViewModel" Title="Producto" HeaderStyle="min-width:140px">
+            <CellTemplate>
+                <span class="cft-product">@context.Item.Product</span>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CreditRequestViewModel" Title="Monto"
+                        HeaderClass="dt-col--right"
+                        HeaderStyle="min-width:120px"
+                        CellStyle="text-align:right">
+            <CellTemplate>
+                <span class="cft-amount">RD$ @context.Item.Amount.ToString("N0")</span>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CreditRequestViewModel" Title="Progreso"
+                        HeaderClass="dt-col--center"
+                        HeaderStyle="min-width:100px"
+                        CellStyle="text-align:center">
+            <CellTemplate>
+                <div class="cft-progress-wrap">
+                    <div class="cft-progress-track">
+                        <div class="cft-progress-fill cft-fill--@GetProgressColor(context.Item.Progress)"
+                             style="width: @(context.Item.Progress)%"></div>
                     </div>
-                    <div class="cft-filters">
-                        <MudDateRangePicker @bind-DateRange="_dateRange"
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                            PlaceholderStart="Desde"
-                                            PlaceholderEnd="Hasta"
-=======
-                                            Placeholder="Rango de fechas"
->>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
-=======
-                                            PlaceholderStart="Desde"
-                                            PlaceholderEnd="Hasta"
->>>>>>> cbda048 (feat(credit-factory): update date range picker placeholders in CreditRequestsTable)
-                                            DateFormat="dd/MM/yy"
-                                            Clearable="true"
-                                            Variant="Variant.Outlined"
-                                            Margin="Margin.Dense"
-                                            Class="cft-date-picker" />
-                        <MudSelect T="string"
-                                   @bind-Value="_productFilter"
-                                   Placeholder="Todos los Productos"
-                                   Clearable="true"
-                                   Variant="Variant.Outlined"
-                                   Margin="Margin.Dense"
-                                   Class="cft-product-select">
-                            @foreach (var product in CreditFactoryState.ProductTypes)
-                            {
-                                <MudSelectItem T="string" Value="@product">@product</MudSelectItem>
-                            }
-                        </MudSelect>
-                        <MudTextField T="string"
-                                      @bind-Value="_searchText"
-                                      Placeholder="Buscar expediente..."
-                                      Clearable="true"
-                                      Immediate="true"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Outlined.Search"
-                                      Variant="Variant.Outlined"
-                                      Margin="Margin.Dense"
-                                      Class="cft-search-field" />
-                    </div>
+                    <span class="cft-progress-pct cft-pct--@GetProgressColor(context.Item.Progress)">
+                        @(context.Item.Progress)%
+                    </span>
                 </div>
-            </ToolBarContent>
+            </CellTemplate>
+        </TemplateColumn>
 
-            <HeaderContent>
-                <MudTh>Expediente</MudTh>
-                <MudTh>Cliente / ID</MudTh>
-                <MudTh>Producto</MudTh>
-                <MudTh Class="cft-th--right">Monto</MudTh>
-                <MudTh Class="cft-th--center">Progreso</MudTh>
-                <MudTh Class="cft-th--center">Estado</MudTh>
-                <MudTh Class="cft-th--center">Acciones</MudTh>
-            </HeaderContent>
+        <TemplateColumn T="CreditRequestViewModel" Title="Estado"
+                        HeaderClass="dt-col--center"
+                        HeaderStyle="min-width:110px"
+                        CellStyle="text-align:center">
+            <CellTemplate>
+                <span class="cft-status-badge cft-status--@context.Item.Status.ToString().ToLower()">
+                    @context.Item.Status.ToLabel()
+                </span>
+            </CellTemplate>
+        </TemplateColumn>
 
-            <RowTemplate>
-                <MudTd DataLabel="Expediente">
-                    <span class="cft-badge">@context.CaseNumber</span>
-                </MudTd>
-                <MudTd DataLabel="Cliente / ID">
-                    <p class="cft-client-name @(context.IsCompany ? "cft-company" : "")">@context.ClientName</p>
-                    <p class="cft-client-id">@context.Identification</p>
-                </MudTd>
-                <MudTd DataLabel="Producto" Class="cft-product">@context.Product</MudTd>
-                <MudTd DataLabel="Monto" Class="cft-amount">RD$ @context.Amount.ToString("N0")</MudTd>
-                <MudTd DataLabel="Progreso" Class="cft-td--center">
-                    <div class="cft-progress-wrap">
-                        <div class="cft-progress-track">
-                            <div class="cft-progress-fill cft-fill--@GetProgressColor(context.Progress)"
-                                 style="width: @(context.Progress)%"></div>
-                        </div>
-                        <span class="cft-progress-pct cft-pct--@GetProgressColor(context.Progress)">@(context.Progress)%</span>
-                    </div>
-                </MudTd>
-                <MudTd DataLabel="Estado" Class="cft-td--center">
-                    <span class="cft-status-badge cft-status--@context.Status.ToString().ToLower()">@context.Status.ToLabel()</span>
-                </MudTd>
-                <MudTd DataLabel="Acciones" Class="cft-td--center">
-                    <MudButton Variant="Variant.Filled"
-                               Color="Color.Primary"
-                               Size="Size.Small"
-                               StartIcon="@Icons.Material.Outlined.Print"
-                               Class="cft-print-btn"
-                               OnClick="() => OnPrintRequest.InvokeAsync(context)">
-                        Imprimir
-                    </MudButton>
-                </MudTd>
-            </RowTemplate>
+        <TemplateColumn T="CreditRequestViewModel" Title="Acciones"
+                        HeaderClass="dt-col--center"
+                        HeaderStyle="min-width:110px"
+                        CellStyle="text-align:center">
+            <CellTemplate>
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Size="Size.Small"
+                           StartIcon="@Icons.Material.Outlined.Print"
+                           Class="cft-print-btn"
+                           OnClick="() => OnPrintRequest.InvokeAsync(context.Item)">
+                    Imprimir
+                </MudButton>
+            </CellTemplate>
+        </TemplateColumn>
 
-            <NoRecordsContent>
-                <div class="cft-empty-state">
-                    <MudIcon Icon="@Icons.Material.Outlined.SearchOff" Class="cft-empty-icon" />
-                    <span class="cft-empty-text">No se encontraron solicitudes con los filtros aplicados</span>
-                </div>
-            </NoRecordsContent>
+    </ColumnDefs>
 
-            <PagerContent>
-                <MudTablePager PageSizeOptions="new int[]{8, 16, 24}"
-                               RowsPerPageString="Por página:" />
-            </PagerContent>
-
-        </MudTable>
-    </MudCard>
-</div>
+</DataTable>

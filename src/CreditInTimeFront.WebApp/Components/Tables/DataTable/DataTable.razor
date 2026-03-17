@@ -1,0 +1,130 @@
+@namespace CreditInTimeFront.WebApp.Components
+@typeparam T
+
+<div class="dt-root tbl-root">
+    <MudCard Elevation="1" Class="dt-card">
+
+        <MudDataGrid T="T"
+                     Items="@Items"
+                     QuickFilter="@_quickFilter"
+                     Dense="true"
+                     Hover="true"
+                     Filterable="false"
+                     SortMode="SortMode.None"
+                     Elevation="0"
+                     RowsPerPage="@RowsPerPage"
+                     ChildRowContent="@(RowDetails is not null ? ctx => RowDetails(ctx) : null)">
+
+            <ToolBarContent>
+                <div class="dt-toolbar">
+
+                    <!-- Title row: icon + label (left) | header actions (right) -->
+                    <div class="dt-toolbar-header">
+                        <div class="dt-toolbar-title">
+                            <MudIcon Icon="@TitleIcon" Class="dt-toolbar-icon" />
+                            <span class="dt-toolbar-label">@Title</span>
+                        </div>
+                        @if (HeaderActions is not null)
+                        {
+                            <div class="dt-toolbar-actions">@HeaderActions</div>
+                        }
+                    </div>
+
+                    <!-- Filters row: rendered dynamically from Filters parameter -->
+                    @if (Filters.Count > 0)
+                    {
+                        <div class="dt-filters">
+                            @foreach (var filter in Filters)
+                            {
+                                @if (filter is DateRangeFilter drf)
+                                {
+                                    <div class="dt-filter-group">
+                                        <label class="dt-filter-label">@drf.Label</label>
+                                        <MudDateRangePicker DateRange="@GetDateRange(drf.Key)"
+                                                            DateRangeChanged="@(v => SetDateRange(drf.Key, v))"
+                                                            PlaceholderStart="Desde"
+                                                            PlaceholderEnd="Hasta"
+                                                            DateFormat="dd/MM/yy"
+                                                            Clearable="true"
+                                                            Variant="Variant.Outlined"
+                                                            Margin="Margin.Dense"
+                                                            Class="dt-filter dt-filter--daterange" />
+                                    </div>
+                                }
+                                else if (filter is DateFilter df)
+                                {
+                                    <div class="dt-filter-group">
+                                        <label class="dt-filter-label">@df.Label</label>
+                                        <MudDatePicker Date="@GetDate(df.Key)"
+                                                       DateChanged="@(v => SetDate(df.Key, v))"
+                                                       Placeholder="@df.Label"
+                                                       DateFormat="dd/MM/yyyy"
+                                                       Clearable="true"
+                                                       Variant="Variant.Outlined"
+                                                       Margin="Margin.Dense"
+                                                       Class="dt-filter dt-filter--date" />
+                                    </div>
+                                }
+                                else if (filter is SelectFilter sf)
+                                {
+                                    <div class="dt-filter-group">
+                                        <label class="dt-filter-label">@sf.Label</label>
+                                        <MudSelect T="string"
+                                                   Value="@GetString(sf.Key)"
+                                                   ValueChanged="@(v => SetString(sf.Key, v))"
+                                                   Placeholder="Todos"
+                                                   Clearable="true"
+                                                   Variant="Variant.Outlined"
+                                                   Margin="Margin.Dense"
+                                                   Class="dt-filter dt-filter--select">
+                                            @foreach (var opt in sf.Options)
+                                            {
+                                                <MudSelectItem T="string" Value="@opt.Value">@opt.Label</MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                    </div>
+                                }
+                                else if (filter is SearchFilter schf)
+                                {
+                                    <div class="dt-filter-group">
+                                        <label class="dt-filter-label">@schf.Label</label>
+                                        <MudTextField T="string"
+                                                      Value="@GetString(schf.Key)"
+                                                      ValueChanged="@(v => SetString(schf.Key, v))"
+                                                      Placeholder="@schf.Placeholder"
+                                                      Clearable="true"
+                                                      Immediate="true"
+                                                      Adornment="Adornment.Start"
+                                                      AdornmentIcon="@Icons.Material.Outlined.Search"
+                                                      Variant="Variant.Outlined"
+                                                      Margin="Margin.Dense"
+                                                      Class="dt-filter dt-filter--search" />
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
+                </div>
+            </ToolBarContent>
+
+            <Columns>
+                @ColumnDefs
+            </Columns>
+
+            <NoRecordsContent>
+                <div class="tbl-empty-state">
+                    <MudIcon Icon="@EmptyIcon" Class="tbl-empty-icon" />
+                    <span class="tbl-empty-text">@EmptyText</span>
+                </div>
+            </NoRecordsContent>
+
+            <PagerContent>
+                <MudDataGridPager T="T"
+                                  PageSizeOptions="@_pageSizes"
+                                  RowsPerPageString="Por página:" />
+            </PagerContent>
+
+        </MudDataGrid>
+    </MudCard>
+</div>

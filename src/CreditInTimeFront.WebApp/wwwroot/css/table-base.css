@@ -1,0 +1,97 @@
+/* =============================================
+   table-base.css — shared MudTable / MudDataGrid base styles
+   NOTA: archivo CSS global — NO usar ::deep (solo válido en .razor.css)
+   Uso: agregar clase "tbl-root" al div raíz del componente tabla.
+   ============================================= */
+
+/* Root: display:contents lo hace invisible para el layout engine */
+.tbl-root {
+    display: contents;
+}
+
+/* ─── Toolbar ─────────────────────────────────────── */
+.tbl-root .mud-table-toolbar {
+    background: var(--bg-subtle) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: unset !important;
+}
+
+/* ─── Header cells ────────────────────────────────── */
+.tbl-root .mud-table-head .mud-table-cell {
+    background: var(--bg-subtle) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-muted) !important;
+    padding: 0.875rem 1.5rem !important;
+    white-space: nowrap;
+}
+
+/* ─── Body cells ──────────────────────────────────── */
+.tbl-root .mud-table-body .mud-table-cell {
+    border-bottom: 1px solid var(--border-card) !important;
+    padding: 0.625rem 1.5rem !important;
+    font-size: 0.875rem !important;
+    color: var(--text-muted) !important;
+}
+
+/* ─── Row hover ───────────────────────────────────── */
+.tbl-root .mud-table-body .mud-table-row:hover .mud-table-cell {
+    background: var(--bg-subtle) !important;
+}
+
+/* ─── Last row — no bottom divider ───────────────── */
+.tbl-root .mud-table-body .mud-table-row:last-child .mud-table-cell {
+    border-bottom: none !important;
+}
+
+/* ─── Pagination ──────────────────────────────────── */
+.tbl-root .mud-table-pagination {
+    background: var(--bg-subtle) !important;
+    border-top: 1px solid var(--border-soft) !important;
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    border-radius: 0 0 12px 12px;
+}
+
+.tbl-root .mud-table-pagination .mud-select-input,
+.tbl-root .mud-table-pagination .mud-input-root {
+    font-size: 11px !important;
+    color: var(--text-body) !important;
+}
+
+.tbl-root .mud-table-pagination-display {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+}
+
+/* ─── Horizontal scroll ───────────────────────────── */
+.tbl-root .mud-table-container {
+    overflow-x: auto !important;
+}
+
+/* ─── Empty state ─────────────────────────────────── */
+.tbl-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem;
+}
+
+.tbl-empty-icon {
+    color: var(--text-subtle) !important;
+    font-size: 2rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+.tbl-empty-text {
+    font-size: 0.875rem;
+    color: var(--text-subtle);
+    text-align: center;
+}

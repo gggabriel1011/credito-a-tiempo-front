@@ -22,10 +22,10 @@ public partial class CreditFactory
     {
         _kpiCards =
         [
-            new("Pendientes",           _state.TotalPending.ToString(),   Icons.Material.Outlined.PendingActions, "cf-detail--warning", "Requieren atención inmediata"),
-            new("En Análisis",          _state.InAnalysis.ToString(),     Icons.Material.Outlined.Analytics,     "cf-detail--info",    "En proceso de evaluación"),
-            new("Aprobadas Hoy",        _state.ApprovedToday.ToString(),  Icons.Material.Outlined.CheckCircle,   "cf-detail--primary", "Meta diaria alcanzada"),
-            new("Monto Total en Turno", FormatAmount(_state.TotalAmount), Icons.Material.Outlined.Payments,      "cf-detail--muted",   "Valor total acumulado"),
+            new("Pendientes",           _state.TotalPending.ToString(),   Icons.Material.Outlined.PendingActions, "warning", "Requieren atención inmediata"),
+            new("En Análisis",          _state.InAnalysis.ToString(),     Icons.Material.Outlined.Analytics,     "info",    "En proceso de evaluación"),
+            new("Aprobadas Hoy",        _state.ApprovedToday.ToString(),  Icons.Material.Outlined.CheckCircle,   "primary", "Meta diaria alcanzada"),
+            new("Monto Total en Turno", FormatAmount(_state.TotalAmount), Icons.Material.Outlined.Payments,      "muted",   "Valor total acumulado"),
         ];
     }
 
@@ -51,5 +51,5 @@ public partial class CreditFactory
             ? $"RD$ {amount / 1_000_000:N1}M"
             : $"RD$ {amount:N0}";
 
-    private record KpiCard(string Label, string Value, string Icon, string DetailColorClass, string Detail);
+    private record KpiCard(string Label, string Value, string Icon, string BadgeVariant, string Detail);
 }

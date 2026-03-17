@@ -1,0 +1,180 @@
+/* ── Root wrapper ──────────────────────────────────────────────────────────── */
+.dt-root {
+    display: contents;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.dt-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-card) !important;
+    overflow: hidden;
+}
+
+/* ── MudDataGrid toolbar area: remove default padding (dt-toolbar owns it) ── */
+.dt-root ::deep .mud-table-toolbar {
+    background: var(--bg-subtle) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    padding: 0 !important;
+    min-height: unset !important;
+    height: auto !important;
+}
+
+/* ── Toolbar layout ─────────────────────────────────────────────────────────  */
+.dt-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding: 0.875rem 1.5rem;
+    width: 100%;
+}
+
+.dt-toolbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dt-toolbar-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dt-toolbar-icon {
+    color: var(--primary-color) !important;
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+.dt-toolbar-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-title);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.dt-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ── Filters row ─────────────────────────────────────────────────────────── */
+.dt-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+
+/* Filter group: label on top + control below — flex: 1 fills available toolbar width */
+.dt-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 120px;
+}
+
+.dt-filter-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding-left: 2px;
+}
+
+/* Controls stretch to fill their flex group */
+.dt-filter--daterange,
+.dt-filter--select,
+.dt-filter--search,
+.dt-filter--date { width: 100%; }
+
+/* Shared MudBlazor input overrides for all filter controls */
+.dt-root ::deep .dt-filter .mud-input-root {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: var(--text-body) !important;
+    background: var(--surface-color) !important;
+    border-radius: 8px !important;
+}
+
+.dt-root ::deep .dt-filter .mud-input-outlined-border {
+    border-color: var(--border-soft) !important;
+}
+
+.dt-root ::deep .dt-filter .mud-input-root input::placeholder,
+.dt-root ::deep .dt-filter .mud-input-root textarea::placeholder {
+    color: var(--text-subtle) !important;
+    font-size: 13px !important;
+}
+
+.dt-root ::deep .dt-filter .mud-input-label {
+    display: none !important;
+}
+
+.dt-root ::deep .dt-filter .mud-input-adornment {
+    color: var(--text-subtle) !important;
+}
+
+.dt-root ::deep .dt-filter .mud-select-input {
+    font-size: 13px !important;
+}
+
+/* ── Table header cells ──────────────────────────────────────────────────── */
+.dt-root ::deep .mud-table-head .mud-table-cell {
+    background: var(--bg-subtle) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-muted) !important;
+    padding: 0.875rem 1.5rem !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+}
+
+/* ── Table body cells ────────────────────────────────────────────────────── */
+.dt-root ::deep .mud-table-body .mud-table-cell {
+    border-bottom: 1px solid var(--border-card) !important;
+    padding: 0.625rem 1.5rem !important;
+    font-size: 0.875rem !important;
+    color: var(--text-muted) !important;
+}
+
+.dt-root ::deep .mud-table-body .mud-table-row:last-child .mud-table-cell {
+    border-bottom: none !important;
+}
+
+/* ── Row hover ───────────────────────────────────────────────────────────── */
+.dt-root ::deep .mud-table-body .mud-table-row:hover .mud-table-cell {
+    background: var(--bg-subtle) !important;
+}
+
+/* ── Pagination ──────────────────────────────────────────────────────────── */
+.dt-root ::deep .mud-table-pagination {
+    background: var(--bg-subtle) !important;
+    border-top: 1px solid var(--border-soft) !important;
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    border-radius: 0 0 12px 12px !important;
+}
+
+/* ── Column header alignment helpers ────────────────────────────────────── */
+/* Usage: HeaderClass="dt-col--right" or HeaderClass="dt-col--center"        */
+.dt-root ::deep th.dt-col--right {
+    text-align: right !important;
+}
+.dt-root ::deep th.dt-col--right > * {
+    justify-content: flex-end !important;
+}
+
+.dt-root ::deep th.dt-col--center {
+    text-align: center !important;
+}
+.dt-root ::deep th.dt-col--center > * {
+    justify-content: center !important;
+}

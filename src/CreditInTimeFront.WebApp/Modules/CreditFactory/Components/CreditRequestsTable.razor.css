@@ -1,228 +1,6 @@
 /* =============================================
-   Root wrapper — scoped parent for ::deep rules
+   Cell — Expediente badge
    ============================================= */
-.cft-root {
-    display: contents;
-}
-
-/* =============================================
-   Card
-   ============================================= */
-.cft-card {
-    border-radius: 12px !important;
-    border: 1px solid var(--border-card) !important;
-    overflow: hidden;
-}
-
-/* =============================================
-   MudTable toolbar area
-   ============================================= */
-.cft-root ::deep .mud-table-toolbar {
-    background: var(--bg-subtle) !important;
-    border-bottom: 1px solid var(--border-soft) !important;
-    padding: 0 !important;
-    height: auto !important;
-    min-height: unset !important;
-}
-
-.cft-toolbar-inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.875rem 1.5rem;
-    width: 100%;
-}
-
-.cft-toolbar-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.cft-toolbar-icon {
-    color: var(--primary-color) !important;
-    font-size: 1.25rem !important;
-}
-
-.cft-toolbar-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-title);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-/* =============================================
-   Filters
-   ============================================= */
-.cft-filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-/* Date range picker — compact to match toolbar */
-.cft-date-picker {
-    width: 220px;
-}
-
-.cft-root ::deep .cft-date-picker .mud-input-root {
-    font-size: 10px !important;
-    font-weight: 700 !important;
-    color: var(--text-title) !important;
-    background: var(--surface-color) !important;
-    border-radius: 8px !important;
-}
-
-.cft-root ::deep .cft-date-picker .mud-input-outlined-border {
-    border-color: var(--border-soft) !important;
-}
-
-.cft-root ::deep .cft-date-picker .mud-input-root input::placeholder {
-    color: var(--text-subtle) !important;
-    font-size: 10px !important;
-}
-
-.cft-root ::deep .cft-date-picker .mud-input-label {
-    display: none !important;
-}
-
-.cft-root ::deep .cft-date-picker .mud-input-adornment {
-    color: var(--text-subtle) !important;
-}
-
-/* Product MudSelect */
-.cft-product-select {
-    width: 200px;
-}
-
-.cft-root ::deep .cft-product-select .mud-input-root {
-    font-size: 10px !important;
-    font-weight: 700 !important;
-    color: var(--text-title) !important;
-    background: var(--surface-color) !important;
-    border-radius: 8px !important;
-}
-
-.cft-root ::deep .cft-product-select .mud-input-outlined-border {
-    border-color: var(--border-soft) !important;
-}
-
-.cft-root ::deep .cft-product-select .mud-select-input {
-    font-size: 10px !important;
-}
-
-/* Search MudTextField */
-.cft-search-field {
-    width: 200px;
-}
-
-.cft-root ::deep .cft-search-field .mud-input-root {
-    font-size: 10px !important;
-    font-weight: 500 !important;
-    color: var(--text-title) !important;
-    background: var(--surface-color) !important;
-    border-radius: 8px !important;
-}
-
-.cft-root ::deep .cft-search-field .mud-input-outlined-border {
-    border-color: var(--border-soft) !important;
-}
-
-.cft-root ::deep .cft-search-field .mud-input-root input::placeholder {
-    color: var(--text-subtle) !important;
-}
-
-.cft-root ::deep .cft-search-field .mud-input-adornment {
-    color: var(--text-subtle) !important;
-}
-
-/* =============================================
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c5860af (feat(CRM): Add client management and detail pages)
-   Horizontal scroll — table scrolls, toolbar stays full-width
-   ============================================= */
-.cft-root ::deep .mud-table-container {
-    overflow-x: auto !important;
-}
-
-.cft-root ::deep .mud-table-container table {
-    min-width: 800px;
-}
-
-/* =============================================
-<<<<<<< HEAD
-=======
->>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
-=======
->>>>>>> c5860af (feat(CRM): Add client management and detail pages)
-   MudTable — header
-   ============================================= */
-.cft-root ::deep .mud-table-head .mud-table-cell {
-    background: var(--bg-subtle) !important;
-    border-bottom: 1px solid var(--border-soft) !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    color: var(--text-muted) !important;
-    padding: 0.875rem 1.5rem !important;
-    white-space: nowrap;
-}
-
-.cft-th--right  { text-align: right !important; }
-.cft-th--center { text-align: center !important; }
-
-/* =============================================
-   MudTable — body rows
-   ============================================= */
-.cft-root ::deep .mud-table-body .mud-table-cell {
-    border-bottom: 1px solid var(--border-card) !important;
-    padding: 0.625rem 1.5rem !important;
-    font-size: 0.875rem !important;
-    color: var(--text-muted) !important;
-}
-
-.cft-root ::deep .mud-table-body .mud-table-row:hover .mud-table-cell {
-    background: var(--bg-subtle) !important;
-}
-
-.cft-root ::deep .mud-table-body .mud-table-row:last-child .mud-table-cell {
-    border-bottom: none !important;
-}
-
-/* =============================================
-   MudTable — pagination
-   ============================================= */
-.cft-root ::deep .mud-table-pagination {
-    background: var(--bg-subtle) !important;
-    border-top: 1px solid var(--border-soft) !important;
-    font-size: 11px !important;
-    color: var(--text-muted) !important;
-    border-radius: 0 0 12px 12px;
-}
-
-.cft-root ::deep .mud-table-pagination .mud-select-input,
-.cft-root ::deep .mud-table-pagination .mud-input-root {
-    font-size: 11px !important;
-    color: var(--text-body) !important;
-}
-
-.cft-root ::deep .mud-table-pagination-display {
-    font-size: 11px !important;
-    color: var(--text-muted) !important;
-}
-
-/* =============================================
-   Custom cell styles
-   ============================================= */
-.cft-td--center { text-align: center !important; }
-
 .cft-badge {
     display: inline-block;
     font-size: 11px;
@@ -234,6 +12,9 @@
     white-space: nowrap;
 }
 
+/* =============================================
+   Cell — Cliente / ID
+   ============================================= */
 .cft-client-name {
     font-size: 0.875rem;
     font-weight: 600;
@@ -249,20 +30,25 @@
     margin: 0;
 }
 
+/* =============================================
+   Cell — Producto
+   ============================================= */
 .cft-product {
     font-size: 0.875rem;
     color: var(--text-secondary);
 }
 
+/* =============================================
+   Cell — Monto
+   ============================================= */
 .cft-amount {
-    text-align: right !important;
-    font-weight: 700 !important;
-    color: var(--text-body) !important;
+    font-weight: 700;
+    color: var(--text-body);
     white-space: nowrap;
 }
 
 /* =============================================
-   Progress bar
+   Cell — Progress bar
    ============================================= */
 .cft-progress-wrap {
     display: flex;
@@ -299,7 +85,7 @@
 .cft-pct--error   { color: var(--error-color);   }
 
 /* =============================================
-   Status badge
+   Cell — Status badge
    ============================================= */
 .cft-status-badge {
     display: inline-block;
@@ -316,30 +102,7 @@
 .cft-status--rechazado  { color: var(--error-strong);    background: rgba(var(--error-rgb),    0.12); }
 
 /* =============================================
-   Empty state
-   ============================================= */
-.cft-empty-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 2rem;
-}
-
-.cft-empty-icon {
-    color: var(--text-subtle) !important;
-    font-size: 2rem !important;
-    width: 2rem !important;
-    height: 2rem !important;
-}
-
-.cft-empty-text {
-    font-size: 0.875rem;
-    color: var(--text-subtle);
-}
-
-/* =============================================
-   Print button
+   Cell — Print button
    ============================================= */
 .cft-print-btn {
     text-transform: none !important;
