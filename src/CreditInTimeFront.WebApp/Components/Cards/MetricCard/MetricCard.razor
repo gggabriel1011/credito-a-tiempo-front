@@ -1,0 +1,27 @@
+@namespace CreditInTimeFront.WebApp.Components
+
+<MudCard Elevation="1" Class="mc-card" Style="height: 100%;">
+    <MudCardContent>
+        <div class="mc-top">
+            <MudIcon Icon="@Icon" Class="mc-icon" />
+            @if (!string.IsNullOrEmpty(BadgeText))
+            {
+                <span class="mc-badge mc-badge--@BadgeVariant">@BadgeText</span>
+            }
+        </div>
+        <p class="mc-label">@Label</p>
+        <p class="mc-value @(ValueClass ?? "")">@Value</p>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Label { get; set; } = "";
+    [Parameter] public string Value { get; set; } = "";
+    [Parameter] public string? BadgeText { get; set; }
+
+    /// <summary>primary | warning | info | muted | positive | negative</summary>
+    [Parameter] public string BadgeVariant { get; set; } = "primary";
+
+    [Parameter] public string? ValueClass { get; set; }
+}

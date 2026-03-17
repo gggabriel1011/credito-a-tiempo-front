@@ -1,51 +1,78 @@
 /* =============================================
    MudCard overrides
    ============================================= */
-.stat-card {
+.mc-card {
     border-radius: 12px !important;
     border: 1px solid var(--border-card) !important;
-    height: 100%;
 }
 
-.stat-card ::deep .mud-card-content {
+.mc-card ::deep .mud-card-content {
     padding: 1.5rem !important;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 /* =============================================
    Inner layout
    ============================================= */
-.stat-card-top {
+.mc-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0.5rem;
 }
 
-.stat-icon {
-    color: var(--text-subtle);
+.mc-icon {
+    color: var(--text-subtle) !important;
     font-size: 1.5rem !important;
     width: 1.5rem !important;
     height: 1.5rem !important;
 }
 
-.stat-trend {
+/* =============================================
+   Badge variants
+   ============================================= */
+.mc-badge {
     font-size: 10px;
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 20px;
 }
 
-.stat-trend--positive {
+.mc-badge--primary {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), 0.1);
+}
+
+.mc-badge--warning {
+    color: var(--warning-strong);
+    background: rgba(var(--warning-rgb), 0.1);
+}
+
+.mc-badge--info {
+    color: var(--info-strong);
+    background: rgba(var(--info-rgb), 0.1);
+}
+
+.mc-badge--muted {
+    color: var(--text-muted);
+    background: var(--bg-subtle);
+}
+
+.mc-badge--positive {
     color: var(--success-strong);
     background: rgba(var(--success-rgb), 0.1);
 }
 
-.stat-trend--negative {
+.mc-badge--negative {
     color: var(--error-strong);
     background: rgba(var(--error-rgb), 0.1);
 }
 
-.stat-label {
+/* =============================================
+   Label + Value
+   ============================================= */
+.mc-label {
     font-size: 11px;
     font-weight: 700;
     color: var(--text-subtle);
@@ -54,7 +81,7 @@
     margin: 0 0 0.25rem 0;
 }
 
-.stat-value {
+.mc-value {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-body);
@@ -62,6 +89,11 @@
     line-height: 1.2;
 }
 
+.mc-value--long {
+    font-size: 1.125rem;
+}
+
+/* Allow callers to set text-primary on the value */
 .text-primary {
     color: var(--primary-color);
 }

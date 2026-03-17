@@ -4,36 +4,34 @@
 
 <PageTitle>Dashboard Gerencial</PageTitle>
 
-<header class="db-header">
-    <h1 class="db-title">Dashboard Gerencial de Operaciones</h1>
-    <p class="db-subtitle">Resumen Ejecutivo de Rendimiento y Carteras</p>
-</header>
+<PageHeader Title="Dashboard Gerencial de Operaciones"
+            Subtitle="Resumen Ejecutivo de Rendimiento y Carteras" />
 
 <MudGrid Class="mb-6">
     <MudItem xs="12" sm="6" lg="3">
-        <StatCard Icon="@Icons.Material.Outlined.AccountBalance"
-                  Label="Cartera Total"
-                  Value="RD$ 1.2B"
-                  TrendValue="+12%"
-                  IsPositiveTrend="true" />
+        <MetricCard Icon="@Icons.Material.Outlined.AccountBalance"
+                    Label="Cartera Total"
+                    Value="RD$ 1.2B"
+                    BadgeText="+12%"
+                    BadgeVariant="positive" />
     </MudItem>
     <MudItem xs="12" sm="6" lg="3">
-        <StatCard Icon="@Icons.Material.Outlined.Warning"
-                  Label="Índice de Mora"
-                  Value="3.2%"
-                  TrendValue="-0.4%"
-                  IsPositiveTrend="false" />
+        <MetricCard Icon="@Icons.Material.Outlined.Warning"
+                    Label="Índice de Mora"
+                    Value="3.2%"
+                    BadgeText="-0.4%"
+                    BadgeVariant="negative" />
     </MudItem>
     <MudItem xs="12" sm="6" lg="3">
-        <StatCard Icon="@Icons.Material.Outlined.Description"
-                  Label="Solicitudes del Mes"
-                  Value="450" />
+        <MetricCard Icon="@Icons.Material.Outlined.Description"
+                    Label="Solicitudes del Mes"
+                    Value="450" />
     </MudItem>
     <MudItem xs="12" sm="6" lg="3">
-        <StatCard Icon="@Icons.Material.Outlined.Verified"
-                  Label="Tasa de Aprobación"
-                  Value="78%"
-                  ValueClass="text-primary" />
+        <MetricCard Icon="@Icons.Material.Outlined.Verified"
+                    Label="Tasa de Aprobación"
+                    Value="78%"
+                    ValueClass="text-primary" />
     </MudItem>
 </MudGrid>
 
