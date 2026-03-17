@@ -1,0 +1,10 @@
+/*
+ * NOTA INTENCIONAL — estilos globales en app.css
+ *
+ * Los estilos de .crm-kpi-card y sus clases internas (.crm-kpi-top,
+ * .crm-kpi-badge, .crm-kpi-label, .crm-kpi-value) se mantienen en
+ * wwwroot/css/app.css (líneas ~174-248) de forma deliberada.
+ *
+ * Si en el futuro se migra a MetricCard (Components/), mover los
+ * estilos al CSS scoped de ese componente y eliminar las reglas de app.css.
+ */

@@ -1,0 +1,224 @@
+@page "/jce"
+@layout MainLayout
+
+<PageTitle>Consulta Junta Central Electoral</PageTitle>
+
+<!-- Header -->
+<header class="jce-header">
+    <h1 class="jce-title">
+        Junta Central <span class="jce-title-accent">Electoral</span>
+    </h1>
+    <p class="jce-subtitle">
+        BANCO AGRÍCOLA DE LA REP. DOM. - <em>"¡Cosechando esperanza!"</em>
+    </p>
+</header>
+
+<!-- Search Card -->
+<MudPaper Elevation="1" Class="jce-card pa-6 mb-6">
+    <label class="jce-section-label">Tipo de búsqueda</label>
+    <div class="jce-search-row">
+        <div class="jce-search-box">
+            <select value="@searchType"
+                    @onchange="OnSearchTypeChanged"
+                    class="jce-select-native">
+                <option value="cedula">Cédula</option>
+                <option value="rnc">RNC</option>
+            </select>
+            <div class="jce-search-separator"></div>
+            <input type="text"
+                   @bind="SearchInput"
+                   @bind:event="oninput"
+                   @onkeydown="OnKeyDown"
+                   placeholder="@Placeholder"
+                   autocomplete="off"
+                   class="jce-input-native" />
+        </div>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@(isLoading ? Icons.Material.Filled.Autorenew : Icons.Material.Filled.Search)"
+                   IconClass="@(isLoading ? "jce-spin" : "")"
+                   Disabled="@isLoading"
+                   Class="jce-search-btn"
+                   OnClick="@Search">
+            @(isLoading ? "Buscando..." : "Buscar")
+        </MudButton>
+    </div>
+</MudPaper>
+
+<!-- Section Divider -->
+<div class="jce-divider-row mb-4">
+    <span class="jce-divider-label">Validación de Identidad (JCE)</span>
+    <div class="jce-divider-line"></div>
+</div>
+
+<!-- Results -->
+@if (showResults)
+{
+    <MudPaper Elevation="1" Class="jce-card overflow-hidden mb-0">
+        @if (searchType == "cedula")
+        {
+            <div class="jce-result-content">
+                <div class="jce-photo-col">
+                    <div class="jce-photo-wrapper">
+                        <img alt="Foto del solicitante" src="images/IndividualDataHandler.jpg" class="jce-photo" />
+                    </div>
+                </div>
+                <div class="jce-data-col">
+                    <p class="jce-person-name">GABRIEL GUERRERO GARCIA</p>
+                    <MudGrid Spacing="0" Class="mt-2">
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Cédula</span>
+                                <span class="jce-field-value">402-1488407-0</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Fecha de Nacimiento</span>
+                                <span class="jce-field-value">10/11/2001</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Edad</span>
+                                <span class="jce-field-value">@CalculateAge(birthDate: "10/11/2001") años</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Lugar de Nacimiento</span>
+                                <span class="jce-field-value">SANTO DOMINGO, R.D.</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Nacionalidad</span>
+                                <span class="jce-field-value">REPÚBLICA DOMINICANA</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Sexo</span>
+                                <span class="jce-field-value">M</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Fecha Expiración</span>
+                                <span class="jce-field-value">11/10/2024</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Estado Civil</span>
+                                <span class="jce-field-value">S</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Categoría</span>
+                                <span class="jce-field-value">Mayor de Edad</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Estatus</span>
+                                <span class="jce-field-value">T</span>
+                            </div>
+                        </MudItem>
+                    </MudGrid>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="jce-result-content">
+                <div class="jce-photo-col">
+                    <div class="jce-photo-wrapper">
+                        <img alt="Logo entidad" src="images/logoBanco.png" class="jce-photo" />
+                    </div>
+                </div>
+                <div class="jce-data-col">
+                    <p class="jce-person-name">BANCO AGRICOLA</p>
+                    <MudGrid Spacing="0" Class="mt-2">
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Cédula / RNC</span>
+                                <span class="jce-field-value">401-00766-5</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Nombre / Razón Social</span>
+                                <span class="jce-field-value">BANCO AGRICOLA</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Nombre Comercial</span>
+                                <span class="jce-field-value">BANCO AGRICOLA</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Régimen de Pagos</span>
+                                <span class="jce-field-value">NORMAL</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Estado</span>
+                                <span class="jce-field-value">ACTIVO</span>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <div class="jce-field">
+                                <span class="jce-field-label">Actividad Económica</span>
+                                <span class="jce-field-value">BANCOS DE AHORRO Y CRÉDITO</span>
+                            </div>
+                        </MudItem>
+                    </MudGrid>
+                </div>
+            </div>
+        }
+    </MudPaper>
+
+    <!-- Action Buttons -->
+    @if (searchType == "cedula")
+    {
+        <div class="jce-actions mt-6">
+            <MudButton Variant="Variant.Outlined"
+                       Color="Color.Primary"
+                       Class="jce-action-btn"
+                       OnClick="@TogglePreview">
+                Visualizar
+            </MudButton>
+        </div>
+    }
+
+    <!-- Preview Section -->
+    @if (showPreview)
+    {
+        <MudPaper Elevation="0" Class="jce-preview mt-10">
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <div class="jce-preview-col">
+                        <span class="jce-divider-label">Cédula</span>
+                        <div class="jce-preview-image-box mt-2">
+                            <img src="images/cedula-edited.png" class="jce-preview-img" alt="Cédula" />
+                        </div>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <div class="jce-preview-col">
+                        <span class="jce-divider-label">Firma</span>
+                        <div class="jce-preview-image-box mt-2">
+                            <img src="images/firma.jpg" class="jce-preview-img" alt="Firma" />
+                        </div>
+                    </div>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    }
+}
+

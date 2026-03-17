@@ -1,0 +1,443 @@
+@page "/crm/detalle/{ClienteId}"
+@namespace CreditInTimeFront.WebApp.Modules.CRM.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CRM.ViewModels
+@using CreditInTimeFront.WebApp.Modules.CRM.State
+@using CreditInTimeFront.WebApp.Modules.CRM.Components
+
+@if (_cliente is null)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+    return;
+}
+
+<!-- ─── Header ──────────────────────────────────────────────────────────── -->
+<header class="crm-det-header">
+    <div class="crm-det-header-left">
+        <div class="crm-det-photo-wrapper">
+            <img src="/images/IndividualDataHandler.jpg" alt="Foto del cliente" />
+        </div>
+        <div class="crm-det-header-text">
+            <h1 class="page-title">Detalle del Cliente <span class="page-title-accent">— Gestión CRM</span></h1>
+            <p class="page-subtitle">@_cliente.Identificacion &nbsp;·&nbsp; @_cliente.Segmento.ToLabel() &nbsp;·&nbsp; Cliente desde @_cliente.FechaRegistro.ToString("MMMM yyyy")</p>
+        </div>
+    </div>
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Default"
+               StartIcon="@Icons.Material.Outlined.Close"
+               Class="crm-det-close-btn"
+               OnClick="Cerrar">
+        Cerrar
+    </MudButton>
+</header>
+
+<!-- ─── Client Summary Card ──────────────────────────────────────────────── -->
+<MudCard Elevation="1" Class="crm-det-summary-card mb-4">
+    <MudCardContent Class="pa-0">
+
+        <!-- Top bar -->
+        <div class="crm-det-topbar">
+            <div class="crm-det-topbar-left">
+                <span class="crm-det-topbar-label">Expediente Digital</span>
+                <MudChip T="string" Class="crm-det-status-badge" Color="Color.Success" Variant="Variant.Filled" Size="Size.Small" Ripple="false">Verificado</MudChip>
+            </div>
+            <div class="crm-det-topbar-right">
+                <span class="crm-det-pep-dot"></span>
+                <span class="crm-det-pep-label">PEP: No Relacionado</span>
+            </div>
+        </div>
+
+        <!-- Data grid -->
+        <div class="crm-det-summary-body">
+            <MudGrid Spacing="3">
+                <MudItem xs="12" md="4">
+                    <div class="crm-det-sum-group">
+                        <span class="crm-det-sum-label">Nombre / Razón Social</span>
+                        <span class="crm-det-sum-name">@_cliente.Nombre</span>
+                        @if (_cliente.NombreEmpresa.Length > 0)
+                        {
+                            <span class="crm-det-sum-sub">@_cliente.NombreEmpresa</span>
+                        }
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <div class="crm-det-sum-group">
+                        <span class="crm-det-sum-label">Contacto</span>
+                        <span class="crm-det-sum-value">@_cliente.Telefono</span>
+                        <span class="crm-det-sum-sub">@_cliente.Email</span>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <div class="crm-det-sum-group">
+                        <span class="crm-det-sum-label">Asignación</span>
+                        <span class="crm-det-sum-value">@_cliente.Oficial</span>
+                        <span class="crm-det-sum-sub">Desde @_cliente.FechaRegistro.ToString("dd/MM/yyyy")</span>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <div class="crm-det-sum-group">
+                        <span class="crm-det-sum-label">Actividad y Fondos</span>
+                        <span class="crm-det-sum-value">@(_cliente.Ocupacion.Length > 0 ? _cliente.Ocupacion : "—")</span>
+                        <span class="crm-det-sum-sub">@(_cliente.Rnc.Length > 0 ? "RNC " + _cliente.Rnc : _cliente.Departamento)</span>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <div class="crm-det-sum-group">
+                        <span class="crm-det-sum-label">Dirección</span>
+                        <div class="crm-det-sum-dir">
+                            <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Class="crm-det-sum-loc-icon" />
+                            <span class="crm-det-sum-value">@(_cliente.Direccion.Length > 0 ? _cliente.Direccion : "—"), @_cliente.Provincia</span>
+                        </div>
+                    </div>
+                </MudItem>
+            </MudGrid>
+        </div>
+
+    </MudCardContent>
+</MudCard>
+
+<!-- ─── Tabs ─────────────────────────────────────────────────────────────── -->
+<MudCard Elevation="1" Class="crm-det-tabs-card">
+    <MudCardContent Class="pa-0">
+        <MudTabs @bind-ActivePanelIndex="_activeTab"
+                 Elevation="0"
+                 Rounded="false"
+                 Class="crm-det-tabs">
+
+            <!-- ── Tab 1: Información General ────────────────────────────── -->
+            <MudTabPanel Text="Información General" Icon="@Icons.Material.Outlined.Info">
+                <div class="crm-det-info-body">
+                    <MudGrid Spacing="4">
+
+                        <!-- Columna 1: Identidad personal -->
+                        <MudItem xs="12" md="4">
+                            <div class="crm-det-info-rows">
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Badge" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Cédula de Identidad</span>
+                                        <span class="crm-det-row-value">@_cliente.Identificacion</span>
+                                    </div>
+                                </div>
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Public" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Nacionalidad y Estado Civil</span>
+                                        <span class="crm-det-row-value">@_cliente.Nacionalidad • @_cliente.EstadoCivil</span>
+                                    </div>
+                                </div>
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Event" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Fecha de Nacimiento</span>
+                                        <span class="crm-det-row-value">@FechaNacimientoLabel</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </MudItem>
+
+                        <!-- Columna 2: Contacto y ubicación -->
+                        <MudItem xs="12" md="4">
+                            <div class="crm-det-info-rows">
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Smartphone" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Teléfono Celular / Personal</span>
+                                        <span class="crm-det-row-value">@_cliente.Telefono</span>
+                                    </div>
+                                </div>
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Email" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Correo Electrónico</span>
+                                        <span class="crm-det-row-value">@_cliente.Email</span>
+                                    </div>
+                                </div>
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Dirección de Residencia</span>
+                                        <span class="crm-det-row-value">@(_cliente.Direccion.Length > 0 ? _cliente.Direccion + ", " + _cliente.Provincia : "—")</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </MudItem>
+
+                        <!-- Columna 3: Ocupación y asignación -->
+                        <MudItem xs="12" md="4">
+                            <div class="crm-det-info-rows">
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Work" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Ocupación / Cargo</span>
+                                        <span class="crm-det-row-value">@(_cliente.Ocupacion.Length > 0 ? _cliente.Ocupacion : "—")</span>
+                                    </div>
+                                </div>
+
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Business" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label">Lugar de Trabajo</span>
+                                        <span class="crm-det-row-value">@(_cliente.NombreEmpresa.Length > 0 ? _cliente.NombreEmpresa : "—")</span>
+                                    </div>
+                                </div>
+
+                                <!-- Oficial de Cuenta — accent treatment -->
+                                <div class="crm-det-info-row">
+                                    <div class="crm-det-icon-box crm-det-icon-box--accent">
+                                        <MudIcon Icon="@Icons.Material.Outlined.AccountCircle" Color="Color.Primary" />
+                                    </div>
+                                    <div>
+                                        <span class="crm-det-row-label crm-det-row-label--accent">Oficial de Cuenta</span>
+                                        <div class="crm-det-oficial-row">
+                                            <span class="crm-det-row-value">@(_cliente.Oficial.Length > 0 ? _cliente.Oficial : "—")</span>
+                                            @if (_cliente.RangoOficial.Length > 0)
+                                            {
+                                                <span class="crm-det-oficial-badge">@_cliente.RangoOficial</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </MudItem>
+
+                    </MudGrid>
+                </div>
+            </MudTabPanel>
+
+            <!-- ── Tab 2: Historial de Préstamos ─────────────────────────── -->
+            <MudTabPanel Text="Historial de Préstamos" Icon="@Icons.Material.Outlined.CreditCard">
+
+                <!-- KPIs -->
+                <MudGrid Spacing="3" Class="mb-4">
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.CreditCard"
+                                    Label="Préstamos Activos"
+                                    Value="@_state.PrestamosActivos.ToString()"
+                                    BadgeText="vigentes"
+                                    BadgeVariant="primary" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.AccountBalance"
+                                    Label="Capital Total"
+                                    Value="@_state.MontoTotal"
+                                    BadgeText="desembolsado"
+                                    BadgeVariant="muted"
+                                    ValueClass="crm-kpi-value--long" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.Warning"
+                                    Label="En Mora"
+                                    Value="1"
+                                    BadgeText="atención"
+                                    BadgeVariant="warning" />
+                    </MudItem>
+                </MudGrid>
+
+                <!-- Table -->
+                <div class="crm-det-tab-content crm-det-root">
+                    <MudTable T="PrestamoViewModel"
+                              Items="@_prestamos"
+                              Elevation="0"
+                              Dense="true"
+                              Hover="true"
+                              Class="crm-det-inner-table">
+                        <HeaderContent>
+                            <MudTh>Expediente</MudTh>
+                            <MudTh>Tipo</MudTh>
+                            <MudTh Class="crm-det-th--right">Monto Original</MudTh>
+                            <MudTh Class="crm-det-th--right">Saldo</MudTh>
+                            <MudTh>Estado</MudTh>
+                            <MudTh>Fecha Apertura</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Expediente"><span class="crm-det-td-mono">@context.Expediente</span></MudTd>
+                            <MudTd DataLabel="Tipo"><span class="crm-det-td-product">@context.Tipo</span></MudTd>
+                            <MudTd DataLabel="Monto" Class="crm-det-td--right"><span class="crm-det-td-amount">@context.Monto</span></MudTd>
+                            <MudTd DataLabel="Saldo" Class="crm-det-td--right"><span class="crm-det-td-amount">@context.Saldo</span></MudTd>
+                            <MudTd DataLabel="Estado">
+                                <MudChip T="string" Class="crm-det-status-badge" Color="@GetPrestamoEstadoColor(context.Estado)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Estado</MudChip>
+                            </MudTd>
+                            <MudTd DataLabel="Fecha Apertura">@context.FechaApertura</MudTd>
+                        </RowTemplate>
+                        <NoRecordsContent>
+                            <div class="crm-det-empty">
+                                <MudIcon Icon="@Icons.Material.Outlined.CreditCardOff" Class="crm-det-empty-icon" />
+                                <span class="crm-det-empty-text">No hay préstamos registrados para este cliente</span>
+                            </div>
+                        </NoRecordsContent>
+                    </MudTable>
+                </div>
+
+            </MudTabPanel>
+
+            <!-- ── Tab 3: Solicitudes en Curso ───────────────────────────── -->
+            <MudTabPanel Text="Solicitudes en Curso" Icon="@Icons.Material.Outlined.PendingActions">
+
+                <!-- KPIs -->
+                <MudGrid Spacing="3" Class="mb-4">
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.Schedule"
+                                    Label="Solicitudes Activas"
+                                    Value="@_state.SolicitudesActivas.ToString()"
+                                    BadgeText="En evaluación"
+                                    BadgeVariant="primary" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.AttachMoney"
+                                    Label="Monto en Trámite"
+                                    Value="@_state.MontoEnTramite"
+                                    BadgeText="Solicitado"
+                                    BadgeVariant="muted"
+                                    ValueClass="crm-kpi-value--long" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.Pending"
+                                    Label="Etapa Actual"
+                                    Value="Análisis"
+                                    BadgeText="Pendiente"
+                                    BadgeVariant="info"
+                                    ValueClass="crm-kpi-value--long" />
+                    </MudItem>
+                </MudGrid>
+
+                <!-- Table -->
+                <div class="crm-det-tab-content crm-det-root">
+                    <MudTable T="SolicitudViewModel"
+                              Items="@_solicitudes"
+                              Elevation="0"
+                              Dense="true"
+                              Hover="true"
+                              Class="crm-det-inner-table">
+                        <HeaderContent>
+                            <MudTh>N° Solicitud</MudTh>
+                            <MudTh>Producto</MudTh>
+                            <MudTh Class="crm-det-th--right">Monto</MudTh>
+                            <MudTh>Etapa</MudTh>
+                            <MudTh>Fecha</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="N° Solicitud"><span class="crm-det-td-mono">@context.Numero</span></MudTd>
+                            <MudTd DataLabel="Producto"><span class="crm-det-td-product">@context.Producto</span></MudTd>
+                            <MudTd DataLabel="Monto" Class="crm-det-td--right"><span class="crm-det-td-amount">@context.Monto</span></MudTd>
+                            <MudTd DataLabel="Etapa">
+                                <MudChip T="string" Class="crm-det-status-badge" Color="@GetEtapaColor(context.Etapa)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Etapa</MudChip>
+                            </MudTd>
+                            <MudTd DataLabel="Fecha">@context.Fecha</MudTd>
+                        </RowTemplate>
+                        <NoRecordsContent>
+                            <div class="crm-det-empty">
+                                <MudIcon Icon="@Icons.Material.Outlined.Inbox" Class="crm-det-empty-icon" />
+                                <span class="crm-det-empty-text">No hay solicitudes activas en este momento</span>
+                            </div>
+                        </NoRecordsContent>
+                    </MudTable>
+                </div>
+
+            </MudTabPanel>
+
+            <!-- ── Tab 4: Interacciones ──────────────────────────────────── -->
+            <MudTabPanel Text="Interacciones" Icon="@Icons.Material.Outlined.Forum">
+
+                <!-- KPIs -->
+                <MudGrid Spacing="3" Class="mb-4">
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.CalendarToday"
+                                    Label="Total Interacciones"
+                                    Value="@_interacciones.Count.ToString()"
+                                    BadgeText="este año"
+                                    BadgeVariant="primary" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.Event"
+                                    Label="Último Contacto"
+                                    Value="@UltimoContacto"
+                                    BadgeText="más reciente"
+                                    BadgeVariant="muted"
+                                    ValueClass="crm-kpi-value--long" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <CrmKpiCard Icon="@Icons.Material.Outlined.ContactPhone"
+                                    Label="Canal Preferido"
+                                    Value="@CanalPreferido"
+                                    BadgeText="más frecuente"
+                                    BadgeVariant="info"
+                                    ValueClass="crm-kpi-value--long" />
+                    </MudItem>
+                </MudGrid>
+
+                <!-- Table (con toolbar integrado) -->
+                <div class="crm-det-tab-content crm-det-root">
+                    <MudToolBar Class="crm-det-toolbar" Dense="true" DisableGutters="true">
+                        <span class="crm-det-toolbar-label">Registro de Interacciones</span>
+                        <MudSpacer />
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Outlined.Add"
+                                   Size="Size.Small"
+                                   Class="crm-det-nuevo-btn">
+                            Nuevo Contacto
+                        </MudButton>
+                    </MudToolBar>
+                    <MudTable T="InteraccionViewModel"
+                              Items="@_interacciones"
+                              Elevation="0"
+                              Dense="true"
+                              Hover="true"
+                              Class="crm-det-inner-table">
+                        <HeaderContent>
+                            <MudTh>Tipo Contacto</MudTh>
+                            <MudTh>Ejecutivo</MudTh>
+                            <MudTh>Estado</MudTh>
+                            <MudTh>Fecha Creación</MudTh>
+                            <MudTh>Tipo Solicitud</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Tipo Contacto">@context.TipoContacto.ToLabel()</MudTd>
+                            <MudTd DataLabel="Ejecutivo"><span class="crm-det-td-name">@context.EjecutivoAsignado</span></MudTd>
+                            <MudTd DataLabel="Estado">
+                                <MudChip T="string" Class="crm-det-status-badge" Color="@GetInteraccionEstadoColor(context.Estado)" Variant="Variant.Filled" Size="Size.Small" Ripple="false">@context.Estado.ToLabel()</MudChip>
+                            </MudTd>
+                            <MudTd DataLabel="Fecha Creación">@context.FechaCreacion.ToString("dd/MM/yyyy")</MudTd>
+                            <MudTd DataLabel="Tipo Solicitud">@context.TipoSolicitud</MudTd>
+                        </RowTemplate>
+                        <NoRecordsContent>
+                            <div class="crm-det-empty">
+                                <MudIcon Icon="@Icons.Material.Outlined.ChatBubbleOutline" Class="crm-det-empty-icon" />
+                                <span class="crm-det-empty-text">No hay interacciones registradas para este cliente</span>
+                            </div>
+                        </NoRecordsContent>
+                    </MudTable>
+                </div>
+
+            </MudTabPanel>
+
+        </MudTabs>
+    </MudCardContent>
+</MudCard>

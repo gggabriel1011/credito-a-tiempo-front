@@ -1,0 +1,37 @@
+<MudCard Elevation="1" Class="chart-card--pie" Style="height: 100%;">
+    <MudCardContent>
+        <h3 class="chart-pie-title">@Title</h3>
+
+        <MudChart T="double"
+                  ChartType="ChartType.Donut"
+                  ChartSeries="@DonutSeries"
+                  ChartLabels="@InputLabels"
+                  Width="100%"
+                  Height="260px"
+                  ChartOptions="@_chartOptions">
+            <CustomGraphics>
+                <text x="50%" y="50%"
+                      dominant-baseline="middle"
+                      text-anchor="middle"
+                      style="font-size: 1rem; font-weight: 700; fill: var(--text-body);">
+                    @CenterText
+                </text>
+            </CustomGraphics>
+        </MudChart>
+
+        <div class="chart-legend">
+            @for (int i = 0; i < DataItems.Count; i++)
+            {
+                var item = DataItems[i];
+                var color = _palette[i % _palette.Length];
+                <div class="legend-row">
+                    <div class="legend-left">
+                        <span class="legend-dot" style="background: @color"></span>
+                        <span class="legend-label">@item.Label</span>
+                    </div>
+                    <span class="legend-pct">@item.Percentage%</span>
+                </div>
+            }
+        </div>
+    </MudCardContent>
+</MudCard>

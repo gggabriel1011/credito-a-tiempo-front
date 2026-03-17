@@ -1,39 +1,26 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">CreditInTimeFront.WebApp</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+@namespace CreditInTimeFront.WebApp.Layout
+@using MudBlazor
+
+<!-- Logo -->
+<div class="nav-header">
+    <img src="images/logo-banco-agricola.jpg" alt="Banco Agrícola" class="nav-logo" />
+</div>
+
+<!-- User Info -->
+<div class="nav-user">
+    <MudAvatar Color="Color.Primary" Size="Size.Medium">@_userInitials</MudAvatar>
+    <div>
+        <MudText Typo="Typo.body2" Class="nav-user-role">@_userRole</MudText>
+        <MudText Typo="Typo.caption" Class="nav-user-location">@_userLocation</MudText>
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+<!-- Navigation -->
+<MudNavMenu Class="nav-menu">
+    @foreach (var item in _navItems)
     {
-        collapseNavMenu = !collapseNavMenu;
+        <MudNavLink href="@item.Href" Match="@item.Match" Icon="@item.Icon">
+            @item.Label
+        </MudNavLink>
     }
-}
+</MudNavMenu>

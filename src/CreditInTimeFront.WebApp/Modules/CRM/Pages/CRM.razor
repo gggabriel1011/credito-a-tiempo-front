@@ -1,0 +1,96 @@
+@page "/crm"
+@namespace CreditInTimeFront.WebApp.Modules.CRM.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CRM.Components
+@using CreditInTimeFront.WebApp.Modules.CRM.State
+
+<!-- Header -->
+<header class="page-header">
+    <h1 class="page-title">CRM <span class="page-title-accent">- Gestión de Clientes</span></h1>
+    <p class="page-subtitle">Seguimiento de Interacciones y Cartera de Clientes</p>
+</header>
+
+<!-- KPI Cards -->
+<MudGrid Spacing="3" Class="mb-4">
+    @foreach (var card in _kpiCards)
+    {
+        <MudItem xs="12" sm="6" lg="3">
+            <MudCard Elevation="1" Class="crm-kpi-card" Style="height: 100%;">
+                <MudCardContent>
+                    <p class="crm-kpi-label">@card.Label</p>
+                    <p class="crm-kpi-value">@card.Value</p>
+                    <div class="crm-kpi-detail @card.DetailColorClass">
+                        <MudIcon Icon="@card.Icon" Class="crm-kpi-icon" />
+                        <span>@card.Detail</span>
+                    </div>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+<!-- Charts Row -->
+<MudGrid Spacing="3" Class="mb-4">
+
+    <!-- Line Chart: Adquisición por Mes -->
+    <MudItem xs="12" md="8">
+        <MudCard Elevation="1" Class="crm-chart-card" Style="height: 100%;">
+            <MudCardContent>
+                <MudText Class="crm-chart-title" Typo="Typo.body2">Adquisición por Mes</MudText>
+                <MudChart T="double"
+                          ChartType="ChartType.Line"
+                          ChartSeries="@_lineChartSeries"
+                          ChartLabels="@CrmState.Meses"
+                          Width="100%"
+                          Height="260px"
+                          ChartOptions="@_lineChartOptions"
+                          MatchBoundsToSize="true" />
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+    <!-- Donut Chart: Segmentación de Cartera -->
+    <MudItem xs="12" md="4">
+        <MudCard Elevation="1" Class="crm-chart-card" Style="height: 100%;">
+            <MudCardContent>
+                <MudText Class="crm-chart-title" Typo="Typo.body2">Segmentación de Cartera</MudText>
+                <MudChart T="double"
+                          ChartType="ChartType.Donut"
+                          ChartSeries="@_donutSeries"
+                          ChartLabels="@CrmState.SegmentacionLabels"
+                          Width="100%"
+                          Height="220px"
+                          ChartOptions="@_donutChartOptions">
+                    <CustomGraphics>
+                        <text x="50%" y="50%"
+                              dominant-baseline="middle"
+                              text-anchor="middle"
+                              style="font-size: 1rem; font-weight: 700; fill: var(--text-body);">
+                            100%
+                        </text>
+                    </CustomGraphics>
+                </MudChart>
+
+                <div class="crm-donut-legend">
+                    @for (int i = 0; i < _donutLabels.Length; i++)
+                    {
+                        var idx   = i;
+                        var color = _donutPalette[idx % _donutPalette.Length];
+                        <div class="crm-legend-row">
+                            <div class="crm-legend-left">
+                                <span class="crm-legend-dot" style="background: @color"></span>
+                                <span class="crm-legend-label">@_donutLabels[idx]</span>
+                            </div>
+                            <span class="crm-legend-pct">@CrmState.SegmentacionCartera[idx]%</span>
+                        </div>
+                    }
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+<!-- Interactions Table -->
+<InteraccionesTable Interacciones="@_state.Interacciones"
+                    OnNuevoCliente="HandleNuevoCliente" />
