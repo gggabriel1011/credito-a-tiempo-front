@@ -1,21 +1,10 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
 @inherits LayoutComponentBase
 @using MudBlazor
 @using CreditInTimeFront.WebApp.Shared.Themes
 
 <MudThemeProvider Theme="BancoAgricolaTheme.GetTheme()" @bind-IsDarkMode="_isDarkMode" />
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <MudPopoverProvider />
-=======
->>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
-=======
-<MudPopoverProvider />
->>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -25,7 +14,6 @@
                Elevation="1"
                Variant="DrawerVariant.Persistent"
                Class="app-shell-drawer">
-<<<<<<< HEAD
         <NavMenu />
     </MudDrawer>
 
@@ -36,26 +24,3 @@
     </MudMainContent>
 
 </MudLayout>
-=======
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-=======
->>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)
-        <NavMenu />
-    </MudDrawer>
-
-    <MudMainContent Style="padding-top: 0;" Class="app-shell-content">
-        <MudContainer MaxWidth="MaxWidth.False" Class="pa-6">
-            @Body
-<<<<<<< HEAD
-        </article>
-    </main>
-</div>
->>>>>>> a2430f8 (feat: initial project structure based on Frontend)
-=======
-        </MudContainer>
-    </MudMainContent>
-
-</MudLayout>
->>>>>>> 1931238 (feat: implement main layout with MudBlazor components and dark/light mode toggle)

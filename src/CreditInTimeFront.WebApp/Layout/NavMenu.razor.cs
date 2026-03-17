@@ -21,7 +21,8 @@ public partial class NavMenu
         new("credit-bureau",         Icons.Material.Outlined.CreditScore, "Buró de Crédito"),
         new("profile",               Icons.Material.Outlined.Person,      "Mi Perfil"),
         new("settings",              Icons.Material.Outlined.Settings,    "Configuración"),
-        new("reports",               Icons.Material.Outlined.Description, "Reportes"),
+        new("reports",               Icons.Material.Outlined.Description,  "Reportes"),
+        new("components-playground", Icons.Material.Outlined.AutoAwesome,  "Prueba de Componentes"),
     ];
 
     private record NavItem(string Href, string Icon, string Label,

@@ -42,37 +42,28 @@
 
     /* Charts */
     --chart-neutral: #CBD5E1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
 
     /* Accent colors */
     --purple-color: #8B5CF6;
     --teal-color: #14B8A6;
     --cyan-color: #06B6D4;
-<<<<<<< HEAD
-=======
->>>>>>> 11af880 (feat: add Banco Agrícola theme light/dark palettes configuration and CSS variables, including logo images)
-=======
->>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
-    
+
     /* Tipografía */
     --font-family: "Inter", sans-serif;
     --font-size-base: 1rem;
-    
+
     /* Espaciado */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
-    
+
     /* Border Radius */
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
     --border-radius-lg: 1rem;
-    
+
     /* Elevación (Sombras) */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -98,18 +89,9 @@
     --border-soft: #4B5563;
     --border-hover: #6B7280;
     --chart-neutral: #6B7280;
-<<<<<<< HEAD
-<<<<<<< HEAD
     --purple-color: #A78BFA;
     --teal-color: #2DD4BF;
     --cyan-color: #22D3EE;
-=======
->>>>>>> 11af880 (feat: add Banco Agrícola theme light/dark palettes configuration and CSS variables, including logo images)
-=======
-    --purple-color: #A78BFA;
-    --teal-color: #2DD4BF;
-    --cyan-color: #22D3EE;
->>>>>>> 730b602 (feat(credit-factory): implement CreditFactory module UI)
 }
 
 /* Explicit light mode (when user selects light) */
