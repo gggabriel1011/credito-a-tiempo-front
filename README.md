@@ -87,50 +87,60 @@ CreditInTimeFront.WebApp
 │   │   ├── State/       AuthState.cs
 │   │   └── ViewModels/  AuthViewModel.cs
 │   │
-│   ├── Dashboard/                     # Implemented
+│   ├── Dashboard/
 │   │   ├── Pages/       Dashboard.razor (.cs, .css)
-│   │   ├── Components/  StatCard, ChartDesembolsos, ChartDistribucion, NotificationItem
+│   │   ├── Components/  ChartDesembolsos, ChartDistribucion, NotificationItem
 │   │   ├── State/       DashboardState.cs
 │   │   └── ViewModels/  DashboardViewModel.cs
 │   │
-│   ├── JCE/                           # Implemented
+│   ├── JCE/
 │   │   └── Pages/       JCE.razor (.cs, .css)
 │   │
-│   ├── CreditFactory/                 # Partial
-│   │   ├── Pages/       CreditFactory.razor
-│   │   ├── Components/  FabricaWizard.razor
-│   │   ├── State/       FabricaCreditoState.cs
-│   │   └── ViewModels/  FabricaCreditoViewModel.cs
+│   ├── CreditFactory/
+│   │   ├── Pages/       CreditFactory.razor (.cs, .css)
+│   │   ├── Components/  CreditRequestsTable.razor (.cs, .css)
+│   │   ├── State/       CreditFactoryState.cs
+│   │   └── ViewModels/  CreditRequestViewModel.cs
 │   │
-│   ├── CRM/                           # Partial
-│   │   ├── Pages/       CRM.razor
-│   │   ├── Components/  ClienteCard.razor
+│   ├── CRM/
+│   │   ├── Pages/       CRM.razor (.cs, .css), CRMAgregarCliente.razor (.css), CRMDetalleCliente.razor (.css)
+│   │   ├── Components/  InteraccionesTable.razor (.cs, .css)
 │   │   ├── State/       CrmState.cs
 │   │   └── ViewModels/  CrmViewModel.cs
 │   │
-│   ├── Credits/                       # Partial
+│   ├── Credits/
 │   │   ├── Pages/       CreditosPage.razor
 │   │   ├── Components/  CreditoForm.razor
 │   │   ├── State/       CreditosState.cs
 │   │   └── ViewModels/  CreditosViewModel.cs
 │   │
-│   ├── Customers/                     # Partial
+│   ├── Customers/
 │   │   ├── Pages/       ClientesPage.razor
 │   │   ├── Components/  ClienteForm.razor
 │   │   ├── State/       ClientesState.cs
 │   │   └── ViewModels/  ClientesViewModel.cs
 │   │
-│   ├── CollectionManagement/          # Stub
-│   ├── CreditBureau/                  # Stub
-│   ├── Profile/                       # Stub
-│   ├── Reports/                       # Stub
-│   └── Settings/                      # Stub
+│   ├── CollectionManagement/
+│   ├── CreditBureau/
+│   ├── Profile/
+│   ├── Reports/
+│   └── Settings/
 │
-├── Components/                        # Domain-agnostic shared components
-│   ├── Feedback/    Notification.razor
-│   ├── Inputs/      BaseInput.razor
-│   ├── Modals/      BaseModal.razor
-│   └── Tables/      BaseTable.razor
+├── Components/                        # Shared component library (domain-agnostic)
+│   ├── Cards/
+│   │   └── MetricCard/   MetricCard.razor (.css)        # KPI card: icon, label, value, badge
+│   ├── Charts/
+│   │   └── ChartCard/    ChartCard.razor (.css)         # Chart wrapper with title and slots
+│   ├── Feedback/
+│   │   ├── AlertMessage/ AlertMessage.razor (.css)      # Contextual alert (success/error/warning/info)
+│   │   └── StatusBadge/  StatusBadge.razor (.css)       # Semantic pill badge
+│   ├── Layout/
+│   │   ├── PageHeader/   PageHeader.razor (.css)        # Standard page header with accent + actions
+│   │   └── FormSection/  FormSection.razor (.css)       # Form section grouping with icon + title
+│   ├── Modals/
+│   │   └── ConfirmDialog/ ConfirmDialog.razor (.css)    # Confirmation dialog via IDialogService
+│   └── Tables/
+│       └── DataTable/    DataTable.razor (.cs, .css)    # Generic filterable + paginated table
 │
 ├── Shared/
 │   ├── Constants/   UiConstants.cs
@@ -460,6 +470,7 @@ All changes must be merged through Merge Requests.
 
 ## 7. Current Status
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -481,6 +492,32 @@ All changes must be merged through Merge Requests.
 >>>>>>> 819f57d (docs: initialize README with project overview, architecture details, and setup instructions)
 =======
 >>>>>>> 430cd1b (feat: update README with project structure, technology stack, and module details)
+=======
+### Infrastructure
+- MudBlazor 9.1.0 fully integrated (services, theme provider, CSS/JS).
+- Shell layout with persistent sidebar navigation implemented.
+- Light/dark mode toggle with `localStorage` persistence.
+- Banco Agrícola theme (`BancoAgricolaTheme.cs`) with custom light and dark palettes.
+- CSS variable system (`theme-variables.css`) fully tokenized across all modules.
+
+### Shared Component Library (`Components/`)
+- `DataTable<T>` — generic filterable, paginated table with toolbar (SearchFilter, SelectFilter, DateFilter, DateRangeFilter), expandable rows, and empty state.
+- `MetricCard` — KPI card with icon, label, value and semantic badge.
+- `ChartCard` — chart wrapper with title, header actions slot and footer slot.
+- `PageHeader` — standard page header with title, accent text, subtitle and actions slot.
+- `StatusBadge` — semantic pill badge wrapping MudChip.
+- `AlertMessage` — contextual alert (success / error / warning / info).
+- `FormSection` — form field grouper with icon and title.
+- `ConfirmDialog` — confirmation modal via `IDialogService`.
+
+### Modules
+- **Dashboard** — KPI cards, monthly stacked bar chart, donut distribution chart, notification list.
+- **JCE** — identity lookup with photo preview and data display.
+- **CreditFactory** — approval queue with `DataTable<T>` (date range, product select, search filters), progress bar, status badges and print action.
+- **CRM** — client interaction list with `DataTable<T>` (5 filters), expandable seguimientos sub-table, add client page and client detail page.
+- **Credits, Customers** — basic structure in place, pending full UI implementation.
+- **CollectionManagement, CreditBureau, Profile, Reports, Settings** — stub pages, pending implementation.
+>>>>>>> Stashed changes
 
 ---
 
