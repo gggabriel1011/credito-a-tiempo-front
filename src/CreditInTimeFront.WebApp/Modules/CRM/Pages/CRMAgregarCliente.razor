@@ -3,7 +3,6 @@
 @using MudBlazor
 @using CreditInTimeFront.WebApp.Modules.CRM.ViewModels
 
-<!-- Header -->
 <PageHeader Title="Nuevo Cliente"
             TitleAccent="- Formulario de Registro"
             Subtitle="Complete los datos del cliente para agregarlo al sistema">
@@ -19,12 +18,7 @@
     <MudCard Elevation="1" Class="crm-add-card">
         <MudCardContent>
 
-            <!-- Sección 1: Información Básica -->
-            <div class="crm-add-section">
-                <div class="crm-add-section-header">
-                    <MudIcon Icon="@Icons.Material.Outlined.Person" Color="Color.Primary" Class="crm-add-section-icon" />
-                    <span class="crm-add-section-title">Información Básica</span>
-                </div>
+            <FormSection Icon="@Icons.Material.Outlined.Person" Title="Información Básica" Subtitle="Datos personales del cliente">
                 <MudGrid Spacing="2">
                     <MudItem xs="12" sm="4">
                         <MudTextField T="string"
@@ -39,14 +33,14 @@
                     </MudItem>
                     <MudItem xs="12" sm="2">
                         <MudTextField @bind-Value="_identificacion"
-                                 Mask="@(new PatternMask("000-0000000-0"))"
-                                 Label="Número de Identificación"
-                                 Placeholder="000-0000000-0"
-                                 Required="true"
-                                 RequiredError="La identificación es requerida"
-                                 Variant="Variant.Outlined"
-                                 Margin="Margin.Dense"
-                                 FullWidth="true" />
+                                      Mask="@(new PatternMask("000-0000000-0"))"
+                                      Label="Número de Identificación"
+                                      Placeholder="000-0000000-0"
+                                      Required="true"
+                                      RequiredError="La identificación es requerida"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
                         <MudTextField T="string"
@@ -63,25 +57,20 @@
                     </MudItem>
                     <MudItem xs="12" sm="2">
                         <MudTextField @bind-Value="_telefono"
-                                 Mask="@(new PatternMask("000-000-0000"))"
-                                 Label="Teléfono"
-                                 Placeholder="Ej. 000-000-0000"
-                                 ShrinkLabel="true"
-                                 Required="true"
-                                 RequiredError="El teléfono es requerido"
-                                 Variant="Variant.Outlined"
-                                 Margin="Margin.Dense"
-                                 FullWidth="true" />
+                                      Mask="@(new PatternMask("000-000-0000"))"
+                                      Label="Teléfono"
+                                      Placeholder="Ej. 000-000-0000"
+                                      ShrinkLabel="true"
+                                      Required="true"
+                                      RequiredError="El teléfono es requerido"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
                     </MudItem>
                 </MudGrid>
-            </div>
+            </FormSection>
 
-            <!-- Sección 2: Información Empresarial -->
-            <div class="crm-add-section">
-                <div class="crm-add-section-header">
-                    <MudIcon Icon="@Icons.Material.Outlined.Business" Color="Color.Primary" Class="crm-add-section-icon" />
-                    <span class="crm-add-section-title">Información Empresarial</span>
-                </div>
+            <FormSection Icon="@Icons.Material.Outlined.Business" Title="Información Empresarial">
                 <MudGrid Spacing="2">
                     <MudItem xs="12" sm="6">
                         <MudTextField T="string"
@@ -94,13 +83,13 @@
                     </MudItem>
                     <MudItem xs="12" sm="2">
                         <MudTextField @bind-Value="_rnc"
-                                 Mask="@(new PatternMask("000-00000-0"))"
-                                 Label="RNC"
-                                 Placeholder="000-00000-0"
-                                 ShrinkLabel="true"
-                                 Variant="Variant.Outlined"
-                                 Margin="Margin.Dense"
-                                 FullWidth="true" />
+                                      Mask="@(new PatternMask("000-00000-0"))"
+                                      Label="RNC"
+                                      Placeholder="000-00000-0"
+                                      ShrinkLabel="true"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true" />
                     </MudItem>
                     <MudItem xs="12" sm="4">
                         <MudSelect T="SegmentoCliente"
@@ -116,14 +105,9 @@
                         </MudSelect>
                     </MudItem>
                 </MudGrid>
-            </div>
+            </FormSection>
 
-            <!-- Sección 3: Información de Contacto -->
-            <div class="crm-add-section">
-                <div class="crm-add-section-header">
-                    <MudIcon Icon="@Icons.Material.Outlined.LocationOn" Color="Color.Primary" Class="crm-add-section-icon" />
-                    <span class="crm-add-section-title">Información de Contacto</span>
-                </div>
+            <FormSection Icon="@Icons.Material.Outlined.LocationOn" Title="Información de Contacto">
                 <MudGrid Spacing="2">
                     <MudItem xs="12">
                         <MudTextField T="string"
@@ -162,14 +146,9 @@
                                       FullWidth="true" />
                     </MudItem>
                 </MudGrid>
-            </div>
+            </FormSection>
 
-            <!-- Sección 4: Notas Adicionales -->
-            <div class="crm-add-section crm-add-section--last">
-                <div class="crm-add-section-header">
-                    <MudIcon Icon="@Icons.Material.Outlined.Notes" Color="Color.Primary" Class="crm-add-section-icon" />
-                    <span class="crm-add-section-title">Notas Adicionales</span>
-                </div>
+            <FormSection Icon="@Icons.Material.Outlined.Notes" Title="Notas Adicionales">
                 <MudTextField T="string"
                               @bind-Value="_observaciones"
                               Label="Observaciones"
@@ -178,12 +157,11 @@
                               Variant="Variant.Outlined"
                               Margin="Margin.Dense"
                               FullWidth="true" />
-            </div>
+            </FormSection>
 
         </MudCardContent>
     </MudCard>
 
-    <!-- Footer Actions -->
     <div class="crm-add-footer">
         <MudButton Variant="Variant.Filled"
                    Color="Color.Default"
