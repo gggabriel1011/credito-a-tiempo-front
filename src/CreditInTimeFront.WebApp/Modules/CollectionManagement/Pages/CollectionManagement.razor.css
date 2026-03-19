@@ -1,0 +1,79 @@
+/* KPI card styles handled by MetricCard component */
+/* Chart card styles handled by ChartCard component */
+/* Bar chart internals (y-axis, legend, grid) overridden in app.css via .cob-bar-chart */
+
+/* =============================================
+   Bar chart — year selector
+   ============================================= */
+.cob-year-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.cob-year-select {
+    appearance: none;
+    -webkit-appearance: none;
+    font-size: 0.75rem;
+    font-family: inherit;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 4px 28px 4px 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 150ms ease;
+}
+
+.cob-year-select:hover { border-color: var(--border-hover); }
+.cob-year-select:focus { border-color: var(--primary-color); }
+
+.cob-year-chevron {
+    position: absolute;
+    right: 8px;
+    width: 14px;
+    height: 14px;
+    color: var(--text-subtle);
+    pointer-events: none;
+}
+
+/* =============================================
+   Donut legend
+   ============================================= */
+.cob-donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 0.25rem;
+}
+
+.cob-legend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cob-legend-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cob-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cob-legend-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.cob-legend-pct {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-body);
+}

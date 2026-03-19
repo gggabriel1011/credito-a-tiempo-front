@@ -1,10 +1,102 @@
 @page "/collection-management"
+@namespace CreditInTimeFront.WebApp.Modules.CollectionManagement.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CollectionManagement.Components
+@using CreditInTimeFront.WebApp.Modules.CollectionManagement.State
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="my-4">
-    <MudText Typo="Typo.h3" Class="mb-4">Gestión de Cobro</MudText>
-    <MudCard Elevation="1" Style="border-radius: 12px; border: 1px solid var(--border-card);">
-        <MudCardContent Class="pa-6">
-            <MudText Typo="Typo.body1">Módulo de Gestión de Cobro - En desarrollo</MudText>
-        </MudCardContent>
-    </MudCard>
-</MudContainer>
+<!-- Header -->
+<PageHeader Title="Dashboard "
+            TitleAccent="- Gestión de Cobros"
+            Subtitle="Seguimiento de mora, promesas de pago y productividad de cobranza" />
+
+<!-- KPI Cards -->
+<MudGrid Spacing="3" Class="mb-4">
+    @foreach (var card in _kpiCards)
+    {
+        <MudItem xs="12" sm="6" lg="3">
+            <MetricCard Icon="@card.Icon"
+                        Label="@card.Label"
+                        Value="@card.Value"
+                        BadgeText="@card.Detail"
+                        BadgeVariant="@card.BadgeVariant" />
+        </MudItem>
+    }
+</MudGrid>
+
+<!-- Charts Row -->
+<MudGrid Spacing="3" Class="mb-4">
+
+    <!-- Bar Chart: Recuperación Mensual -->
+    <MudItem xs="12" md="8">
+        <ChartCard Title="Recuperación Mensual" Height="100%" CardClass="cob-bar-chart">
+            <HeaderActions>
+                <div class="cob-year-wrap">
+                    <select @onchange="OnYearSelected" class="cob-year-select">
+                        @foreach (var year in _availableYears)
+                        {
+                            <option value="@year">Año @year</option>
+                        }
+                    </select>
+                    <svg class="cob-year-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </HeaderActions>
+            <ChildContent>
+                <MudChart T="double"
+                          ChartType="ChartType.StackedBar"
+                          ChartSeries="@_barChartSeries"
+                          ChartLabels="@_barLabels"
+                          Width="100%"
+                          Height="280px"
+                          ChartOptions="@_barChartOptions"
+                          MatchBoundsToSize="true" />
+            </ChildContent>
+        </ChartCard>
+    </MudItem>
+
+    <!-- Donut Chart: Distribución por Antigüedad -->
+    <MudItem xs="12" md="4">
+        <ChartCard Title="Distribución por Antigüedad" Height="100%" CardClass="chart-card--pie">
+            <ChildContent>
+                <MudChart T="double"
+                          ChartType="ChartType.Donut"
+                          ChartSeries="@_donutSeries"
+                          ChartLabels="@CollectionManagementState.DistribucionLabels"
+                          Width="100%"
+                          Height="220px"
+                          ChartOptions="@_donutChartOptions">
+                    <CustomGraphics>
+                        <text x="50%" y="50%"
+                              dominant-baseline="middle"
+                              text-anchor="middle"
+                              style="font-size: 1rem; font-weight: 700; fill: var(--text-body);">
+                            @_state.MontoEnMora
+                        </text>
+                    </CustomGraphics>
+                </MudChart>
+            </ChildContent>
+            <Footer>
+                <div class="cob-donut-legend">
+                    @for (int i = 0; i < _donutLabels.Length; i++)
+                    {
+                        var idx   = i;
+                        var color = _donutPalette[idx % _donutPalette.Length];
+                        <div class="cob-legend-row">
+                            <div class="cob-legend-left">
+                                <span class="cob-legend-dot" style="background: @color"></span>
+                                <span class="cob-legend-label">@_donutLabels[idx]</span>
+                            </div>
+                            <span class="cob-legend-pct">@CollectionManagementState.DistribucionAntiguedad[idx]%</span>
+                        </div>
+                    }
+                </div>
+            </Footer>
+        </ChartCard>
+    </MudItem>
+
+</MudGrid>
+
+<!-- Alerts Table -->
+<CobroAlertsTable Casos="@_state.Casos"
+                  OnNuevaGestion="HandleNuevaGestion" />

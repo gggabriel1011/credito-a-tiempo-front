@@ -137,3 +137,11 @@ h1:focus {
 .chart-card--pie .mud-chart-legend { display: none !important; }
 
 /* CRM KPI Card styles migrated to Components/Cards/MetricCard/MetricCard.razor.css */
+
+/* =============================================
+   CollectionManagement — bar chart overrides
+   ============================================= */
+.cob-bar-chart .mud-charts-yaxis { display: none !important; }
+.cob-bar-chart .mud-chart-legend { display: none !important; }
+.cob-bar-chart .mud-charts-xaxis text { font-size: 10px; fill: var(--text-subtle); font-weight: 500; }
+.cob-bar-chart .mud-charts-grid line  { stroke: var(--border-card); stroke-width: 1; }

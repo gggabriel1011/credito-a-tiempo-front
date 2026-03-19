@@ -1,0 +1,148 @@
+@page "/collection-management/seguimiento"
+@page "/collection-management/seguimiento/{ClienteId}"
+@namespace CreditInTimeFront.WebApp.Modules.CollectionManagement.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CollectionManagement.ViewModels
+
+<!-- Header -->
+<PageHeader Title="Programar Seguimiento "
+            TitleAccent="@_tituloCliente"
+            Subtitle="@_subtitleSeguimiento">
+    <Actions>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Size="Size.Small"
+                   StartIcon="@Icons.Material.Outlined.ArrowBack"
+                   Href="@_volverHref">
+            Volver al Detalle
+        </MudButton>
+    </Actions>
+</PageHeader>
+
+<MudGrid Spacing="3">
+
+    <!-- Left: Follow-up form -->
+    <MudItem xs="12" md="8">
+        <MudCard Elevation="1" Class="cob-seg-card">
+            <MudCardContent>
+                <FormSection Icon="@Icons.Material.Outlined.EventNote"
+                             Title="Configuración del Seguimiento"
+                             Subtitle="Complete los datos para programar la siguiente acción de cobro">
+                    <MudGrid Spacing="2">
+                        <MudItem xs="12" sm="6">
+                            <MudSelect T="TipoSeguimiento"
+                                       @bind-Value="_tipoSeguimiento"
+                                       Label="Tipo de Seguimiento"
+                                       Variant="Variant.Outlined"
+                                       Margin="Margin.Dense"
+                                       FullWidth="true">
+                                @foreach (TipoSeguimiento tipo in Enum.GetValues<TipoSeguimiento>())
+                                {
+                                    <MudSelectItem T="TipoSeguimiento" Value="@tipo">@tipo.ToLabel()</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudSelect T="PrioridadSeguimiento"
+                                       @bind-Value="_prioridad"
+                                       Label="Prioridad"
+                                       Variant="Variant.Outlined"
+                                       Margin="Margin.Dense"
+                                       FullWidth="true">
+                                @foreach (PrioridadSeguimiento p in Enum.GetValues<PrioridadSeguimiento>())
+                                {
+                                    <MudSelectItem T="PrioridadSeguimiento" Value="@p">@p.ToLabel()</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="12" sm="8">
+                            <MudDatePicker @bind-Date="_fechaProgramada"
+                                           Label="Fecha Programada"
+                                           Placeholder="dd/mm/aaaa"
+                                           DateFormat="dd/MM/yyyy"
+                                           Clearable="true"
+                                           Variant="Variant.Outlined"
+                                           Margin="Margin.Dense"
+                                           FullWidth="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="4">
+                            <MudTimePicker @bind-Time="_horaProgramada"
+                                           Label="Hora"
+                                           Placeholder="hh:mm"
+                                           Clearable="true"
+                                           Variant="Variant.Outlined"
+                                           Margin="Margin.Dense"
+                                           FullWidth="true" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField T="string"
+                                          @bind-Value="_descripcion"
+                                          Label="Descripción de la Tarea"
+                                          Placeholder="Especifique el objetivo de este seguimiento y cualquier detalle relevante..."
+                                          Lines="5"
+                                          Variant="Variant.Outlined"
+                                          Margin="Margin.Dense"
+                                          FullWidth="true" />
+                        </MudItem>
+                    </MudGrid>
+                </FormSection>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+    <!-- Right: Reminders -->
+    <MudItem xs="12" md="4">
+        <MudCard Elevation="1" Class="cob-seg-card">
+            <MudCardContent>
+                <div class="cob-seg-reminders-header">
+                    <MudIcon Icon="@Icons.Material.Outlined.NotificationsActive" Color="Color.Primary" Class="cob-seg-reminders-icon" />
+                    <MudText Typo="Typo.subtitle1" Class="cob-seg-reminders-title">Recordatorios</MudText>
+                </div>
+
+                <div class="cob-seg-reminder-item">
+                    <div class="cob-seg-reminder-info">
+                        <MudIcon Icon="@Icons.Material.Outlined.Mail" Class="cob-seg-reminder-icon" />
+                        <div>
+                            <MudText Typo="Typo.body2" Class="cob-seg-reminder-label">Correo Electrónico</MudText>
+                            <MudText Typo="Typo.caption" Class="cob-seg-reminder-desc">Notificar al gestor asignado</MudText>
+                        </div>
+                    </div>
+                    <MudSwitch @bind-Value="_notificarCorreo" Color="Color.Primary" />
+                </div>
+
+                <div class="cob-seg-reminder-item">
+                    <div class="cob-seg-reminder-info">
+                        <MudIcon Icon="@Icons.Material.Outlined.DesktopWindows" Class="cob-seg-reminder-icon" />
+                        <div>
+                            <MudText Typo="Typo.body2" Class="cob-seg-reminder-label">Notificación del Sistema</MudText>
+                            <MudText Typo="Typo.caption" Class="cob-seg-reminder-desc">Alerta en panel de control</MudText>
+                        </div>
+                    </div>
+                    <MudSwitch @bind-Value="_notificarSistema" Color="Color.Primary" />
+                </div>
+
+                <MudAlert Severity="Severity.Info" Class="cob-seg-alert" Dense="true">
+                    Las acciones programadas generarán una alerta 30 minutos antes de la hora pactada.
+                </MudAlert>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+<!-- Footer actions -->
+<div class="cob-seg-footer">
+    <MudButton Variant="Variant.Filled "
+               Color="Color.Default"
+               Class="cob-seg-cancel-btn"
+               OnClick="Cancelar">
+        Cancelar
+    </MudButton>
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.Outlined.EventAvailable"
+               Class="cob-seg-save-btn"
+               OnClick="ProgramarAccion">
+        Programar Acción
+    </MudButton>
+</div>

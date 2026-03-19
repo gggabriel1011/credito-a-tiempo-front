@@ -1,0 +1,78 @@
+@namespace CreditInTimeFront.WebApp.Modules.CollectionManagement.Components
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CollectionManagement.ViewModels
+
+<DataTable T="CobroCasoViewModel"
+           Title="Alertas de Seguimiento"
+           TitleIcon="@Icons.Material.Outlined.NotificationsActive"
+           Items="@Casos"
+           Filters="@_filters"
+           FilterPredicate="@FilterCaso">
+
+    <HeaderActions>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Outlined.AddTask"
+                   Class="cob-t-nueva-btn"
+                   OnClick="() => OnNuevaGestion.InvokeAsync()">
+            Nueva Gestión
+        </MudButton>
+    </HeaderActions>
+
+    <ColumnDefs>
+        <TemplateColumn T="CobroCasoViewModel" Title="Cliente" HeaderStyle="width: 240px;">
+            <CellTemplate>
+                <div class="cob-t-cliente">
+                    <span class="@("cob-t-cliente-nombre" + (context.Item.EsEmpresa ? " cob-t-empresa" : ""))">
+                        @context.Item.ClienteNombre
+                    </span>
+                    <span class="cob-t-tipo-credito">@context.Item.TipoCredito</span>
+                </div>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CobroCasoViewModel" Title="Días Atraso" HeaderStyle="width: 110px;"
+                        HeaderClass="dt-col--center" CellStyle="text-align: center;">
+            <CellTemplate>
+                <span class="cob-t-dias-badge cob-t-dias--@GetDiasClass(context.Item.DiasAtraso)">
+                    @context.Item.DiasAtraso Días
+                </span>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CobroCasoViewModel" Title="Monto" HeaderStyle="width: 130px;">
+            <CellTemplate>
+                <span class="cob-t-monto">@FormatMonto(context.Item.Monto)</span>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CobroCasoViewModel" Title="Última Gestión" HeaderStyle="min-width: 200px;">
+            <CellTemplate>
+                <div class="cob-t-gestion">
+                    <span class="cob-t-gestion-tipo">@context.Item.UltimaGestion</span>
+                    <span class="cob-t-gestion-tiempo">@context.Item.UltimaGestionTiempo</span>
+                </div>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CobroCasoViewModel" Title="Estado" HeaderStyle="width: 130px;"
+                        HeaderClass="dt-col--center" CellStyle="text-align: center;">
+            <CellTemplate>
+                <span class="cob-t-estado-badge cob-t-estado--@context.Item.Estado.ToCssKey()">
+                    @context.Item.Estado.ToLabel()
+                </span>
+            </CellTemplate>
+        </TemplateColumn>
+
+        <TemplateColumn T="CobroCasoViewModel" Title="Acciones" HeaderStyle="width: 80px;"
+                        HeaderClass="dt-col--center" CellStyle="text-align: center;">
+            <CellTemplate>
+                <MudIconButton Icon="@Icons.Material.Outlined.Visibility"
+                               Size="Size.Small"
+                               Color="Color.Primary"
+                               Href="@($"/collection-management/detalle/{context.Item.ClienteId}")" />
+            </CellTemplate>
+        </TemplateColumn>
+    </ColumnDefs>
+
+</DataTable>

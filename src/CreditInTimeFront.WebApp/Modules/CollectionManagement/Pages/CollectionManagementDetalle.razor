@@ -1,0 +1,148 @@
+@page "/collection-management/detalle/{ClienteId}"
+@namespace CreditInTimeFront.WebApp.Modules.CollectionManagement.Pages
+@using MudBlazor
+@using CreditInTimeFront.WebApp.Modules.CollectionManagement.ViewModels
+
+<!-- Header -->
+<PageHeader Title="Gestión de Cobro "
+            TitleAccent="@_caso?.ClienteNombre"
+            Subtitle="@_subtitleDetalle">
+    <Actions>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Size="Size.Small"
+                   StartIcon="@Icons.Material.Outlined.ArrowBack"
+                   Href="/collection-management">
+            Volver a Cartera
+        </MudButton>
+    </Actions>
+</PageHeader>
+
+<!-- KPI Cards -->
+<MudGrid Spacing="3" Class="mb-4">
+    @foreach (var card in _kpiCards)
+    {
+        <MudItem xs="12" sm="4">
+            <MetricCard Icon="@card.Icon"
+                        Label="@card.Label"
+                        Value="@card.Value"
+                        BadgeText="@card.Detail"
+                        BadgeVariant="@card.BadgeVariant" />
+        </MudItem>
+    }
+</MudGrid>
+
+<!-- Two-column layout -->
+<MudGrid Spacing="3">
+
+    <!-- Left: History timeline -->
+    <MudItem xs="12" md="8">
+        <MudCard Elevation="1" Class="cob-det-card">
+            <MudCardContent>
+                <div class="cob-det-card-header">
+                    <MudIcon Icon="@Icons.Material.Outlined.Timeline" Color="Color.Primary" Class="cob-det-card-icon" />
+                    <MudText Typo="Typo.subtitle1" Class="cob-det-card-title" Style="font-weight: 700;">Historial de Gestiones</MudText>
+                </div>
+
+                <div class="cob-det-timeline">
+                    @foreach (var item in _historial)
+                    {
+                        <div class="cob-det-timeline-item">
+                            <div class="cob-det-timeline-left">
+                                <div class="cob-det-timeline-icon-circle @(item.EsAlerta ? "cob-det-icon--alert" : "cob-det-icon--normal")">
+                                    <MudIcon Icon="@item.Icono" Size="Size.Small" />
+                                </div>
+                                <div class="cob-det-timeline-line"></div>
+                            </div>
+                            <div class="cob-det-timeline-content">
+                                <div class="cob-det-timeline-header">
+                                    <span class="cob-det-timeline-tipo">@item.TipoAccion</span>
+                                    <span class="cob-det-timeline-tiempo">@item.TiempoLabel</span>
+                                </div>
+                                <p class="cob-det-timeline-desc">@item.Descripcion</p>
+                                <span class="cob-det-timeline-gestor">@(item.EsSistema ? "SISTEMA" : "GESTOR"): @item.GestorNombre</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+    <!-- Right: Register new action -->
+    <MudItem xs="12" md="4">
+        <MudCard Elevation="1" Class="cob-det-card">
+            <MudCardContent>
+                <FormSection Icon="@Icons.Material.Outlined.AddTask" Title="Registrar Nueva Gestión">
+                    <MudSelect T="TipoAccionCobro"
+                               @bind-Value="_tipoAccion"
+                               Label="Tipo de Acción"
+                               Variant="Variant.Outlined"
+                               Margin="Margin.Dense"
+                               FullWidth="true"
+                               Class="mb-3">
+                        @foreach (TipoAccionCobro tipo in Enum.GetValues<TipoAccionCobro>())
+                        {
+                            <MudSelectItem T="TipoAccionCobro" Value="@tipo">@tipo.ToLabel()</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                    <MudSelect T="ResultadoGestion"
+                               @bind-Value="_resultado"
+                               Label="Resultado"
+                               Variant="Variant.Outlined"
+                               Margin="Margin.Dense"
+                               FullWidth="true"
+                               Class="mb-3">
+                        @foreach (ResultadoGestion res in Enum.GetValues<ResultadoGestion>())
+                        {
+                            <MudSelectItem T="ResultadoGestion" Value="@res">@res.ToLabel()</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                    <MudTextField T="string"
+                                  @bind-Value="_comentarios"
+                                  Label="Comentarios"
+                                  Placeholder="Detalle los puntos clave de la gestión..."
+                                  Lines="5"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense"
+                                  FullWidth="true"
+                                  Class="mb-3" />
+
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Outlined.Save"
+                               FullWidth="true"
+                               Class="cob-det-save-btn"
+                               OnClick="GuardarGestion">
+                        Guardar Gestión
+                    </MudButton>
+                </FormSection>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+<!-- Footer actions -->
+<div class="cob-det-footer">
+    <MudText Typo="Typo.caption" Class="cob-det-footer-info">
+        Última actualización: Hoy, 10:45 AM
+    </MudText>
+    <div class="cob-det-footer-actions">
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Default"
+                   StartIcon="@Icons.Material.Outlined.TableChart"
+                   Class="cob-det-footer-btn">
+            Ver Amortización
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Outlined.EventRepeat"
+                   Class="cob-det-footer-btn"
+                   Href="@($"/collection-management/seguimiento/{ClienteId}")">
+            Programar Siguiente Acción
+        </MudButton>
+    </div>
+</div>

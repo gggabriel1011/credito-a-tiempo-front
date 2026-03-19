@@ -1,0 +1,97 @@
+/* =============================================
+   Toolbar — Nueva Gestión button
+   ============================================= */
+.cob-t-nueva-btn {
+    text-transform: none !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    border-radius: 9999px !important;
+    white-space: nowrap;
+    padding: 0 1.25rem !important;
+}
+
+/* =============================================
+   Cell — Cliente
+   ============================================= */
+.cob-t-cliente {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.cob-t-cliente-nombre {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-body);
+}
+
+.cob-t-empresa {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.cob-t-tipo-credito {
+    font-size: 0.75rem;
+    color: var(--text-subtle);
+}
+
+/* =============================================
+   Cell — Días de Atraso badge
+   ============================================= */
+.cob-t-dias-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+.cob-t-dias--critico { color: #EF4444; background: rgba(239, 68, 68, 0.12); }
+.cob-t-dias--alerta  { color: var(--warning-strong); background: rgba(var(--warning-rgb), 0.12); }
+.cob-t-dias--normal  { color: var(--text-muted);     background: var(--bg-subtle); }
+
+/* =============================================
+   Cell — Monto
+   ============================================= */
+.cob-t-monto {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-body);
+}
+
+/* =============================================
+   Cell — Última Gestión
+   ============================================= */
+.cob-t-gestion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.cob-t-gestion-tipo {
+    font-size: 0.875rem;
+    color: var(--text-body);
+}
+
+.cob-t-gestion-tiempo {
+    font-size: 0.75rem;
+    color: var(--text-subtle);
+}
+
+/* =============================================
+   Cell — Estado badge
+   ============================================= */
+.cob-t-estado-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+.cob-t-estado--en-gestion  { color: var(--info-strong);    background: rgba(var(--info-rgb),    0.12); }
+.cob-t-estado--critico     { color: #EF4444;               background: rgba(239, 68, 68, 0.12); }
+.cob-t-estado--normalizado { color: var(--success-strong); background: rgba(var(--success-rgb), 0.12); }
+.cob-t-estado--Judicial    { color: var(--warning-strong); background: rgba(var(--warning-rgb),  0.12); }
